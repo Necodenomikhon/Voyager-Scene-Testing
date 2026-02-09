@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Voyager Viewer</title>
+
+  <!-- Keep fonts (required by you) -->
+  <link
+    href="https://cdn.jsdelivr.net/gh/smithsonian/dpo-voyager@latest/assets/fonts/fonts.css"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root{
+      --bg: #0033a0;
+      --panel: #0033a0;
+      --panel2:#0b1020;
+      --text:#eef2ff;
+      --muted:#aab4d6;
+      --border: rgba(255,255,255,0.10);
+      --accent: rgba(120,160,255,0.35);
+      --topbar-h: 56px;
+      --side-w: 360px;
+    }
+
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--text);
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
+
+    .topbar{
+      height:var(--topbar-h);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 14px;
+      box-sizing:border-box;
+      border-bottom:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(17,22,38,0.95), rgba(9,12,22,0.95));
+      position:sticky; top:0; z-index:5;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:650; letter-spacing:.2px; font-size:14px;
+    }
+    .brand .dot{
+      width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,0.85);
+      box-shadow:0 0 0 3px rgba(255,255,255,0.08);
+    }
+    .top-actions{
+      display:flex; align-items:center; gap:8px;
+      font-size:13px; color:var(--muted);
+    }
+    .top-actions a{
+      color:var(--muted); text-decoration:none;
+      border:1px solid var(--border);
+      padding:6px 10px; border-radius:999px;
+      background: rgba(255,255,255,0.03);
+    }
+    .top-actions a:hover{background: rgba(255,255,255,0.06);}
+
+    .app{
+      height: calc(100% - var(--topbar-h));
+      display:flex;
+      overflow:hidden;
+    }
+
+    .sidebar{
+      width:var(--side-w);
+      min-width:var(--side-w);
+      border-right:1px solid var(--border);
+      background: linear-gradient(180deg, var(--panel), var(--panel2));
+      display:flex; flex-direction:column;
+      overflow:hidden;
+    }
+
+    .sidebar-header{
+      padding:14px 14px 10px;
+      border-bottom:1px solid var(--border);
+    }
+    .title{
+      margin:0;
+      font-size:16px;
+      font-weight:700;
+      line-height:1.2;
+    }
+    .subtitle{
+      margin:6px 0 0;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .tabs{
+      display:flex; gap:8px;
+      padding:10px 14px;
+      border-bottom:1px solid var(--border);
+    }
+    .tab{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      color:var(--text);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:12px;
+      cursor:pointer;
+    }
+    .tab[aria-selected="true"]{
+      border-color: var(--accent);
+      background: rgba(120,160,255,0.12);
+    }
+
+    .panel{
+      padding:12px 14px 18px;
+      overflow:auto;
+      flex:1;
+    }
+    .kv{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      font-size:13px;
+    }
+    .kv .k{ color:var(--muted); font-size:12px; margin-bottom:2px;}
+    .kv .v{ color:var(--text); }
+
+    .small{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:12px;
+      border-top:1px solid var(--border);
+      padding-top:12px;
+      line-height:1.35;
+    }
+    code{color:#d7defa}
+
+    .viewer{
+      flex:1;
+      min-width:0;
+      position:relative;
+      background:#000;
+    }
+    voyager-explorer, iframe{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      display:block;
+      border:0;
+    }
+
+    @media (max-width: 900px){
+      :root{ --side-w: 320px; }
+    }
+    @media (max-width: 760px){
+      .app{ flex-direction:column; }
+      .sidebar{
+        width:100%; min-width:0;
+        height: 42vh;
+        border-right:none;
+        border-bottom:1px solid var(--border);
+      }
+      .viewer{ height: 58vh; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand" aria-label="Site header">
+      <span class="dot" aria-hidden="true"></span>
+      <span>3D Viewer</span>
+    </div>
+    <div class="top-actions">
+      <a href="./index.html" title="Back">Back</a>
+    </div>
+  </header>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="title" id="sceneTitle">Select a scene</h1>
+        <p class="subtitle" id="sceneSub">Powered by Voyager Explorer</p>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Details tabs">
+        <button class="tab" id="tabDetails" role="tab" aria-selected="true">Details</button>
+        <button class="tab" id="tabHelp" role="tab" aria-selected="false">How to link</button>
+      </div>
+
+      <div class="panel" id="panelDetails" role="tabpanel" aria-labelledby="tabDetails">
+        <div class="kv" id="kv">
+          <div>
+            <div class="k">Root</div>
+            <div class="v"><code id="kvRoot">—</code></div>
+          </div>
+          <div>
+            <div class="k">Document</div>
+            <div class="v"><code id="kvDoc">—</code></div>
+          </div>
+        </div>
+
+        <div class="small">
+          This viewer loads scenes only from the URL query string.
+        </div>
+      </div>
+
+      <div class="panel" id="panelHelp" role="tabpanel" aria-labelledby="tabHelp" hidden>
+        <div class="kv">
+          <div>
+            <div class="k">Example</div>
+            <div class="v">
+              <code>viewer.html?root=mammoth_scene/&document=mammoth.json&title=Mammoth</code>
+            </div>
+          </div>
+          <div>
+            <div class="k">Another example</div>
+            <div class="v">
+              <code>viewer.html?root=sabertooth_scene/&document=sabertooth.json&title=Sabertooth</code>
+            </div>
+          </div>
+        </div>
+
+        <div class="small">
+          Required query parameters: <code>root</code> and <code>document</code>.
+        </div>
+      </div>
+    </aside>
+
+    <main class="viewer" aria-label="3D viewer">
+      <div id="viewerMount"></div>
+    </main>
+  </div>
+
+  <!-- Voyager Explorer web component (necessary for voyager-explorer to work) -->
+  <script src="https://3d-api.si.edu/resources/js/voyager-explorer.min.js"></script>
+
+  <script>
+    // --- Tabs ---
+    const tabDetails = document.getElementById("tabDetails");
+    const tabHelp = document.getElementById("tabHelp");
+    const panelDetails = document.getElementById("panelDetails");
+    const panelHelp = document.getElementById("panelHelp");
+
+    function selectTab(which){
+      const isDetails = which === "details";
+      tabDetails.setAttribute("aria-selected", String(isDetails));
+      tabHelp.setAttribute("aria-selected", String(!isDetails));
+      panelDetails.hidden = !isDetails;
+      panelHelp.hidden = isDetails;
+    }
+    tabDetails.addEventListener("click", () => selectTab("details"));
+    tabHelp.addEventListener("click", () => selectTab("help"));
+
+    // --- Scene loading from URL (ONLY root+document supported) ---
+    const params = new URLSearchParams(location.search);
+    const rootParam = params.get("root");
+    const docParam = params.get("document") || params.get("doc");
+    const titleParam = params.get("title");
+
+    const root = rootParam && rootParam.trim() ? rootParam.trim() : null;
+    const documentName = docParam && docParam.trim() ? docParam.trim() : null;
+
+    // Populate sidebar UI
+    document.getElementById("sceneTitle").textContent = titleParam || (root && documentName ? "Loading…" : "Select a scene");
+    document.getElementById("kvRoot").textContent = root || "—";
+    document.getElementById("kvDoc").textContent = documentName || "—";
+
+    // Mount the voyager-explorer (right side) only when both params exist
+    const mount = document.getElementById("viewerMount");
+
+    if (root && documentName) {
+      const explorer = document.createElement("voyager-explorer");
+      explorer.setAttribute("root", root);
+      explorer.setAttribute("document", documentName);
+      mount.appendChild(explorer);
+
+      // Update title once mounted
+      document.getElementById("sceneTitle").textContent = titleParam || "Scene";
+    } else {
+      mount.innerHTML = `
+        <div style="
+          position:absolute;
+          inset:0;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          color:#aab4d6;
+          font-size:14px;
+          background:#000;
+          text-align:center;
+          padding:24px;
+        ">
+          No scene loaded.<br><br>
+          Provide <code>?root=...&document=...</code> in the URL.
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
