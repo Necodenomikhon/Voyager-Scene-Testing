@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Custom Maps with Expandable Info</title>
+
+  <!-- Leaflet (demo map behavior) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Font Awesome for the TopoView-ish icon vibe -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+  <link rel="stylesheet" href="./data-view.css"/>
+</head>
+
+<body>
+  <div class="app" id="appRoot">
+    <div id="map"></div>
+
+    <div class="rightRail">
+      <div id="sideToggle" class="toggle fa center fa-caret-right" title="Toggle panel"
+           style="touch-action: pan-y; user-select: none; display: block;" data-title="Collapse">
+        <span class="infoNum" id="infoCount">0</span>
+      </div>
+
+      <div id="sideElement">
+        <div id="infoHeader" class="inline col12" style="touch-action: none; user-select: none;">
+          <div class="titlePill">
+            <span>Custom maps</span>
+            <span id="activeCountLabel">0 active</span>
+          </div>
+
+          <div class="infoHeaderIcon" id="btnResetAll" title="Reset all overlays">
+            <i class="fa fa-refresh"></i>
+          </div>
+          <div class="infoHeaderIcon" id="btnHelp" title="Help">
+            <i class="fa fa-question-circle"></i>
+          </div>
+        </div>
+
+        <div class="sideScroll">
+          <ul id="recordsTable" class="searchReturns noSort noselect"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://unpkg.com/geotiff@2.1.3/dist-browser/geotiff.js"></script>
+<script src="https://unpkg.com/georaster/dist/georaster.browser.bundle.min.js"></script>
+<script src="https://unpkg.com/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js"></script>
+
+<script>
+/* ---------------------------
+   Map (demo)
+---------------------------- */
+const map = L.map('map', { zoomControl:true }).setView([41.615, -71.251], 11);
+// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//   maxZoom: 20, attribution: '&copy; OpenStreetMap contributors'
+// }).addTo(map);
+
+const terrain = L.tileLayer(
+  'https://basemap.nationalmap.gov/arcgis/rest/services/USGSShadedReliefOnly/MapServer/tile/{z}/{y}/{x}',
+  { maxZoom: 20 }
+);
+
+const topoLabels = L.tileLayer(
+  'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}',
+  { maxZoom: 20 }
+);
+
+terrain.addTo(map);
+topoLabels.addTo(map);
+/* ---------------------------
+   Sidebar collapse
+---------------------------- */
+const appRoot = document.getElementById('appRoot');
+const sideToggle = document.getElementById('sideToggle');
+
+function setCollapsed(collapsed){
+  appRoot.classList.toggle('collapsed', collapsed);
+  sideToggle.dataset.title = collapsed ? 'Expand' : 'Collapse';
+  sideToggle.title = collapsed ? 'Expand panel' : 'Collapse panel';
+}
+setCollapsed(false);
+sideToggle.addEventListener('click', () => setCollapsed(!appRoot.classList.contains('collapsed')));
+
+/* ---------------------------
+   Custom entries rendered in “record entry” markup style
+
+   Each entry supports:
+   - Show (toggle overlay)
+   - Info (expand metaFields inline, like your snippet)
+   - Zoom (fit bounds / setView)
+   - Pan (panTo)
+   - Pin (localStorage)
+   - Fix (open fixUrl or mailto fallback)
+   - Downloads (open provided URLs)
+---------------------------- */
+
+const PINS_KEY = 'custom_maps_pins_v2';
+
+function loadPins(){
+  try{
+    const raw = localStorage.getItem(PINS_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr : [];
+  }catch{ return []; }
+}
+function savePins(pins){
+  localStorage.setItem(PINS_KEY, JSON.stringify(pins));
+}
+
+// Provide either bounds OR center+zoom
+const customEntries = [
+  {
+    id: 1,
+    title: "Magnetic (GeoTIFF)",
+    state: "—",
+    year: 2024,
+    series: "Custom",
+    edition: "",
+    scale: 0,
+    thumb: "",
+
+    geotiffUrl: "./maps/mag_geo.tif",
+    opacity: 0.7,
+
+    // Optional: for Zoom/Pan buttons (recommended)
+    // If you don’t know these yet, you can omit and later auto-fit after load.
+    bounds: [[34.0, -86.0], [36.0, -84.0]],
+
+    // Downloads (optional)
+    downloads: {
+      jpg: { url:'https://example.com/narragansett.jpg', mb: 2 },
+      kmz: { url:'https://example.com/narragansett.kmz', mb: 3 },
+      tif: { url:'https://example.com/narragansett.tif', mb: 7 },
+      pdf: { url:'https://example.com/narragansett.pdf', mb: 9 }
+    },
+
+    fixUrl: 'https://example.com/report',
+
+    // Meta fields to show when Info is clicked
+    meta: {
+      publishers: 'USACE',
+      datum: 'Unstated',
+      projection: 'Unstated',
+      gnisCellId: '58272',
+      gnisCell: 'Narrangansett Bay',
+      woodlandTint: 'Y',
+
+      advance: null,
+      aerialPhotoYear: null,
+      fieldCheckYear: null,
+      editYear: null,
+      interim: null,
+      orthophoto: null,
+      photoInspectionYear: null,
+      photoRevisionYear: null,
+      planimetric: null,
+      preliminary: null,
+      provisional: null,
+      shadedRelief: null,
+      specialMap: null,
+      specialPrinting: null,
+      surveyYear: null
+    }
+  },
+  {
+    id: 3,
+    title: 'Prudence Island',
+    state: 'RI',
+    year: 2024,
+    series: 'US Topo',
+    edition: '',
+    scale: 24000,
+    thumb: '/img4/usTopo_icons/Browse/RI/RI_Prudence_Island_20240813_TM_tn.jpg',
+    tileUrl: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    opacity: 0.75,
+    on: false,
+    center: [41.64, -71.36],
+    zoom: 13,
+    downloads: {
+      pdf: { url:'https://example.com/prudence_2024.pdf', mb: 10 }
+    },
+    fixUrl: '',
+    meta: {
+      publishers: 'USGS',
+      datum: 'NAD83 (example)',
+      projection: 'UTM (example)',
+      woodlandTint: 'Y',
+      gnisCellId: null,
+      gnisCell: null,
+
+      advance: null,
+      aerialPhotoYear: 2022,
+      fieldCheckYear: null,
+      editYear: 2023,
+      interim: null,
+      orthophoto: 2022,
+      photoInspectionYear: null,
+      photoRevisionYear: null,
+      planimetric: null,
+      preliminary: null,
+      provisional: null,
+      shadedRelief: 'Y',
+      specialMap: null,
+      specialPrinting: null,
+      surveyYear: null
+    }
+  }
+];
+
+// Leaflet overlay layers per entry
+const layersById = new Map();
+const stateById = new Map(); // id -> {on, opacity, infoOpen, pinned}
+const pins = new Set(loadPins());
+
+const overlayById = new Map();
+
+async function toggleEntryOverlay(entry) {
+  const st = stateById.get(entry.id);
+
+  if (!st.on) {
+    // turn ON
+    if (!overlayById.has(entry.id)) {
+      const layer = await addGeoTiffOverlay(entry.geotiffUrl, { opacity: entry.opacity ?? 0.7 });
+      overlayById.set(entry.id, layer);
+    } else {
+      overlayById.get(entry.id).addTo(map);
+    }
+    st.on = true;
+  } else {
+    // turn OFF
+    const layer = overlayById.get(entry.id);
+    if (layer) map.removeLayer(layer);
+    st.on = false;
+  }
+
+  render(); // update Show/Hide label etc.
+}
+
+customEntries.forEach((e) => {
+  // init state for every entry
+  stateById.set(e.id, {
+    on: !!e.on,
+    opacity: e.opacity ?? 0.9,
+    infoOpen: false,
+    pinned: pins.has(e.id)
+  });
+
+  // only build a Leaflet tile layer if tileUrl exists
+  if (e.tileUrl) {
+    const layer = L.tileLayer(e.tileUrl, { maxZoom: 20, opacity: e.opacity ?? 0.9 });
+    layersById.set(e.id, layer);
+  }
+});
+
+
+function applyLayers(){
+  customEntries.forEach(e => {
+    if (!e.tileUrl) return; // GeoTIFF entries: handled elsewhere
+
+    const st = stateById.get(e.id);
+    const layer = layersById.get(e.id);
+    if (!layer) return;
+
+    layer.setOpacity(st.opacity);
+    if (st.on && !map.hasLayer(layer)) layer.addTo(map);
+    if (!st.on && map.hasLayer(layer)) map.removeLayer(layer);
+  });
+}
+
+function setCounts(){
+  const total = customEntries.length;
+  const active = customEntries.filter(e => stateById.get(e.id).on).length;
+  document.getElementById('infoCount').textContent = String(total);
+  document.getElementById('activeCountLabel').textContent = `${active} active`;
+}
+
+function openDownload(url){
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function zoomToEntry(e){
+  if (Array.isArray(e.bounds) && e.bounds.length === 2){
+    map.fitBounds(e.bounds, { padding:[40,40] });
+    return;
+  }
+  if (Array.isArray(e.center) && Number.isFinite(e.zoom)){
+    map.setView(e.center, e.zoom, { animate:true });
+    return;
+  }
+}
+
+function panToEntry(e){
+  if (Array.isArray(e.center)){
+    map.panTo(e.center, { animate:true });
+    return;
+  }
+  if (Array.isArray(e.bounds) && e.bounds.length === 2){
+    const sw = e.bounds[0], ne = e.bounds[1];
+    map.panTo([(sw[0]+ne[0])/2, (sw[1]+ne[1])/2], { animate:true });
+  }
+}
+
+function reportFix(e){
+  if (e.fixUrl){
+    window.open(e.fixUrl, '_blank', 'noopener,noreferrer');
+    return;
+  }
+  const subj = encodeURIComponent('Map issue report: ' + e.title + ', ' + e.state);
+  const body = encodeURIComponent(
+    `Map: ${e.title}, ${e.state} (${e.year})\n\nDescribe the issue:\n\nLocation (lat,lng): ${map.getCenter().lat.toFixed(5)}, ${map.getCenter().lng.toFixed(5)}\nZoom: ${map.getZoom()}\n`
+  );
+  window.location.href = `mailto:?subject=${subj}&body=${body}`;
+}
+
+function togglePin(id){
+  const st = stateById.get(id);
+  st.pinned = !st.pinned;
+  if (st.pinned) pins.add(id); else pins.delete(id);
+  savePins(Array.from(pins));
+  render();
+}
+
+function boolIcon(val){
+  // match your look: check-circle for present, times-circle for N/A
+  return val == null ? 'fa-times-circle metaNoCheck' : 'fa-check-circle metaChecked';
+}
+function valText(label, val){
+  if (val == null || val === '') return `<span class="${label.toLowerCase().includes('year') ? 'noData' : 'noData'}">${label}: N/A</span>`;
+  return `<span>${label}: ${escapeHtml(String(val))}</span>`;
+}
+function escapeHtml(s){
+  return String(s)
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'","&#039;");
+}
+
+const table = document.getElementById('recordsTable');
+
+function render(){
+  table.innerHTML = '';
+  customEntries.forEach(e => {
+    const st = stateById.get(e.id);
+
+    // Download availability
+    const dls = e.downloads || {};
+    const jpg = dls.jpg?.url || '';
+    const kmz = dls.kmz?.url || '';
+    const tif = dls.tif?.url || '';
+    const pdf = dls.pdf?.url || '';
+
+    // Build meta fields (matches your snippet structure)
+    const m = e.meta || {};
+    const metaHtml = `
+      <span class="col12 metaFields noselect ${st.infoOpen ? 'open' : ''}">
+        <span class="col11 metaInfo">
+          <span class="col12 inline">
+            <span class="metaPub col10">Publishers: ${escapeHtml(m.publishers ?? 'N/A')}</span>
+            <span class="metaPubLink col1"></span>
+            <span class="sbLink col1"></span>
+          </span>
+
+          <span class="col12 inline">
+            <span class="col6 metaColumn">
+              ${metaItem('Advance', m.advance)}
+              ${metaItem('Aerial Photo Year', m.aerialPhotoYear)}
+              ${metaItem('Datum', m.datum)}
+              ${metaItem('Field Check Year', m.fieldCheckYear)}
+              ${metaItem('Edit Year', m.editYear)}
+              ${metaItem('GNIS Cell Id', m.gnisCellId)}
+              ${metaItem('GNIS Cell', m.gnisCell, true)}
+              ${metaItem('Interim', m.interim)}
+              ${metaItem('Orthophoto', m.orthophoto)}
+              ${metaItem('Photo Inspection Year', m.photoInspectionYear)}
+            </span>
+
+            <span class="col6 metaColumn">
+              ${metaItem('Photo Revision Year', m.photoRevisionYear)}
+              ${metaItem('Planimetric', m.planimetric)}
+              ${metaItem('Preliminary', m.preliminary)}
+              ${metaItem('Projection', m.projection)}
+              ${metaItem('Provisional', m.provisional)}
+              ${metaItem('Shaded Relief', m.shadedRelief)}
+              ${metaItem('Special Map', m.specialMap)}
+              ${metaItem('Special Printing', m.specialPrinting)}
+              ${metaItem('Survey Year', m.surveyYear)}
+              ${metaItem('Woodland Tint', m.woodlandTint)}
+            </span>
+          </span>
+        </span>
+      </span>
+    `;
+
+    const li = document.createElement('li');
+    li.className = st.infoOpen ? 'expanded' : '';
+
+    // NOTE: IDs like recHeader are duplicated in your snippet; keep classes, avoid duplicate IDs.
+    li.innerHTML = `
+      <a data-id="${e.id}">
+        <span class="col12 pad1l inline">
+          <span class="recTitle recKeyline searchItem col8">${escapeHtml(e.title)}, <span class="recState">${escapeHtml(e.state)}</span></span>
+
+          <span class="col9">
+            <span class="recYear searchItem pad05">${escapeHtml(e.year)}</span>
+            <span class="searchItem">(${escapeHtml(e.series)}${e.edition ? ', ' + escapeHtml(e.edition) : ''}) </span>
+
+            <span class="searchItem" style="padding-left:5px">Scale 1:</span><span class="recScale searchItem">${escapeHtml(e.scale)}</span>
+            <br>
+
+            <span class="col5 sideFile">
+              <span class="downloadItem jpgDown col12 pad05" title="Download JPEG" ${jpg ? '' : 'aria-disabled="true"'}>JPEG<span class="jpgByte">(${jpg ? `${escapeHtml(String(dls.jpg.mb ?? '?'))} MB` : 'N/A'})</span></span>
+              <span class="downloadItem kmzDown col12" title="Download KMZ" ${kmz ? '' : 'aria-disabled="true"'}>KMZ<span class="kmzByte">(${kmz ? `${escapeHtml(String(dls.kmz.mb ?? '?'))} MB` : 'N/A'})</span></span>
+            </span>
+
+            <span class="col5 sideFile">
+              <span class="downloadItem gTifDown col12 pad05" title="Download GeoTiff" ${tif ? '' : 'aria-disabled="true"'}>GeoTiff<span class="tifByte">(${tif ? `${escapeHtml(String(dls.tif.mb ?? '?'))} MB` : 'N/A'})</span></span>
+              <span class="downloadItem pdfDown col12" title="Download GeoPDF" ${pdf ? '' : 'aria-disabled="true"'}>GeoPDF<span class="pdfByte">(${pdf ? `${escapeHtml(String(dls.pdf.mb ?? '?'))} MB` : 'N/A'})</span></span>
+            </span>
+          </span>
+
+          <span class="col3 recImageMini lazy" style="background-image:url('${escapeHtml(e.thumb || '')}');"></span>
+
+          <span class="col12 inline recordlinkGroup">
+            <span class="col8 center">
+              <span title="Show map" class="recordLinks dot fa fa-map-o showOverlay"><span class="linkText overState">${st.on ? 'Hide' : 'Show'}</span></span>
+              <span title="Map metadata" class="recordLinks dot moreInfo fa fa-info-circle ${st.infoOpen ? 'infoShown' : ''}"><span class="linkText">Info</span></span>
+              <span title="Zoom to map" class="recordLinks zoomTo dot fa fa-search-plus"><span class="linkText">Zoom</span></span>
+              <span title="Pan to map" class="recordLinks panTo dot fa fa-hand-paper-o"><span class="linkText">Pan</span></span>
+              <span class="recordLinks hidden 3d dot fa fa-cube" style="text-indent:0px;"><span class="linkText">3D</span></span>
+            </span>
+
+            <span class="center col4" style="text-indent: 4px;">
+              <span title="Pin this map" class="recordLinks dot fa fa-pinterest pinIt"><span class="linkText">${st.pinned ? 'Pinned' : 'Pin'}</span></span>
+              <span title="Report errors" class="recordLinks dot fa fa-comments mapComment"><span class="linkText" style="letter-spacing:0px;">Fix</span></span>
+            </span>
+          </span>
+
+          ${metaHtml}
+        </span>
+      </a>
+    `;
+
+    // Wire events (delegate per entry so you get exactly the recordLinks behavior)
+    const root = li.querySelector('a');
+
+    // downloads
+    const jpgEl = li.querySelector('.jpgDown');
+    if (jpg) jpgEl.addEventListener('click', (ev) => { ev.preventDefault(); ev.stopPropagation(); openDownload(jpg); });
+
+    const kmzEl = li.querySelector('.kmzDown');
+    if (kmz) kmzEl.addEventListener('click', (ev) => { ev.preventDefault(); ev.stopPropagation(); openDownload(kmz); });
+
+    const tifEl = li.querySelector('.gTifDown');
+    if (tif) tifEl.addEventListener('click', (ev) => { ev.preventDefault(); ev.stopPropagation(); openDownload(tif); });
+
+    const pdfEl = li.querySelector('.pdfDown');
+    if (pdf) pdfEl.addEventListener('click', (ev) => { ev.preventDefault(); ev.stopPropagation(); openDownload(pdf); });
+
+  
+    // show/hide
+    li.querySelector('.showOverlay').addEventListener('click', async (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+
+      if (e.geotiffUrl) {
+        await toggleEntryOverlay(e); // GeoTIFF path
+      } else {
+        const st2 = stateById.get(e.id); // avoid shadowing "st"
+        st2.on = !st2.on;
+        applyLayers();
+        render();
+      }
+    });
+
+    // info expand/collapse (inline, matching your snippet)
+    li.querySelector('.moreInfo').addEventListener('click', (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+      st.infoOpen = !st.infoOpen;
+      render();
+    });
+
+    // zoom/pan
+    li.querySelector('.zoomTo').addEventListener('click', (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+      zoomToEntry(e);
+    });
+    li.querySelector('.panTo').addEventListener('click', (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+      panToEntry(e);
+    });
+
+    // pin / fix
+    li.querySelector('.pinIt').addEventListener('click', (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+      togglePin(e.id);
+    });
+    li.querySelector('.mapComment').addEventListener('click', (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+      reportFix(e);
+    });
+
+    table.appendChild(li);
+  });
+
+  setCounts();
+}
+
+function metaItem(label, value, overflow=false){
+  const ok = !(value == null || value === '');
+  const icon = ok ? 'fa-check-circle metaChecked' : 'fa-times-circle metaNoCheck';
+  const textCls = ok ? '' : 'noData';
+  const overflowCls = overflow ? 'overflow' : '';
+  const val = ok ? escapeHtml(String(value)) : 'N/A';
+  return `
+    <span class="col12 metaItem">
+      <span class="col1 fa ${icon}" style=""></span>
+      <span class="col12 ${textCls} ${overflowCls}">${escapeHtml(label)}: ${val}</span>
+    </span>
+  `;
+}
+
+async function addGeoTiffOverlay(url, { opacity = 0.7 } = {}) {
+  const georaster = await parseGeoraster(url); // reads GeoTIFF georeferencing
+  const layer = new GeoRasterLayer({
+    georaster,
+    opacity,
+    resolution: 256 // adjust for quality/perf
+  });
+  layer.addTo(map);
+  return layer;
+}
+
+
+/* Reset all overlays */
+document.getElementById('btnResetAll').addEventListener('click', () => {
+  customEntries.forEach(e => {
+    const st = stateById.get(e.id);
+    st.on = false;
+    st.infoOpen = false;
+  });
+  applyLayers();
+  render();
+});
+
+/* Help */
+document.getElementById('btnHelp').addEventListener('click', () => {
+  alert('Info expands inline within an entry (like TopoView). Edit customEntries[] to set thumb, downloads, and meta fields.');
+});
+
+/* Init */
+applyLayers();
+render();
+</script>
+</body>
+</html>

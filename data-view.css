@@ -1,0 +1,282 @@
+    :root{
+      --bg:#0b0f17;
+      --panelTop:#121c2b;
+      --panelBot:#0c121d;
+      --text:#e8eefc;
+      --muted:#a7b3cc;
+      --border:rgba(255,255,255,.12);
+      --hover:rgba(255,255,255,.06);
+      --pill:rgba(255,255,255,.04);
+      --shadow: 0 12px 34px rgba(0,0,0,.42);
+
+      --sideW: 430px;
+      --sideWCollapsed: 0px;
+      --handleW: 34px;
+      --headerH: 58px;
+    }
+
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;}
+
+    .app{
+      height:100%;
+      display:grid;
+      grid-template-columns: 1fr auto;
+    }
+    #map{height:100%;width:100%;background:#0b0f17;}
+
+    .rightRail{
+      position:relative;
+      height:100%;
+      display:flex;
+      align-items:stretch;
+    }
+
+    /* Handle */
+    #sideToggle{
+      width: var(--handleW);
+      border-left:1px solid var(--border);
+      border-right:1px solid var(--border);
+      background: rgba(15,22,34,.90);
+      backdrop-filter: blur(10px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      user-select:none;
+      touch-action: pan-y;
+      position:relative;
+      box-shadow: var(--shadow);
+      z-index: 50;
+    }
+    #sideToggle:hover{ background: rgba(255,255,255,.06); }
+    #sideToggle .fa{ color: var(--muted); font-size:18px; }
+    #sideToggle[data-title="Expand"] .fa{ transform: rotate(180deg); }
+    .infoNum{
+      position:absolute; top:10px; left:50%;
+      transform: translateX(-50%);
+      min-width:20px; height:18px;
+      border-radius:999px; padding:0 6px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:11px; font-weight:700;
+      color:#0b0f17;
+      background: rgba(255,255,255,.92);
+      border:1px solid rgba(0,0,0,.2);
+    }
+
+    /* Panel */
+    #sideElement{
+      width: var(--sideW);
+      max-width: min(var(--sideW), 92vw);
+      height:100%;
+      border-left:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(18,28,43,.96), rgba(12,18,29,.98));
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      transition: width .18s ease, opacity .18s ease;
+    }
+    .collapsed #sideElement{
+      width: var(--sideWCollapsed);
+      opacity:0;
+      pointer-events:none;
+      border-left:none;
+    }
+
+    /* Header */
+    #infoHeader{
+      height: var(--headerH);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 10px;
+      border-bottom:1px solid var(--border);
+      touch-action:none;
+      user-select:none;
+      background: rgba(0,0,0,.08);
+    }
+    .titlePill{
+      flex:1 1 auto;
+      border:1px solid var(--border);
+      background: var(--pill);
+      border-radius:999px;
+      padding:8px 12px;
+      font-weight:700;
+      font-size:13px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .titlePill span:last-child{
+      color:var(--muted);
+      font-weight:600;
+      font-size:12px;
+    }
+
+    .infoHeaderIcon{
+      width: 34px;
+      height: 34px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--muted);
+      cursor:pointer;
+    }
+    .infoHeaderIcon:hover{ background: var(--hover); color: var(--text); }
+
+    .sideScroll{
+      overflow:auto;
+      padding: 10px;
+    }
+
+    /* --- TopoView-ish grid classes (just enough for your snippet look) --- */
+    .col12{width:100%}
+    .col11{width:91.666%}
+    .col10{width:83.333%}
+    .col9{width:75%}
+    .col8{width:66.666%}
+    .col6{width:50%}
+    .col5{width:41.666%}
+    .col4{width:33.333%}
+    .col3{width:25%}
+    .col2{width:16.666%}
+    .col1{width:8.333%}
+
+    .inline{display:flex; flex-wrap:wrap;}
+    .center{text-align:center;}
+    .fr{float:right;}
+    .pad05{padding:4px;}
+    .pad1l{padding-left:10px;}
+    .pad1{padding:8px;}
+    .noselect{user-select:none;}
+
+    /* Records list styling */
+    #recordsTable{
+      list-style:none;
+      padding:0;
+      margin:0;
+      border:1px solid var(--border);
+      border-radius: 14px;
+      overflow:hidden;
+      background: rgba(0,0,0,.10);
+    }
+    #recordsTable li{
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    #recordsTable li:first-child{border-top:none;}
+
+    /* The clickable entry itself */
+    #recordsTable a{
+      display:block;
+      color:var(--text);
+      text-decoration:none;
+    }
+    #recordsTable a:hover{
+      background: rgba(255,255,255,.03);
+    }
+
+    .recTitle{font-weight:800;}
+    .recState{color:var(--muted); font-weight:700;}
+    .searchItem{color: rgba(232,238,252,.92); font-size:12px;}
+    .recYear{color: var(--muted); font-weight:700;}
+    .recScale{color: rgba(232,238,252,.92); font-weight:700;}
+    .recKeyline{border-bottom:1px solid rgba(255,255,255,.08); padding-bottom:6px; display:inline-block;}
+
+    /* Thumb */
+    .recImageMini{
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      background-size: cover;
+      background-position: center;
+      border:1px solid rgba(255,255,255,.10);
+      margin-left:auto;
+    }
+
+    /* Downloads */
+    .sideFile{display:flex; flex-direction:column; gap:6px; margin-top:6px;}
+    .downloadItem{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: var(--muted);
+      cursor:pointer;
+      user-select:none;
+    }
+    .downloadItem:hover{ background: var(--hover); color: var(--text); }
+    .downloadItem[aria-disabled="true"]{
+      opacity:.45;
+      pointer-events:none;
+    }
+    .jpgByte,.kmzByte,.tifByte,.pdfByte{ color: rgba(167,179,204,.85); margin-left:6px; }
+
+    /* Record links row (Show/Info/Zoom/Pan/Pin/Fix) */
+    .recordlinkGroup{ margin-top:8px; }
+    .recordLinks{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      border-radius:999px;
+      padding:6px 10px;
+      margin: 4px 6px 0 0;
+      cursor:pointer;
+      color: var(--muted);
+      user-select:none;
+      text-indent:0 !important;
+    }
+    .recordLinks:hover{ background: var(--hover); color: var(--text); }
+    .recordLinks.dot{ }
+    .linkText{ font-size:12px; letter-spacing:.2px; }
+
+    .infoShown{
+      border-color: rgba(90,170,255,.55);
+      background: rgba(90,170,255,.14);
+      color: var(--text);
+    }
+
+    /* Expandable meta fields (the “info opened” block) */
+    .metaFields{
+      display:none;
+      width:100%;
+      padding:10px 10px 12px 10px;
+      border-top:1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.12);
+    }
+    .metaFields.open{ display:flex; flex-wrap:wrap; gap:10px; }
+
+    .metaInfo{ width:100%; }
+    .metaPub{ font-size:12px; color: rgba(232,238,252,.92); }
+    .metaColumn{ padding-top:8px; }
+
+    .metaItem{
+      display:flex;
+      gap:8px;
+      align-items:flex-start;
+      padding:6px 0;
+      border-top:1px solid rgba(255,255,255,.06);
+      width:100%;
+    }
+    .metaItem:first-child{border-top:none;}
+    .metaChecked{ color: rgba(120,220,160,.95); margin-top:1px; }
+    .metaNoCheck{ color: rgba(255,120,120,.92); margin-top:1px; }
+    .noData{ color: rgba(167,179,204,.75); }
+    .overflow{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+    /* Leaflet attribution polish */
+    .leaflet-control-attribution{
+      background: rgba(15,22,34,.72) !important;
+      color: rgba(232,238,252,.85) !important;
+      border: 1px solid var(--border);
+      border-radius:10px;
+      margin: 0 10px 10px 0;
+      padding:6px 8px;
+      backdrop-filter: blur(8px);
+    }
