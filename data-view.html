@@ -10,6 +10,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <link rel="stylesheet" href="./data-view.css"/>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 fill=%27%23121c2b%27/%3E%3Cpath d=%27M16 44l16-28 16 28H16z%27 fill=%27%23e8eefc%27/%3E%3C/svg%3E">
 </head>
 
 <body>
@@ -122,12 +123,12 @@ const map = L.map('map', { zoomControl:true }).setView([41.615, -71.251], 11);
 
 const terrain = L.tileLayer(
   'https://basemap.nationalmap.gov/arcgis/rest/services/USGSShadedReliefOnly/MapServer/tile/{z}/{y}/{x}',
-  { maxZoom: 20, attribution: 'USGS The National Map' }
+  { maxZoom: 20, attribution: 'USGS The National Map', crossOrigin: true }
 );
 
 const topoLabels = L.tileLayer(
   'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}',
-  { maxZoom: 20, attribution: 'USGS The National Map' }
+  { maxZoom: 20, attribution: 'USGS The National Map', crossOrigin: true }
 );
 
 map.attributionControl.setPrefix('<a href="https://leafletjs.com/" target="_blank" rel="noopener">Leaflet</a>');
@@ -594,17 +595,26 @@ function metaItem(label, value, overflow=false){
 }
 
 async function addGeoTiffOverlay(url, { opacity = 0.7 } = {}) {
-  const absUrl = new URL(url, window.location.href).href; // make absolute
+  const absUrl = new URL(url, window.location.href).href;
   const res = await fetch(absUrl);
-  if (!res.ok) throw new Error(`GeoTIFF fetch failed: ${res.status} ${res.statusText}`);
+  if (!res.ok) throw new Error(`GeoTIFF fetch failed: ${res.status}`);
   const buf = await res.arrayBuffer();
 
   const georaster = await parseGeoraster(buf);
-  const layer = new GeoRasterLayer({ georaster, opacity, resolution: 256 });
+
+  const layer = new GeoRasterLayer({
+    georaster,
+    opacity,
+    resolution: 256
+  });
+
   layer.addTo(map);
+
+  // Auto-fit to raster bounds
+  map.fitBounds(layer.getBounds(), { padding: [40, 40] });
+
   return layer;
 }
-
 
 
 /* Reset all overlays */
