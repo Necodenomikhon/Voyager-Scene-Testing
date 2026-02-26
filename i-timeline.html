@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Interactive Timeline (Map + List + Popovers)</title>
+  <link rel="stylesheet" href="i-timeline.css">
+</head>
+<body>
+
+<div class="itmap-wrap" id="itmapWrap">
+  <!-- LEFT SIDEBAR (Timeline list) -->
+  <aside class="itmap-sidebar itmap-sidebar-left" aria-label="Timeline">
+    <div class="itmap-controller-view-toolbar">
+      <div class="itmap-directory-filter-wrap filter-wrap">
+        <input id="timelineSearch" type="search" placeholder="Search timeline…" autocomplete="off" />
+      </div>
+    </div>
+
+    <div class="itmap-directory-scroll nano-content" tabindex="0">
+      <div id="timelineList" class="itmap-controller-view-content">
+        <div class="itmap-directory-item" data-object-id="1">May 23rd, 7:00 AM</div>
+        <div class="itmap-directory-item" data-object-id="2">June 9th, 8:00 AM</div>
+        <div class="itmap-directory-item" data-object-id="3">August 29th, 8:00AM</div>
+        <div class="itmap-directory-item" data-object-id="4">August 29th, 9:00 AM</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAP -->
+  <main class="itmap-map-container" aria-label="Map">
+    <div id="itmap-18" class="itmap" data-id="18">
+      <!-- Background / pan-zoom surface -->
+      <div class="itmap-scrollpane-wrap" aria-hidden="true">
+        <div class="itmap-scrollpane" id="scrollpane">
+          <img src="Timeline_Test1.jpg" id="mapImage" alt="Timeline Map">
+        </div>
+      </div>
+
+      <!-- Markers + popovers -->
+      <div class="itmap-layers-wrap">
+        <div class="itmap-layer itmap-layer-markers">
+          <div class="itmap-marker" data-object-id="1" id="marker_1" style="left:39.807%; top:24.591%;">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='9' fill='%230055ff'/%3E%3C/svg%3E" class="itmap-marker-image" alt="North Battery">
+          </div>
+          <div class="itmap-marker" data-object-id="2" id="marker_2" style="left:49.714%; top:70.426%;">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='9' fill='%230055ff'/%3E%3C/svg%3E" class="itmap-marker-image" alt="Barracks">
+          </div>
+          <div class="itmap-marker" data-object-id="3" id="marker_3" style="left:50.802%; top:56.192%;">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='9' fill='%230055ff'/%3E%3C/svg%3E" class="itmap-marker-image" alt="Flagpole">
+          </div>
+          <div class="itmap-marker" data-object-id="4" id="marker_4" style="left:31.492%; top:29.080%;">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='9' fill='%230055ff'/%3E%3C/svg%3E" class="itmap-marker-image" alt="Armory">
+          </div>
+        </div>
+        <div class="itmap-layer itmap-layer-popovers" id="popoverLayer"></div>
+      </div>
+
+      <!-- Buttons right -->
+      <div class="itmap-buttons right" aria-label="Map controls">
+        <div class="itmap-btn-group">
+          <button class="itmap-btn-map itmap-in" type="button" title="Zoom in" aria-label="Zoom in"></button>
+          <button class="itmap-btn-map itmap-out" type="button" title="Zoom out" aria-label="Zoom out"></button>
+        </div>
+        <div class="itmap-btn-group">
+          <button class="itmap-btn-map itmap-reset" type="button" title="Reset zoom" aria-label="Reset zoom"></button>
+        </div>
+      </div>
+
+      <!-- Mobile toolbar -->
+      <div class="itmap-map-toolbar" aria-label="Mobile toolbar">
+        <div class="itmap-mobile-buttons">
+          <button class="itmap-button itmap-button-menu" data-controller="menu" type="button">List</button>
+          <button class="itmap-button itmap-button-map" data-controller="map" type="button">Map</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  // Minimal data model; add more IDs as needed
+  const EVENT_DETAILS = {
+    "1": {
+      title: "North Battery",
+      timeLabel: "August 29th, 8:00AM",
+      image: "//battleofrhodeisland.org/wp-content/uploads/2023/04/Laurens-223x300.jpeg",
+      body: "Theoretical location of the overlook that warded off attacks from the North.",
+      learnMore: "https://battleofrhodeisland.org/"
+    },
+    "2": {
+      title: "Barracks",
+      timeLabel: "August 29th, 7:00 AM",
+      image: "//battleofrhodeisland.org/wp-content/uploads/2023/04/Redcoatsmarching-2-300x238.jpg",
+      body: "The barracks served as soldier housing while offering strong fortifactions against attacks from the South side.",
+      learnMore: "https://battleofrhodeisland.org/"
+    },
+    "3": {
+      title: "BHF Flagpole",
+      timeLabel: "August 29th, 7:00 AM",
+      image: "//battleofrhodeisland.org/wp-content/uploads/2023/04/Redcoatsmarching-2-300x238.jpg",
+      body: "The flagpole is the only remaining part of the baseball pitch apart from the grounds themselves from the \'30s.",
+      learnMore: "https://battleofrhodeisland.org/"
+    },
+    "4": {
+      title: "Armory",
+      timeLabel: "August 29th, 7:00 AM",
+      image: "//battleofrhodeisland.org/wp-content/uploads/2023/04/Redcoatsmarching-2-300x238.jpg",
+      body: "The armory stored ammo and was recorded to be used by multiple parties during the war.",
+      learnMore: "https://battleofrhodeisland.org/"
+    },
+  };
+
+  const mapRoot = document.querySelector("#itmap-18");
+  const popoverLayer = document.querySelector("#popoverLayer");
+  const list = document.querySelector("#timelineList");
+  const search = document.querySelector("#timelineSearch");
+
+  const items = () => Array.from(document.querySelectorAll(".itmap-directory-item"));
+  const markers = () => Array.from(document.querySelectorAll(".itmap-marker"));
+
+  function clearPopover(){
+    popoverLayer.innerHTML = "";
+  }
+
+  function setActive(objectId){
+    items().forEach(i => i.classList.toggle("is-active", i.dataset.objectId === objectId));
+    markers().forEach(m => m.classList.toggle("is-active", m.dataset.objectId === objectId));
+  }
+
+  function buildPopoverHTML(ev){
+    // Keep the key class hooks but reduce wrapper nesting
+    return `
+      <div class="itmap-controller-container itmap-popover itmap-invisible"
+           style="width:300px; max-width:75%; transform: translate(-50%) translate(0px, 0px);">
+        <div class="itmap-controller-view">
+          <div class="itmap-controller-view-toolbar">
+            <button class="itmap-popover-close itmap-details-close" type="button" aria-label="Close popover"></button>
+          </div>
+          <div class="nano-content">
+            <div class="itmap-controller-view-content">
+              <h5>${ev.title || ""}</h5>
+              <p>${ev.timeLabel || ""}</p>
+              ${ev.image ? `<img src="${ev.image}" alt="">` : ""}
+              ${ev.image ? `<br><br>` : ""}
+              <p>${ev.body || ""}</p>
+              <p><em></em></p>
+              ${ev.learnMore ? `<p><a href="${ev.learnMore}" target="_blank" rel="noopener">Learn More</a></p>` : ""}
+            </div>
+          </div>
+          <button class="itmap-mobile-modal-close" type="button">Close</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function positionPopover(popEl, markerEl){
+    const mapRect = mapRoot.getBoundingClientRect();
+    const mRect = markerEl.getBoundingClientRect();
+
+    // anchor near marker; x is center because translate(-50%)
+    let x = (mRect.left - mapRect.left) + (mRect.width / 2);
+    let y = (mRect.top - mapRect.top) + (mRect.height / 2) + 18;
+
+    // clamp inside map bounds
+    const pad = 8;
+    const bw = popEl.offsetWidth || 300;
+    const bh = Math.min(popEl.offsetHeight || 240, mapRect.height - pad*2);
+
+    x = Math.max((bw/2)+pad, Math.min(mapRect.width - (bw/2) - pad, x));
+    y = Math.max(pad, Math.min(mapRect.height - bh - pad, y));
+
+    popEl.style.transform = `translate(-50%) translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+
+    // give it a reasonable max height based on remaining space
+    const available = Math.max(160, mapRect.height - y - 16);
+    popEl.style.maxHeight = `${Math.round(Math.min(available, mapRect.height * 0.75))}px`;
+  }
+
+  function openPopoverForId(objectId){
+    const marker = document.querySelector(`.itmap-marker[data-object-id="${objectId}"]`);
+    if (!marker) return;
+
+    const fallbackTitle = marker.querySelector("img")?.alt || `Event ${objectId}`;
+    const ev = EVENT_DETAILS[objectId] || { title: fallbackTitle, timeLabel:"", image:"", body:"", learnMore:"" };
+
+    popoverLayer.innerHTML = buildPopoverHTML(ev);
+    const pop = popoverLayer.querySelector(".itmap-popover");
+    if (!pop) return;
+
+    // close handlers
+    pop.querySelector(".itmap-details-close")?.addEventListener("click", clearPopover);
+    pop.querySelector(".itmap-mobile-modal-close")?.addEventListener("click", clearPopover);
+
+    // measure + position, then reveal (itmap-ish)
+    requestAnimationFrame(() => {
+      positionPopover(pop, marker);
+      requestAnimationFrame(() => pop.classList.remove("itmap-invisible"));
+    });
+  }
+
+  // List click -> popover
+  items().forEach(item => {
+    item.addEventListener("click", () => {
+      setActive(item.dataset.objectId);
+      openPopoverForId(item.dataset.objectId);
+    });
+  });
+
+  // Marker click -> popover
+  markers().forEach(marker => {
+    marker.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setActive(marker.dataset.objectId);
+      openPopoverForId(marker.dataset.objectId);
+    });
+  });
+
+  // Search filter
+  search.addEventListener("input", () => {
+    const q = search.value.trim().toLowerCase();
+    items().forEach(it => {
+      const show = it.textContent.toLowerCase().includes(q);
+      it.style.display = show ? "" : "none";
+    });
+  });
+
+  // Click map background closes popover
+  mapRoot.addEventListener("click", (e) => {
+    if (e.target.closest(".itmap-marker") || e.target.closest(".itmap-popover")) return;
+    clearPopover();
+  });
+
+  // Reposition popover on resize
+  window.addEventListener("resize", () => {
+    const active = document.querySelector(".itmap-marker.is-active");
+    const pop = document.querySelector(".itmap-popover");
+    if (active && pop) positionPopover(pop, active);
+
+    fitToViewport();
+  });
+
+  // --- itmap-like Pan/Zoom: map + markers move together ---
+  const pane = document.getElementById("scrollpane");
+  const markerLayer = document.querySelector(".itmap-layer-markers");
+  const mapImage = document.getElementById("mapImage");
+
+  const view = {
+    s: 1,
+    min: 1,
+    max: 4,
+    x: 0,
+    y: 0,
+    panning: false,
+    sx: 0,
+    sy: 0,
+    ox: 0,
+    oy: 0
+  };
+
+  function clamp(n, lo, hi){ return Math.max(lo, Math.min(hi, n)); }
+
+  function baseSize(){
+    // Use the image's natural pixel size as the world size
+    const w = mapImage?.naturalWidth || mapImage?.offsetWidth || mapRoot.clientWidth;
+    const h = mapImage?.naturalHeight || mapImage?.offsetHeight || mapRoot.clientHeight;
+    return { w, h };
+  }
+
+  function clampPan(){
+    const vw = mapRoot.clientWidth;
+    const vh = mapRoot.clientHeight;
+    const { w, h } = baseSize();
+    const sw = w * view.s;
+    const sh = h * view.s;
+
+    // Allow panning only within bounds; center if smaller than viewport
+    const minX = Math.min(0, vw - sw);
+    const minY = Math.min(0, vh - sh);
+    const maxX = 0;
+    const maxY = 0;
+
+    view.x = clamp(view.x, minX, maxX);
+    view.y = clamp(view.y, minY, maxY);
+
+    if (sw < vw) view.x = (vw - sw) / 2;
+    if (sh < vh) view.y = (vh - sh) / 2;
+  }
+
+  function apply(){
+    clampPan();
+
+    // IMPORTANT: always use TWO-ARG translate(x,y)
+    const t = `translate(${view.x}px, ${view.y}px) scale(${view.s})`;
+
+      // Keep markers roughly constant size on screen
+    const inv = 1 / view.s;
+    document.documentElement.style.setProperty("--marker-scale", String(inv));
+
+    pane.style.transform = t;
+    markerLayer.style.transform = t;
+
+    // keep popover anchored to active marker (popover is not scaled)
+    const active = document.querySelector(".itmap-marker.is-active");
+    const pop = document.querySelector(".itmap-popover");
+    if (active && pop) positionPopover(pop, active);
+
+  }
+
+  // zoom around a screen point
+  function zoomAt(clientX, clientY, nextScale){
+    nextScale = clamp(nextScale, view.min, view.max);
+
+    const r = mapRoot.getBoundingClientRect();
+    const px = clientX - r.left;
+    const py = clientY - r.top;
+
+    // world coord under cursor before zoom
+    const wx = (px - view.x) / view.s;
+    const wy = (py - view.y) / view.s;
+
+    view.s = nextScale;
+
+    // new translate so same world coord stays under cursor
+    view.x = px - wx * view.s;
+    view.y = py - wy * view.s;
+
+    apply();
+  }
+
+  function fitToViewport(){
+    const vw = mapRoot.clientWidth;
+    const vh = mapRoot.clientHeight;
+    const { w, h } = baseSize();
+
+    // tell CSS what the world size is (so markers % align to the world box)
+    mapRoot.style.setProperty("--world-w", `${w}px`);
+    mapRoot.style.setProperty("--world-h", `${h}px`);
+
+    // contain fit (like itmap "fit")
+    const fitScale = Math.min(vw / w, vh / h);
+
+    view.s = fitScale;
+    view.min = fitScale;        // prevents zooming out smaller than fit
+    view.max = Math.max(4, fitScale * 4); // keep your existing max feel, scaled
+
+    // center it
+    view.x = (vw - w * view.s) / 2;
+    view.y = (vh - h * view.s) / 2;
+
+    apply();
+  }
+
+  // Buttons
+  document.querySelector(".itmap-in").addEventListener("click", () => {
+    const r = mapRoot.getBoundingClientRect();
+    zoomAt(r.left + r.width/2, r.top + r.height/2, view.s * 1.15);
+  });
+  document.querySelector(".itmap-out").addEventListener("click", () => {
+    const r = mapRoot.getBoundingClientRect();
+    zoomAt(r.left + r.width/2, r.top + r.height/2, view.s / 1.15);
+  });
+  document.querySelector(".itmap-reset").addEventListener("click", () => {
+    view.s = 1; view.x = 0; view.y = 0;
+    apply();
+  });
+
+  // Wheel / trackpad zoom
+  mapRoot.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    const factor = Math.exp(-e.deltaY * 0.0015);
+    zoomAt(e.clientX, e.clientY, view.s * factor);
+  }, { passive: false });
+
+  // Drag pan (with threshold + reliable end)
+  const PAN_THRESHOLD_PX = 6;
+  let panCandidate = null;
+
+  mapRoot.addEventListener("pointerdown", (e) => {
+    // Only left button / primary touch
+    if (e.button !== 0) return;
+
+    // Don’t pan when clicking markers/popover UI
+    if (
+    e.target.closest(".itmap-marker") ||
+    e.target.closest(".itmap-popover") ||
+    e.target.closest(".itmap-buttons") ||      // zoom controls
+    e.target.closest(".itmap-map-toolbar")     // mobile buttons
+    ) return;
+
+    // Start as a candidate; we only enter pan mode after threshold
+    panCandidate = {
+      pointerId: e.pointerId,
+      startX: e.clientX,
+      startY: e.clientY,
+      originX: view.x,
+      originY: view.y,
+    };
+
+    // Capture so we still receive pointerup even if cursor leaves the map
+    mapRoot.setPointerCapture(e.pointerId);
+  }, { passive: true });
+
+  mapRoot.addEventListener("pointermove", (e) => {
+    // If actively panning, update translate
+    if (view.panning) {
+      view.x = view.ox + (e.clientX - view.sx);
+      view.y = view.oy + (e.clientY - view.sy);
+      apply();
+      return;
+    }
+
+    // If not panning yet, see if we should “promote” candidate to panning
+    if (!panCandidate || panCandidate.pointerId !== e.pointerId) return;
+
+    const dx = e.clientX - panCandidate.startX;
+    const dy = e.clientY - panCandidate.startY;
+
+    if (Math.hypot(dx, dy) >= PAN_THRESHOLD_PX) {
+      view.panning = true;
+      mapRoot.classList.add("is-panning");
+
+      view.sx = panCandidate.startX;
+      view.sy = panCandidate.startY;
+      view.ox = panCandidate.originX;
+      view.oy = panCandidate.originY;
+
+      // During panning, stop the browser from text selection, etc.
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  function endPan(e){
+    // Always clear candidate
+    if (panCandidate && (!e || panCandidate.pointerId === e.pointerId)) {
+      panCandidate = null;
+    }
+
+    if (!view.panning) {
+      // Still release capture if we had it
+      if (e && mapRoot.hasPointerCapture?.(e.pointerId)) {
+        try { mapRoot.releasePointerCapture(e.pointerId); } catch {}
+      }
+      mapRoot.classList.remove("is-panning");
+      return;
+    }
+
+    view.panning = false;
+    mapRoot.classList.remove("is-panning");
+
+    if (e && mapRoot.hasPointerCapture?.(e.pointerId)) {
+      try { mapRoot.releasePointerCapture(e.pointerId); } catch {}
+    }
+  }
+
+  // End pan in *all* the ways it can end:
+  mapRoot.addEventListener("pointerup", endPan);
+  mapRoot.addEventListener("pointercancel", endPan);
+  mapRoot.addEventListener("lostpointercapture", endPan);
+  // Fallback: if pointerup happens anywhere, still end
+  window.addEventListener("pointerup", endPan, true);
+
+  // Apply once image has correct layout (important for clamping)
+  if (mapImage?.complete) fitToViewport();
+  else mapImage?.addEventListener("load", fitToViewport);
+
+  // Mobile buttons: toggle sidebar on small screens
+  const sidebar = document.querySelector(".itmap-sidebar-left");
+  document.querySelector(".itmap-button-menu").addEventListener("click", () => { sidebar.style.display = "flex"; });
+  document.querySelector(".itmap-button-map").addEventListener("click", () => {
+    if (window.matchMedia("(max-width: 700px)").matches) sidebar.style.display = "none";
+  });
+  
+  // Prevent background processing clicks.
+  document.querySelectorAll(".itmap-buttons button, .itmap-map-toolbar button").forEach(btn => {
+    btn.addEventListener("pointerdown", (e) => e.stopPropagation());
+    btn.addEventListener("click", (e) => e.stopPropagation());
+  });
+
+  // Default selection
+  setActive("7");
+
+  function screenToWorld(clientX, clientY){
+  const r = mapRoot.getBoundingClientRect();
+  const sx = clientX - r.left;
+  const sy = clientY - r.top;
+
+  // undo pan/zoom to get "world" coords
+  const wx = (sx - view.x) / view.s;
+  const wy = (sy - view.y) / view.s;
+  return { wx, wy };
+}
+
+  mapRoot.addEventListener("click", async (e) => {
+    // Hold Shift to pick coords
+    if (!e.shiftKey) return;
+
+    // Don’t interfere with UI clicks
+    if (e.target.closest(".itmap-marker") || e.target.closest(".itmap-popover") || e.target.closest(".itmap-buttons")) return;
+
+    const { w, h } = baseSize(); // natural image size
+    const { wx, wy } = screenToWorld(e.clientX, e.clientY);
+
+    const x = clamp(wx, 0, w);
+    const y = clamp(wy, 0, h);
+
+    const xp = (x / w) * 100;
+    const yp = (y / h) * 100;
+
+    const out = {
+      worldPx: { x: Math.round(x), y: Math.round(y) },
+      percent: { left: +xp.toFixed(3), top: +yp.toFixed(3) },
+      markerStyle: `left:${xp.toFixed(3)}%; top:${yp.toFixed(3)}%;`
+    };
+
+    console.log("📍 Map coords:", out);
+
+    // Try to copy style string to clipboard for convenience
+    try {
+      await navigator.clipboard.writeText(out.markerStyle);
+      console.log("Copied to clipboard:", out.markerStyle);
+    } catch {}
+  });
+
+</script>
+
+</body>
+</html>

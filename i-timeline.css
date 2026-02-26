@@ -1,0 +1,290 @@
+.itmap-wrap{
+  display:flex;
+  width:100%;
+  min-height:520px;
+  border:1px solid rgba(0,0,0,.12);
+  background:#fafafa;
+}
+
+/* Sidebar */
+.itmap-sidebar{
+  flex:0 0 240px;
+  display:flex;
+  flex-direction:column;
+  border-right:1px solid rgba(0,0,0,.12);
+  background:#fafafa;
+  min-width:180px;
+}
+@media (max-width: 860px){
+  .itmap-sidebar{ flex-basis: 220px; }
+}
+@media (max-width: 700px){
+  .itmap-sidebar{ display:none; }
+}
+
+/* Toolbar (used by sidebar + popover) */
+.itmap-controller-view-toolbar{
+  padding:10px;
+  border-bottom:1px solid rgba(0,0,0,.12);
+  background:#fafafa;
+}
+
+.itmap-directory-filter-wrap input{
+  width:100%;
+  padding:8px 10px;
+  border:1px solid rgba(0,0,0,.18);
+  background:white;
+  outline:none;
+  font: 14px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Sidebar scroll region */
+.itmap-directory-scroll.nano-content{
+  flex:1;
+  overflow:auto;
+  padding:8px;
+}
+
+.itmap-directory-item{
+  padding:10px;
+  margin:0 0 6px 0;
+  cursor:pointer;
+  border:1px solid rgba(0,0,0,.12);
+  background:white;
+  font: 14px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+.itmap-directory-item:hover{ background:#f3f3f3; }
+.itmap-directory-item.is-active{
+  outline:2px solid rgba(20,110,255,.55);
+  border-color:rgba(20,110,255,.35);
+}
+
+/* Map container */
+.itmap-map-container{
+  flex:1;
+  min-width:0;
+  background:#b09b83;
+}
+.itmap{
+  position:relative;
+  width:100%;
+  height:100%;
+  min-height:520px;
+  overflow:hidden;
+}
+
+/* Background surface and overlay layers */
+.itmap-scrollpane-wrap,
+.itmap-layers-wrap{
+  position:absolute;
+  inset:0;
+}
+.itmap-scrollpane-wrap{ z-index: 1; }
+.itmap-layers-wrap{ z-index: 2; }
+
+/* The map image represents the "world" at its natural size */
+.itmap-scrollpane img{
+  display:block;
+  width:100%;
+  height:100%;
+  user-select:none;
+  pointer-events:none;
+}
+/* World sizing: JS will set these to the image natural size */
+.itmap-scrollpane{
+  position:absolute;
+  left:0;
+  top:0;
+  width: var(--world-w, 100%);
+  height: var(--world-h, 100%);
+}
+
+/* Make markers layer match the world size so % marker coords stay aligned */
+.itmap-layer-markers{
+  inset: auto;           /* stop forcing full viewport */
+  left: 0;
+  top: 0;
+  width: var(--world-w, 100%);
+  height: var(--world-h, 100%);
+}
+
+/* Layers */
+.itmap-layer{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+.itmap-layer-markers{ pointer-events:auto; }
+
+/* Markers */
+.itmap-marker{
+  position: absolute;             /* <-- REQUIRED so left/top works */
+  width: 25px;
+  height: 25px;
+  transform: translate(-50%, -50%) scale(var(--marker-scale, 1));
+  transform-origin: 50% 50%;
+  cursor: pointer;
+}
+.itmap-marker img{ width:100%; height:100%; display:block; }
+.itmap-marker.is-active img{
+  filter: drop-shadow(0 0 6px rgba(20,110,255,.8));
+  transform: scale(1.15);
+}
+
+/* Map control buttons */
+.itmap-buttons.right{
+  position:absolute;
+  right:10px;
+  top:10px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  z-index: 5;
+}
+.itmap-btn-group{
+  display:flex;
+  flex-direction:column;
+  border:1px solid rgba(0,0,0,.15);
+  background:rgba(255,255,255,.85);
+  overflow:hidden;
+}
+.itmap-btn-map{
+  width:36px;
+  height:36px;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+}
+.itmap-btn-map:hover{ background:rgba(0,0,0,.06); }
+.itmap-btn-map.itmap-in::before{ content:"+"; font-size:18px; }
+.itmap-btn-map.itmap-out::before{ content:"–"; font-size:18px; }
+.itmap-btn-map.itmap-reset::before{ content:"[ ]"; font-size:18px; }
+
+/* Mobile toolbar */
+.itmap-map-toolbar{
+  position:absolute;
+  left:10px;
+  bottom:10px;
+  z-index: 6;
+}
+.itmap-mobile-buttons{ display:flex; gap:8px; }
+.itmap-button{
+  border:1px solid rgba(0,0,0,.15);
+  background:rgba(255,255,255,.9);
+  padding:8px 10px;
+  cursor:pointer;
+  font: 13px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+.itmap-button:hover{ background:rgba(0,0,0,.06); }
+
+/* Clip transformed map so it never spills over the sidebar */
+.itmap-map-container,
+.itmap{
+  overflow: hidden;
+}
+
+/* Pan/zoom usability */
+.itmap{ touch-action: none; cursor: grab; }
+.itmap.is-panning{ cursor: grabbing; }
+
+/* Map image should not eat clicks (markers remain clickable) */
+#mapImage{ pointer-events: none; }
+
+/* Ensure transforms behave consistently */
+#scrollpane,
+.itmap-layer-markers{
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+/* Cursor hints */
+.itmap{ cursor: grab; }
+
+/* Popover */
+.itmap-layer-popovers{ 
+  pointer-events:auto;
+  z-index: 4;
+  inset:0; 
+}
+.itmap-layer-popovers:empty{ pointer-events:none; }
+
+.itmap-popover{
+  position:absolute;
+  pointer-events:auto;
+  background:rgba(255,255,255,.95);
+  border:1px solid rgba(0,0,0,.18);
+  box-shadow:0 12px 36px rgba(0,0,0,.25);
+  overflow:hidden;
+}
+.itmap-popover.itmap-invisible{
+  visibility:hidden;
+  opacity:0;
+  pointer-events:none;
+}
+.itmap-popover .itmap-controller-view-toolbar{
+  height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  padding:0 8px;
+  border-bottom:1px solid rgba(0,0,0,.12);
+  background:#fff;
+}
+
+/* Close button (x) */
+.itmap-popover-close.itmap-details-close{
+  width:28px;
+  height:28px;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  position:relative;
+}
+.itmap-popover-close.itmap-details-close:before,
+.itmap-popover-close.itmap-details-close:after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:14px;
+  height:2px;
+  background:#111;
+  transform-origin:center;
+}
+.itmap-popover-close.itmap-details-close:before{ transform:translate(-50%,-50%) rotate(45deg); }
+.itmap-popover-close.itmap-details-close:after{ transform:translate(-50%,-50%) rotate(-45deg); }
+
+/* Popover body */
+.itmap-popover .nano-content{
+  padding:12px;
+  overflow:auto;
+  max-height: min(60vh, 420px);
+}
+.itmap-popover h5{ margin:0 0 6px 0; font-size:14px; }
+.itmap-popover p{ margin:0 0 10px 0; font-size:13px; line-height:1.35; }
+.itmap-popover img{
+  max-width:100%;
+  height:auto;
+  display:block;
+  border:1px solid rgba(0,0,0,.12);
+}
+
+.itmap-mobile-modal-close{
+  display:none;
+  width:100%;
+  border:0;
+  border-top:1px solid rgba(0,0,0,.12);
+  background:#fff;
+  padding:10px;
+  cursor:pointer;
+}
+@media (max-width:700px){
+  .itmap-mobile-modal-close{ display:block; }
+}
+
+/* Small screens: show sidebar when toggled by JS */
+@media (max-width: 700px){
+  .itmap-sidebar{ width: 240px; }
+}

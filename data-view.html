@@ -108,7 +108,8 @@
   </div>
 <script src="https://unpkg.com/geotiff@2.1.3/dist-browser/geotiff.js"></script>
 <script src="https://unpkg.com/georaster/dist/georaster.browser.bundle.min.js"></script>
-<script src="https://unpkg.com/georaster-layer-for-leaflet/georaster-layer-for-leaflet.browserify.min.js"></script>
+<script src="https://unpkg.com/georaster-layer-for-leaflet@4.1.2/dist/georaster-layer-for-leaflet.min.js"></script>
+
 
 <script>
 /* ---------------------------
@@ -228,7 +229,7 @@ const customEntries = [
     }
   },
   {
-    id: 1,
+    id: 2,
     title: "Lidar (GeoTIFF)",
     state: "—",
     year: 2024,
@@ -593,15 +594,17 @@ function metaItem(label, value, overflow=false){
 }
 
 async function addGeoTiffOverlay(url, { opacity = 0.7 } = {}) {
-  const georaster = await parseGeoraster(url); // reads GeoTIFF georeferencing
-  const layer = new GeoRasterLayer({
-    georaster,
-    opacity,
-    resolution: 256 // adjust for quality/perf
-  });
+  const absUrl = new URL(url, window.location.href).href; // make absolute
+  const res = await fetch(absUrl);
+  if (!res.ok) throw new Error(`GeoTIFF fetch failed: ${res.status} ${res.statusText}`);
+  const buf = await res.arrayBuffer();
+
+  const georaster = await parseGeoraster(buf);
+  const layer = new GeoRasterLayer({ georaster, opacity, resolution: 256 });
   layer.addTo(map);
   return layer;
 }
+
 
 
 /* Reset all overlays */
