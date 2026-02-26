@@ -50,8 +50,8 @@
       z-index: 50;
     }
     #sideToggle:hover{ background: rgba(255,255,255,.06); }
-    #sideToggle .fa{ color: var(--muted); font-size:18px; }
-    #sideToggle[data-title="Expand"] .fa{ transform: rotate(180deg); }
+    #sideToggle .ico{ color: var(--muted); width:18px; height:18px; }
+    #sideToggle[data-title="Expand"] .ico-caret{ transform: rotate(180deg); }
     .infoNum{
       position:absolute; top:10px; left:50%;
       transform: translateX(-50%);
@@ -280,3 +280,37 @@
       padding:6px 8px;
       backdrop-filter: blur(8px);
     }
+    
+/* Inline SVG icon styling */
+.ico{
+  width:16px;
+  height:16px;
+  display:inline-block;
+  vertical-align:-3px;
+  fill:none;
+  stroke:currentColor;
+}
+.infoHeaderIcon .ico{ width:18px; height:18px; }
+
+.recordLinks .ico{
+  width:15px; height:15px;
+  margin-right:6px;
+  vertical-align:-2px;
+}
+
+.metaIcon .ico{
+  width:14px; height:14px;
+}
+
+.metaIcon.ok{ color: rgba(160, 220, 170, 0.95); }
+.metaIcon.no{ color: rgba(240, 160, 160, 0.95); }
+
+/* Sidebar attribution */
+.attributionFooter{
+  padding: 10px 12px 12px 12px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+.attributionFooter a{ color: inherit; }
