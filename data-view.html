@@ -111,32 +111,78 @@
 <script src="https://unpkg.com/georaster-layer-for-leaflet@4.1.2/dist/georaster-layer-for-leaflet.min.js"></script>
 
 
+
 <script>
 /* ---------------------------
-   Map (demo)
+   Map
 ---------------------------- */
-const map = L.map('map', { zoomControl:true }).setView([41.615, -71.251], 11);
+const map = L.map('map', { zoomControl:true, maxZoom:22 }).setView([41.615, -71.251], 11);
 
+// Basemaps
 const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; OpenStreetMap contributors', maxNativeZoom:19, maxZoom:22, crossOrigin: true}
-);
+  attribution: '&copy; OpenStreetMap contributors',
+  maxNativeZoom: 19,
+  maxZoom: 22,
+  crossOrigin: true,
+  errorTileUrl: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+});
 
-const terrain = L.tileLayer(
+const usgsRelief = L.tileLayer(
   'https://basemap.nationalmap.gov/arcgis/rest/services/USGSShadedReliefOnly/MapServer/tile/{z}/{y}/{x}',
-  { maxZoom: 20, attribution: 'USGS The National Map', maxNativeZoom:16, maxZoom: 22, crossOrigin: true }
+  {
+    attribution: 'USGS The National Map',
+    maxNativeZoom: 16,
+    maxZoom: 22,
+    crossOrigin: true,
+    errorTileUrl: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+  }
 );
 
-const topoLabels = L.tileLayer(
+const usgsTopo = L.tileLayer(
   'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}',
-  { maxZoom: 20, attribution: 'USGS The National Map', maxNativeZoom:16, maxZoom:22, crossOrigin: true }
+  {
+    attribution: 'USGS The National Map',
+    maxNativeZoom: 16,
+    maxZoom: 22,
+    crossOrigin: true,
+    errorTileUrl: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+  }
 );
 
+let activeBase = usgsTopo;
+
+function setActiveBasemap(layer){
+  if (activeBase && map.hasLayer(activeBase)) map.removeLayer(activeBase);
+  activeBase = layer;
+  activeBase.addTo(map);
+  map.setMaxZoom(activeBase.options.maxZoom ?? 22);
+}
+
+function addTileFailureFallback(primary, fallback){
+  // If a provider starts 404'ing at high zoom, switch basemap instead of showing black tiles.
+  let failures = 0;
+  primary.on('tileerror', () => {
+    failures++;
+    if (failures >= 8){
+      console.warn('Basemap failing; switching to fallback');
+      setActiveBasemap(fallback);
+      failures = 0;
+    }
+  });
+  primary.on('load', () => { failures = 0; });
+}
+
+map.attributionControl.setPrefix('<a href="https://leafletjs.com/" target="_blank" rel="noopener">Leaflet</a>');
+
+// Add basemap stack: relief under topo
+usgsRelief.addTo(map);
+setActiveBasemap(usgsTopo);
+
+// fallback for both USGS layers
 addTileFailureFallback(usgsTopo, osm);
 addTileFailureFallback(usgsRelief, osm);
 
-map.attributionControl.setPrefix('<a href="https://leafletjs.com/" target="_blank" rel="noopener">Leaflet</a>');
-terrain.addTo(map);
-topoLabels.addTo(map);
+
 /* ---------------------------
    Sidebar collapse
 ---------------------------- */
@@ -150,6 +196,7 @@ function setCollapsed(collapsed){
 }
 setCollapsed(false);
 sideToggle.addEventListener('click', () => setCollapsed(!appRoot.classList.contains('collapsed')));
+
 
 /* ---------------------------
    Custom entries rendered in “record entry” markup style
@@ -177,7 +224,6 @@ function savePins(pins){
   localStorage.setItem(PINS_KEY, JSON.stringify(pins));
 }
 
-// Provide either bounds OR center+zoom
 const customEntries = [
   {
     id: 1,
@@ -189,48 +235,16 @@ const customEntries = [
     scale: 0,
     thumb: "",
 
+    // IMPORTANT: use absolute URL on GitHub Pages OR a relative path that actually exists
     geotiffUrl: "./maps/gpr_geo.tif",
     opacity: 0.7,
 
-    // Optional: for Zoom/Pan buttons (recommended)
-    // If you don’t know these yet, you can omit and later auto-fit after load.
-    bounds: [[34.0, -86.0], [36.0, -84.0]],
+    // Optional: for Pan/Zoom before load; if unknown, omit and we use overlay bounds after load.
+    // bounds: [[34.0, -86.0], [36.0, -84.0]],
 
-    // Downloads (optional)
-    downloads: {
-      jpg: { url:'https://example.com/narragansett.jpg', mb: 2 },
-      kmz: { url:'https://example.com/narragansett.kmz', mb: 3 },
-      tif: { url:'https://example.com/narragansett.tif', mb: 7 },
-      pdf: { url:'https://example.com/narragansett.pdf', mb: 9 }
-    },
-
-    fixUrl: 'https://example.com/report',
-
-    // Meta fields to show when Info is clicked
-    meta: {
-      publishers: 'EduceLab',
-      datum: 'Unstated',
-      projection: 'Unstated',
-      gnisCellId: '58272',
-      gnisCell: 'BHF',
-      woodlandTint: 'Y',
-
-      advance: null,
-      aerialPhotoYear: null,
-      fieldCheckYear: null,
-      editYear: null,
-      interim: null,
-      orthophoto: null,
-      photoInspectionYear: null,
-      photoRevisionYear: null,
-      planimetric: null,
-      preliminary: null,
-      provisional: null,
-      shadedRelief: null,
-      specialMap: null,
-      specialPrinting: null,
-      surveyYear: null
-    }
+    downloads: { },
+    fixUrl: "",
+    meta: { publishers: 'EduceLab', datum: 'Unstated', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
   {
     id: 2,
@@ -245,110 +259,27 @@ const customEntries = [
     geotiffUrl: "./maps/lidar_geo.tif",
     opacity: 0.7,
 
-    // Optional: for Zoom/Pan buttons (recommended)
-    // If you don’t know these yet, you can omit and later auto-fit after load.
-    bounds: [[34.0, -86.0], [36.0, -84.0]],
-
-    // Downloads (optional)
-    downloads: {
-      jpg: { url:'https://example.com/narragansett.jpg', mb: 2 },
-      kmz: { url:'https://example.com/narragansett.kmz', mb: 3 },
-      tif: { url:'https://example.com/narragansett.tif', mb: 7 },
-      pdf: { url:'https://example.com/narragansett.pdf', mb: 9 }
-    },
-
-    fixUrl: 'https://example.com/report',
-
-    // Meta fields to show when Info is clicked
-    meta: {
-      publishers: 'EduceLab',
-      datum: 'Unstated',
-      projection: 'Unstated',
-      gnisCellId: '58272',
-      gnisCell: 'Portsmouth',
-      woodlandTint: 'Y',
-
-      advance: null,
-      aerialPhotoYear: null,
-      fieldCheckYear: null,
-      editYear: null,
-      interim: null,
-      orthophoto: null,
-      photoInspectionYear: null,
-      photoRevisionYear: null,
-      planimetric: null,
-      preliminary: null,
-      provisional: null,
-      shadedRelief: null,
-      specialMap: null,
-      specialPrinting: null,
-      surveyYear: null
-    }
+    downloads: { },
+    fixUrl: "",
+    meta: { publishers: 'EduceLab', datum: 'Unstated', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   }
 ];
 
-// Leaflet overlay layers per entry
-const layersById = new Map();
+// State + pins
 const stateById = new Map(); // id -> {on, opacity, infoOpen, pinned}
 const pins = new Set(loadPins());
-
-const overlayById = new Map();
-
-async function toggleEntryOverlay(entry) {
-  const st = stateById.get(entry.id);
-
-  if (!st.on) {
-    // turn ON
-    if (!overlayById.has(entry.id)) {
-      const layer = await addGeoTiffOverlay(entry.geotiffUrl, { opacity: entry.opacity ?? 0.7 });
-      overlayById.set(entry.id, layer);
-    } else {
-      overlayById.get(entry.id).addTo(map);
-    }
-    st.on = true;
-  } else {
-    // turn OFF
-    const layer = overlayById.get(entry.id);
-    if (layer) map.removeLayer(layer);
-    st.on = false;
-  }
-
-  render(); // update Show/Hide label etc.
-}
+const overlayById = new Map(); // id -> GeoRasterLayer
 
 customEntries.forEach((e) => {
-  // init state for every entry
   stateById.set(e.id, {
-    on: !!e.on,
+    on: false,
     opacity: e.opacity ?? 0.9,
     infoOpen: false,
     pinned: pins.has(e.id)
   });
-
-  // only build a Leaflet tile layer if tileUrl exists
-  if (e.tileUrl) {
-    const layer = L.tileLayer(e.tileUrl, { maxZoom: 20, opacity: e.opacity ?? 0.9 });
-    layersById.set(e.id, layer);
-  }
 });
 
-
-function applyLayers(){
-  customEntries.forEach(e => {
-    if (!e.tileUrl) return; // GeoTIFF entries: handled elsewhere
-
-    const st = stateById.get(e.id);
-    const layer = layersById.get(e.id);
-    if (!layer) return;
-
-    layer.setOpacity(st.opacity);
-    if (st.on && !map.hasLayer(layer)) layer.addTo(map);
-    if (!st.on && map.hasLayer(layer)) map.removeLayer(layer);
-  });
-}
-
 function setCounts(){
-  const total = customEntries.length;
   const active = customEntries.filter(e => stateById.get(e.id).on).length;
   document.getElementById('activeCountLabel').textContent = `${active} active`;
 }
@@ -359,15 +290,16 @@ function openDownload(url){
 
 function zoomToEntry(e){
   if (Array.isArray(e.bounds) && e.bounds.length === 2){
-    map.fitBounds(tiffLayer.getBounds(), {
-      padding: [40, 40],
-      maxZoom: activeBase.options.maxNativeZoom ?? 16
-    });
+    map.fitBounds(e.bounds, { padding:[40,40], maxZoom: activeBase.options.maxNativeZoom ?? 16 });
+    return;
+  }
+  const layer = overlayById.get(e.id);
+  if (layer && layer.getBounds){
+    map.fitBounds(layer.getBounds(), { padding:[40,40], maxZoom: activeBase.options.maxNativeZoom ?? 16 });
     return;
   }
   if (Array.isArray(e.center) && Number.isFinite(e.zoom)){
     map.setView(e.center, e.zoom, { animate:true });
-    return;
   }
 }
 
@@ -379,6 +311,12 @@ function panToEntry(e){
   if (Array.isArray(e.bounds) && e.bounds.length === 2){
     const sw = e.bounds[0], ne = e.bounds[1];
     map.panTo([(sw[0]+ne[0])/2, (sw[1]+ne[1])/2], { animate:true });
+    return;
+  }
+  const layer = overlayById.get(e.id);
+  if (layer && layer.getBounds){
+    const b = layer.getBounds();
+    map.panTo(b.getCenter(), { animate:true });
   }
 }
 
@@ -387,9 +325,9 @@ function reportFix(e){
     window.open(e.fixUrl, '_blank', 'noopener,noreferrer');
     return;
   }
-  const subj = encodeURIComponent('Map issue report: ' + e.title + ', ' + e.state);
+  const subj = encodeURIComponent('Map issue report: ' + e.title);
   const body = encodeURIComponent(
-    `Map: ${e.title}, ${e.state} (${e.year})\n\nDescribe the issue:\n\nLocation (lat,lng): ${map.getCenter().lat.toFixed(5)}, ${map.getCenter().lng.toFixed(5)}\nZoom: ${map.getZoom()}\n`
+    `Map: ${e.title} (${e.year})\n\nDescribe the issue:\n\nLocation (lat,lng): ${map.getCenter().lat.toFixed(5)}, ${map.getCenter().lng.toFixed(5)}\nZoom: ${map.getZoom()}\n`
   );
   window.location.href = `mailto:?subject=${subj}&body=${body}`;
 }
@@ -402,10 +340,6 @@ function togglePin(id){
   render();
 }
 
-function valText(label, val){
-  if (val == null || val === '') return `<span class="${label.toLowerCase().includes('year') ? 'noData' : 'noData'}">${label}: N/A</span>`;
-  return `<span>${label}: ${escapeHtml(String(val))}</span>`;
-}
 function escapeHtml(s){
   return String(s)
     .replaceAll('&','&amp;')
@@ -413,200 +347,6 @@ function escapeHtml(s){
     .replaceAll('>','&gt;')
     .replaceAll('"','&quot;')
     .replaceAll("'","&#039;");
-}
-
-const table = document.getElementById('recordsTable');
-
-function render(){
-  table.innerHTML = '';
-  customEntries.forEach(e => {
-    const st = stateById.get(e.id);
-
-    // Download availability
-    const dls = e.downloads || {};
-    const jpg = dls.jpg?.url || '';
-    const kmz = dls.kmz?.url || '';
-    const tif = dls.tif?.url || '';
-    const pdf = dls.pdf?.url || '';
-
-    // Build meta fields (matches your snippet structure)
-    const m = e.meta || {};
-    const metaHtml = `
-      <span class="col12 metaFields noselect ${st.infoOpen ? 'open' : ''}">
-        <span class="col11 metaInfo">
-          <span class="col12 inline">
-            <span class="metaPub col10">Publishers: ${escapeHtml(m.publishers ?? 'N/A')}</span>
-            <span class="metaPubLink col1"></span>
-            <span class="sbLink col1"></span>
-          </span>
-
-          <span class="col12 inline">
-            <span class="col6 metaColumn">
-              ${metaItem('Advance', m.advance)}
-              ${metaItem('Aerial Photo Year', m.aerialPhotoYear)}
-              ${metaItem('Datum', m.datum)}
-              ${metaItem('Field Check Year', m.fieldCheckYear)}
-              ${metaItem('Edit Year', m.editYear)}
-              ${metaItem('GNIS Cell Id', m.gnisCellId)}
-              ${metaItem('GNIS Cell', m.gnisCell, true)}
-              ${metaItem('Interim', m.interim)}
-              ${metaItem('Orthophoto', m.orthophoto)}
-              ${metaItem('Photo Inspection Year', m.photoInspectionYear)}
-            </span>
-
-            <span class="col6 metaColumn">
-              ${metaItem('Photo Revision Year', m.photoRevisionYear)}
-              ${metaItem('Planimetric', m.planimetric)}
-              ${metaItem('Preliminary', m.preliminary)}
-              ${metaItem('Projection', m.projection)}
-              ${metaItem('Provisional', m.provisional)}
-              ${metaItem('Shaded Relief', m.shadedRelief)}
-              ${metaItem('Special Map', m.specialMap)}
-              ${metaItem('Special Printing', m.specialPrinting)}
-              ${metaItem('Survey Year', m.surveyYear)}
-              ${metaItem('Woodland Tint', m.woodlandTint)}
-            </span>
-          </span>
-        </span>
-      </span>
-    `;
-
-    const li = document.createElement('li');
-    li.className = st.infoOpen ? 'expanded' : '';
-
-    // NOTE: IDs like recHeader are duplicated in your snippet; keep classes, avoid duplicate IDs.
-    li.innerHTML = `
-      <a data-id="${e.id}">
-        <span class="col12 pad1l inline">
-          <span class="recTitle recKeyline searchItem col8">${escapeHtml(e.title)}, <span class="recState">${escapeHtml(e.state)}</span></span>
-
-          <span class="col9">
-            <span class="recYear searchItem pad05">${escapeHtml(e.year)}</span>
-            <span class="searchItem">(${escapeHtml(e.series)}${e.edition ? ', ' + escapeHtml(e.edition) : ''}) </span>
-
-            <span class="searchItem" style="padding-left:5px">Scale 1:</span><span class="recScale searchItem">${escapeHtml(e.scale)}</span>
-            <br>
-
-            <span class="col5 sideFile">
-              <span class="downloadItem jpgDown col12 pad05" title="Download JPEG" ${jpg ? '' : 'aria-disabled="true"'}>JPEG<span class="jpgByte">(${jpg ? `${escapeHtml(String(dls.jpg.mb ?? '?'))} MB` : 'N/A'})</span></span>
-              <span class="downloadItem kmzDown col12" title="Download KMZ" ${kmz ? '' : 'aria-disabled="true"'}>KMZ<span class="kmzByte">(${kmz ? `${escapeHtml(String(dls.kmz.mb ?? '?'))} MB` : 'N/A'})</span></span>
-            </span>
-
-            <span class="col5 sideFile">
-              <span class="downloadItem gTifDown col12 pad05" title="Download GeoTiff" ${tif ? '' : 'aria-disabled="true"'}>GeoTiff<span class="tifByte">(${tif ? `${escapeHtml(String(dls.tif.mb ?? '?'))} MB` : 'N/A'})</span></span>
-              <span class="downloadItem pdfDown col12" title="Download GeoPDF" ${pdf ? '' : 'aria-disabled="true"'}>GeoPDF<span class="pdfByte">(${pdf ? `${escapeHtml(String(dls.pdf.mb ?? '?'))} MB` : 'N/A'})</span></span>
-            </span>
-          </span>
-
-          <span class="col3 recImageMini lazy" style="background-image:url('${escapeHtml(e.thumb || '')}');"></span>
-
-          <span class="col12 inline recordlinkGroup">
-            <span class="col8 center">
-              <span title="Show map" class="recordLinks dot showOverlay"><svg class="ico" aria-hidden="true"><use href="#i-map"></use></svg><span class="linkText overState">${st.on ? 'Hide' : 'Show'}</span></span>
-              <span title="Map metadata" class="recordLinks dot moreInfo ${st.infoOpen ? 'infoShown' : ''}"><svg class="ico" aria-hidden="true"><use href="#i-info"></use></svg><span class="linkText">Info</span></span>
-              <span title="Zoom to map" class="recordLinks dot zoomTo"><svg class="ico" aria-hidden="true"><use href="#i-zoom"></use></svg><span class="linkText">Zoom</span></span>
-              <span title="Pan to map" class="recordLinks dot panTo"><svg class="ico" aria-hidden="true"><use href="#i-hand"></use></svg><span class="linkText">Pan</span></span>
-              <span class="recordLinks hidden 3d dot" style="text-indent:0px;"><svg class="ico" aria-hidden="true"><use href="#i-cube"></use></svg><span class="linkText">3D</span></span>
-            </span>
-
-            <span class="center col4" style="text-indent: 4px;">
-              <span title="Pin this map" class="recordLinks dot pinIt"><svg class="ico" aria-hidden="true"><use href="#i-pin"></use></svg><span class="linkText">${st.pinned ? 'Pinned' : 'Pin'}</span></span>
-              <span title="Report errors" class="recordLinks dot mapComment"><svg class="ico" aria-hidden="true"><use href="#i-comment"></use></svg><span class="linkText" style="letter-spacing:0px;">Fix</span></span>
-            </span>
-          </span>
-
-          ${metaHtml}
-        </span>
-      </a>
-    `;
-
-    // Wire events (delegate per entry so you get exactly the recordLinks behavior)
-    const root = li.querySelector('a');
-
-    // downloads
-    const jpgEl = li.querySelector('.jpgDown');
-    if (jpg) jpgEl.addEventListener('click', (ev) => { ev.preventDefault(); ev.stopPropagation(); openDownload(jpg); });
-
-    const kmzEl = li.querySelector('.kmzDown');
-    if (kmz) kmzEl.addEventListener('click', (ev) => { ev.preventDefault(); ev.stopPropagation(); openDownload(kmz); });
-
-    const tifEl = li.querySelector('.gTifDown');
-    if (tif) tifEl.addEventListener('click', (ev) => { ev.preventDefault(); ev.stopPropagation(); openDownload(tif); });
-
-    const pdfEl = li.querySelector('.pdfDown');
-    if (pdf) pdfEl.addEventListener('click', (ev) => { ev.preventDefault(); ev.stopPropagation(); openDownload(pdf); });
-
-  
-    // show/hide
-    li.querySelector('.showOverlay').addEventListener('click', async (ev) => {
-      ev.preventDefault(); ev.stopPropagation();
-
-      if (e.geotiffUrl) {
-        await toggleEntryOverlay(e); // GeoTIFF path
-      } else {
-        const st2 = stateById.get(e.id); // avoid shadowing "st"
-        st2.on = !st2.on;
-        applyLayers();
-        render();
-      }
-    });
-
-    function setActiveBasemap(layer) {
-      if (activeBase && map.hasLayer(activeBase)) map.removeLayer(activeBase);
-      activeBase = layer;
-      activeBase.addTo(map);
-
-      // keep map zoom constraints in sync
-      map.setMaxZoom(activeBase.options.maxZoom ?? 22);
-    }
-
-    function addTileFailureFallback(primary, fallback) {
-      let failures = 0;
-
-      primary.on('tileerror', () => {
-        failures++;
-        if (failures >= 6) { // threshold
-          console.warn('Basemap failing; switching to fallback');
-          setActiveBasemap(fallback);
-          failures = 0;
-        }
-      });
-
-      primary.on('load', () => { failures = 0; });
-    }
-
-
-    // info expand/collapse (inline, matching your snippet)
-    li.querySelector('.moreInfo').addEventListener('click', (ev) => {
-      ev.preventDefault(); ev.stopPropagation();
-      st.infoOpen = !st.infoOpen;
-      render();
-    });
-
-    // zoom/pan
-    li.querySelector('.zoomTo').addEventListener('click', (ev) => {
-      ev.preventDefault(); ev.stopPropagation();
-      zoomToEntry(e);
-    });
-    li.querySelector('.panTo').addEventListener('click', (ev) => {
-      ev.preventDefault(); ev.stopPropagation();
-      panToEntry(e);
-    });
-
-    // pin / fix
-    li.querySelector('.pinIt').addEventListener('click', (ev) => {
-      ev.preventDefault(); ev.stopPropagation();
-      togglePin(e.id);
-    });
-    li.querySelector('.mapComment').addEventListener('click', (ev) => {
-      ev.preventDefault(); ev.stopPropagation();
-      reportFix(e);
-    });
-
-    table.appendChild(li);
-  });
-
-  setCounts();
 }
 
 function metaItem(label, value, overflow=false){
@@ -625,9 +365,11 @@ function metaItem(label, value, overflow=false){
 }
 
 async function addGeoTiffOverlay(url, { opacity = 0.7 } = {}) {
+  // IMPORTANT: Workers inside GeoTIFF libs sometimes need an absolute URL. Always resolve relative to page.
   const absUrl = new URL(url, window.location.href).href;
-  const res = await fetch(absUrl);
-  if (!res.ok) throw new Error(`GeoTIFF fetch failed: ${res.status}`);
+
+  const res = await fetch(absUrl, { mode: 'cors' });
+  if (!res.ok) throw new Error(`GeoTIFF fetch failed: ${res.status} (${absUrl})`);
   const buf = await res.arrayBuffer();
 
   const georaster = await parseGeoraster(buf);
@@ -640,16 +382,164 @@ async function addGeoTiffOverlay(url, { opacity = 0.7 } = {}) {
 
   layer.addTo(map);
 
-  // Auto-fit to raster bounds
-  map.fitBounds(tiffLayer.getBounds(), {
-    padding: [40, 40],
-    maxZoom: activeBase.options.maxNativeZoom ?? 16
-  });
-
+  // Fit to raster bounds but DO NOT exceed basemap native zoom (prevents black/404 tiles)
+  if (layer.getBounds){
+    map.fitBounds(layer.getBounds(), {
+      padding: [40, 40],
+      maxZoom: activeBase.options.maxNativeZoom ?? 16
+    });
+  }
 
   return layer;
 }
 
+async function toggleEntryOverlay(entry){
+  const st = stateById.get(entry.id);
+
+  if (!st.on){
+    // ON
+    if (!overlayById.has(entry.id)){
+      const layer = await addGeoTiffOverlay(entry.geotiffUrl, { opacity: st.opacity });
+      overlayById.set(entry.id, layer);
+    } else {
+      overlayById.get(entry.id).addTo(map);
+    }
+    st.on = true;
+  } else {
+    // OFF
+    const layer = overlayById.get(entry.id);
+    if (layer) map.removeLayer(layer);
+    st.on = false;
+  }
+}
+
+const table = document.getElementById('recordsTable');
+
+function render(){
+  table.innerHTML = '';
+
+  customEntries.forEach(e => {
+    const st = stateById.get(e.id);
+    const dls = e.downloads || {};
+
+    const metaHtml = (() => {
+      const m = e.meta || {};
+      return `
+        <span class="col12 metaFields noselect ${st.infoOpen ? 'open' : ''}">
+          <span class="col11 metaInfo">
+            <span class="col12 inline">
+              <span class="metaPub col10">Publishers: ${escapeHtml(m.publishers ?? 'N/A')}</span>
+              <span class="metaPubLink col1"></span>
+              <span class="sbLink col1"></span>
+            </span>
+
+            <span class="col12 inline">
+              <span class="col6 metaColumn">
+                ${metaItem('Datum', m.datum)}
+                ${metaItem('Projection', m.projection)}
+                ${metaItem('GNIS Cell Id', m.gnisCellId)}
+                ${metaItem('GNIS Cell', m.gnisCell, true)}
+              </span>
+
+              <span class="col6 metaColumn">
+                ${metaItem('Woodland Tint', m.woodlandTint)}
+              </span>
+            </span>
+          </span>
+        </span>
+      `;
+    })();
+
+    const li = document.createElement('li');
+    li.className = st.infoOpen ? 'expanded' : '';
+
+    li.innerHTML = `
+      <a data-id="${e.id}">
+        <span class="col12 pad1l inline">
+          <span class="recTitle recKeyline searchItem col8">${escapeHtml(e.title)}, <span class="recState">${escapeHtml(e.state)}</span></span>
+
+          <span class="col9">
+            <span class="recYear searchItem pad05">${escapeHtml(e.year)}</span>
+            <span class="searchItem">(${escapeHtml(e.series)}${e.edition ? ', ' + escapeHtml(e.edition) : ''}) </span>
+
+            <span class="searchItem" style="padding-left:5px">Scale 1:</span><span class="recScale searchItem">${escapeHtml(e.scale)}</span>
+            <br>
+
+            <span class="col5 sideFile">
+              <span class="downloadItem jpgDown col12 pad05" title="Download JPEG" aria-disabled="true">JPEG<span class="jpgByte">(N/A)</span></span>
+              <span class="downloadItem kmzDown col12" title="Download KMZ" aria-disabled="true">KMZ<span class="kmzByte">(N/A)</span></span>
+            </span>
+
+            <span class="col5 sideFile">
+              <span class="downloadItem gTifDown col12 pad05" title="Download GeoTiff" aria-disabled="true">GeoTiff<span class="tifByte">(N/A)</span></span>
+              <span class="downloadItem pdfDown col12" title="Download GeoPDF" aria-disabled="true">GeoPDF<span class="pdfByte">(N/A)</span></span>
+            </span>
+          </span>
+
+          <span class="col3 recImageMini lazy" style="background-image:url('${escapeHtml(e.thumb || '')}');"></span>
+
+          <span class="col12 inline recordlinkGroup">
+            <span class="col8 center">
+              <span title="Show map" class="recordLinks dot showOverlay"><svg class="ico" aria-hidden="true"><use href="#i-map"></use></svg><span class="linkText overState">${st.on ? 'Hide' : 'Show'}</span></span>
+              <span title="Map metadata" class="recordLinks dot moreInfo ${st.infoOpen ? 'infoShown' : ''}"><svg class="ico" aria-hidden="true"><use href="#i-info"></use></svg><span class="linkText">Info</span></span>
+              <span title="Zoom to map" class="recordLinks dot zoomTo"><svg class="ico" aria-hidden="true"><use href="#i-zoom"></use></svg><span class="linkText">Zoom</span></span>
+              <span title="Pan to map" class="recordLinks dot panTo"><svg class="ico" aria-hidden="true"><use href="#i-hand"></use></svg><span class="linkText">Pan</span></span>
+            </span>
+
+            <span class="center col4" style="text-indent: 4px;">
+              <span title="Pin this map" class="recordLinks dot pinIt"><svg class="ico" aria-hidden="true"><use href="#i-pin"></use></svg><span class="linkText">${st.pinned ? 'Pinned' : 'Pin'}</span></span>
+              <span title="Report errors" class="recordLinks dot mapComment"><svg class="ico" aria-hidden="true"><use href="#i-comment"></use></svg><span class="linkText" style="letter-spacing:0px;">Fix</span></span>
+            </span>
+          </span>
+
+          ${metaHtml}
+        </span>
+      </a>
+    `;
+
+    // Wire events
+    li.querySelector('.showOverlay').addEventListener('click', async (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+      try{
+        await toggleEntryOverlay(e);
+      }catch(err){
+        console.error(err);
+        alert(String(err.message || err));
+      }
+      render();
+    });
+
+    li.querySelector('.moreInfo').addEventListener('click', (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+      st.infoOpen = !st.infoOpen;
+      render();
+    });
+
+    li.querySelector('.zoomTo').addEventListener('click', (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+      zoomToEntry(e);
+    });
+
+    li.querySelector('.panTo').addEventListener('click', (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+      panToEntry(e);
+    });
+
+    li.querySelector('.pinIt').addEventListener('click', (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+      togglePin(e.id);
+    });
+
+    li.querySelector('.mapComment').addEventListener('click', (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+      reportFix(e);
+    });
+
+    table.appendChild(li);
+  });
+
+  setCounts();
+}
 
 /* Reset all overlays */
 document.getElementById('btnResetAll').addEventListener('click', () => {
@@ -657,19 +547,18 @@ document.getElementById('btnResetAll').addEventListener('click', () => {
     const st = stateById.get(e.id);
     st.on = false;
     st.infoOpen = false;
+    const layer = overlayById.get(e.id);
+    if (layer) map.removeLayer(layer);
   });
-  applyLayers();
   render();
 });
 
 /* Help */
 document.getElementById('btnHelp').addEventListener('click', () => {
-  alert('Info expands inline within an entry (like TopoView). Edit customEntries[] to set thumb, downloads, and meta fields.');
+  alert('Edit customEntries[] to add your GeoTIFF URLs (absolute URLs work best on GitHub Pages).');
 });
 
 /* Init */
-applyLayers();
 render();
 </script>
 </body>
-</html>
