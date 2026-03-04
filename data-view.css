@@ -25,6 +25,47 @@
     }
     #map{height:100%;width:100%;background:#0b0f17;}
 
+    /* Basemap cycle button only */
+    .basemap-cycle {
+      display: block;
+      width: fit-content;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      padding: 6px 10px;
+      font-size: 12px;
+      line-height: 16px;
+
+      background: rgba(15,22,34,.85);
+      color: rgba(232,238,252,.92);
+      border: 1px solid rgba(255,255,255,.12);
+      text-decoration: none;
+    }
+    .basemap-cycle:hover{
+      background: rgba(255,255,255,.06);
+    }
+
+    .leaflet-bar a.basemap-cycle{
+      width:auto !important;
+      height:32px !important;
+      line-height:32px !important;
+      padding:0 10px !important;
+      display:inline-block !important;
+
+      max-width:180px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .leaflet-control-attribution a{
+      background: transparent !important;
+      padding: 0 !important;
+      border: 0 !important;
+      color: rgba(0, 76, 255, 0.85) !important;
+      text-decoration: underline;
+    }
+
     .rightRail{
       position:relative;
       height:100%;
@@ -258,17 +299,6 @@
     .metaNoCheck{ color: rgba(255,120,120,.92); margin-top:1px; }
     .noData{ color: rgba(167,179,204,.75); }
     .overflow{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-
-    /* Leaflet attribution polish */
-    .leaflet-control-attribution{
-      background: rgba(15,22,34,.72) !important;
-      color: rgba(232,238,252,.85) !important;
-      border: 1px solid var(--border);
-      border-radius:10px;
-      margin: 0 10px 10px 0;
-      padding:6px 8px;
-      backdrop-filter: blur(8px);
-    }
     
 /* Inline SVG icon styling */
 .ico{

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Custom Maps with Expandable Info</title>
+  <title>BHF Data View</title>
 
   <!-- Leaflet (demo map behavior) -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -119,69 +119,83 @@
 const map = L.map('map', { zoomControl:true, maxZoom:22 }).setView([41.615, -71.251], 11);
 
 // Basemaps
-const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; OpenStreetMap contributors',
-  maxNativeZoom: 19,
-  maxZoom: 22,
-  crossOrigin: true,
-  errorTileUrl: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+const basemaps = [
+  {
+    name: "USGS Topo",
+    layer: L.tileLayer(
+      "https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}",
+      {
+        attribution: "USGS The National Map",
+        maxNativeZoom: 16,
+        maxZoom: 22,
+        crossOrigin: true
+      }
+    )
+  },
+  {
+    name: "USGS Relief",
+    layer: L.tileLayer(
+      "https://basemap.nationalmap.gov/arcgis/rest/services/USGSShadedReliefOnly/MapServer/tile/{z}/{y}/{x}",
+      {
+        attribution: "USGS The National Map",
+        maxNativeZoom: 16,
+        maxZoom: 22,
+        crossOrigin: true
+      }
+    )
+  },
+  {
+    name: "OpenStreetMap",
+    layer: L.tileLayer(
+      "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        attribution: "© OpenStreetMap contributors",
+        maxNativeZoom: 19,
+        maxZoom: 22
+      }
+    )
+  }
+];
+
+let currentBasemap = 0;
+let activeBase = basemaps[currentBasemap].layer;
+activeBase.addTo(map);
+
+function cycleBasemap() {
+  map.removeLayer(activeBase);
+
+  currentBasemap = (currentBasemap + 1) % basemaps.length;
+  activeBase = basemaps[currentBasemap].layer;
+
+  activeBase.addTo(map);
+
+  basemapButton.innerText = basemaps[currentBasemap].name;
+}
+
+const BasemapControl = L.Control.extend({
+  options: { position: "bottomleft" },
+
+  onAdd: function () {
+    const container = L.DomUtil.create("div", "leaflet-bar leaflet-control");
+
+    const button = L.DomUtil.create("a", "", container);
+    button.href = "#";
+    button.title = "Cycle basemap";
+    button.innerText = basemaps[currentBasemap].name;
+    button.className = "basemap-cycle";
+
+    window.basemapButton = button;
+
+    L.DomEvent.on(button, "click", function (e) {
+      L.DomEvent.stop(e);
+      cycleBasemap();
+    });
+
+    return container;
+  }
 });
 
-const usgsRelief = L.tileLayer(
-  'https://basemap.nationalmap.gov/arcgis/rest/services/USGSShadedReliefOnly/MapServer/tile/{z}/{y}/{x}',
-  {
-    attribution: 'USGS The National Map',
-    maxNativeZoom: 16,
-    maxZoom: 22,
-    crossOrigin: true,
-    errorTileUrl: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
-  }
-);
-
-const usgsTopo = L.tileLayer(
-  'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}',
-  {
-    attribution: 'USGS The National Map',
-    maxNativeZoom: 16,
-    maxZoom: 22,
-    crossOrigin: true,
-    errorTileUrl: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
-  }
-);
-
-let activeBase = usgsTopo;
-
-function setActiveBasemap(layer){
-  if (activeBase && map.hasLayer(activeBase)) map.removeLayer(activeBase);
-  activeBase = layer;
-  activeBase.addTo(map);
-  map.setMaxZoom(activeBase.options.maxZoom ?? 22);
-}
-
-function addTileFailureFallback(primary, fallback){
-  // If a provider starts 404'ing at high zoom, switch basemap instead of showing black tiles.
-  let failures = 0;
-  primary.on('tileerror', () => {
-    failures++;
-    if (failures >= 8){
-      console.warn('Basemap failing; switching to fallback');
-      setActiveBasemap(fallback);
-      failures = 0;
-    }
-  });
-  primary.on('load', () => { failures = 0; });
-}
-
-map.attributionControl.setPrefix('<a href="https://leafletjs.com/" target="_blank" rel="noopener">Leaflet</a>');
-
-// Add basemap stack: relief under topo
-usgsRelief.addTo(map);
-setActiveBasemap(usgsTopo);
-
-// fallback for both USGS layers
-addTileFailureFallback(usgsTopo, osm);
-addTileFailureFallback(usgsRelief, osm);
-
+map.addControl(new BasemapControl());
 
 /* ---------------------------
    Sidebar collapse
