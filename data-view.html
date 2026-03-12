@@ -84,7 +84,7 @@
       <div id="sideElement">
         <div id="infoHeader" class="inline col12" style="touch-action: none; user-select: none;">
           <div class="titlePill">
-            <span>Custom maps</span>
+            <span>BHF Revolutionary War Collection</span>
             <span id="activeCountLabel">0 active</span>
           </div>
 
@@ -102,6 +102,24 @@
 
         <div class="attributionFooter">
           Basemap tiles: USGS The National Map (USGSTopo, USGSShadedReliefOnly). Map UI: Leaflet. Overlay rendering: GeoRasterLayer.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="citeModal" class="citeModal hidden" aria-hidden="true">
+    <div class="citeModalBackdrop" id="citeModalBackdrop"></div>
+    <div class="citeModalPanel" role="dialog" aria-modal="true" aria-labelledby="citeModalTitle">
+      <div class="citeModalHeader">
+        <div id="citeModalTitle">Citation</div>
+        <button type="button" class="citeCloseBtn" id="citeCloseBtn" aria-label="Close">×</button>
+      </div>
+
+      <div class="citeModalBody">
+        <textarea id="citeTextarea" readonly spellcheck="false"></textarea>
+        <div class="citeModalActions">
+          <button type="button" class="citeActionBtn" id="citeCopyBtn">Copy</button>
+          <button type="button" class="citeActionBtn secondary" id="citeSelectBtn">Select All</button>
         </div>
       </div>
     </div>

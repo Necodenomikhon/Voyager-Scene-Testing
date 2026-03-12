@@ -96,20 +96,6 @@ function setCollapsed(collapsed){
 setCollapsed(false);
 sideToggle.addEventListener('click', () => setCollapsed(!appRoot.classList.contains('collapsed')));
 
-
-/* ---------------------------
-   Custom entries rendered in “record entry” markup style
-
-   Each entry supports:
-   - Show (toggle overlay)
-   - Info (expand metaFields inline, like your snippet)
-   - Zoom (fit bounds / setView)
-   - Pan (panTo)
-   - Pin (localStorage)
-   - Fix (open fixUrl or mailto fallback)
-   - Downloads (open provided URLs)
----------------------------- */
-
 const PINS_KEY = 'custom_maps_pins_v2';
 
 function loadPins(){
@@ -126,19 +112,38 @@ function savePins(pins){
 const customEntries = [
   {
     id: 1,
-    title: "Lidar (GeoTIFF)",
-    state: "—",
+    title: "USGS Lidar Point Cloud for BHF",
+    state: "RI",
     year: 2024,
     series: "BHF",
     edition: "",
     scale: 0,
-    thumb: "",
+    thumb: "maps/lidar.jpg",
+    citation: "“USGS Lidar Point Cloud RI_Statewide_D22 395000_192500” U.S. Geological Survey, Jan. 2024. Accessed: 04/17/2025. [Online]. Available: https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/RI_Statewide_D22/RI_Statewide_1_D22/0_file_download_links.txt",
 
-    geotiffUrl: "./maps/lidar_geo.tif",
+    geotiffUrl: "maps/lidar_geo.tif",
     opacity: 0.7,
     
     // Optional: for Pan/Zoom before load; if unknown, omit and we use overlay bounds after load.
     // bounds: [[34.0, -86.0], [36.0, -84.0]],
+
+    downloads: { },
+    fixUrl: "",
+    meta: { publishers: 'EduceLab', datum: 'Unstated', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
+  },
+  {
+    id: 2,
+    title: "Battle of Rhode Island Historic District boundaries",
+    state: "RI",
+    year: 1969,
+    series: "BHF",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "Greenlee, Marcia M. Battle of Rhode Island Historic District (Battle of Rhode Island Site). National Register of Historic Places Inventory–Nomination Form. Prepared for the Rhode Island Historical Preservation Commission under contract to the Afro-American Bicentennial Corporation, ca. 1973. National Park Service. p. 14. National Archives Identifier 41374753. https://catalog.archives.gov/id/41374753",
+
+    geotiffUrl: "maps/DOI_NPS_1969_geo.tif",
+    opacity: 0.99,
 
     downloads: { },
     fixUrl: "",
@@ -243,6 +248,61 @@ function metaItem(label, value, overflow=false){
       <span class="col11 metaField ${overflowCls} ${textCls}">${label}: ${val}</span>
     </span>
   `;
+}
+
+const citeModal = document.getElementById("citeModal");
+const citeModalBackdrop = document.getElementById("citeModalBackdrop");
+const citeCloseBtn = document.getElementById("citeCloseBtn");
+const citeTextarea = document.getElementById("citeTextarea");
+const citeCopyBtn = document.getElementById("citeCopyBtn");
+const citeSelectBtn = document.getElementById("citeSelectBtn");
+
+function openCiteModal(text){
+  citeTextarea.value = text || "";
+  citeModal.classList.remove("hidden");
+  citeModal.setAttribute("aria-hidden", "false");
+}
+
+function closeCiteModal(){
+  citeModal.classList.add("hidden");
+  citeModal.setAttribute("aria-hidden", "true");
+}
+
+citeModalBackdrop.addEventListener("click", closeCiteModal);
+citeCloseBtn.addEventListener("click", closeCiteModal);
+
+citeSelectBtn.addEventListener("click", () => {
+  citeTextarea.focus();
+  citeTextarea.select();
+});
+
+citeCopyBtn.addEventListener("click", async () => {
+  try{
+    await navigator.clipboard.writeText(citeTextarea.value);
+    citeCopyBtn.textContent = "Copied";
+    setTimeout(() => { citeCopyBtn.textContent = "Copy"; }, 1200);
+  }catch{
+    citeTextarea.focus();
+    citeTextarea.select();
+  }
+});
+
+document.addEventListener("keydown", (ev) => {
+  if (ev.key === "Escape" && !citeModal.classList.contains("hidden")) {
+    closeCiteModal();
+  }
+});
+
+function buildCitation(e){
+  if (e.citation) return e.citation;
+
+  const parts = [];
+  parts.push(e.meta?.publishers || "Unknown publisher");
+  parts.push(`${e.title}${e.state && e.state !== "—" ? ", " + e.state : ""}.`);
+  if (e.year) parts.push(String(e.year) + ".");
+  if (e.series) parts.push(`${e.series}${e.edition ? ", " + e.edition : ""}.`);
+  if (e.scale) parts.push(`Scale 1:${e.scale}.`);
+  return parts.join(" ").replace(/\s+/g, " ").trim();
 }
 
 async function addGeoTiffOverlay(url, { opacity = 0.7 } = {}) {
@@ -365,6 +425,7 @@ function render(){
               <span title="Map metadata" class="recordLinks dot moreInfo ${st.infoOpen ? 'infoShown' : ''}"><svg class="ico" aria-hidden="true"><use href="#i-info"></use></svg><span class="linkText">Info</span></span>
               <span title="Zoom to map" class="recordLinks dot zoomTo"><svg class="ico" aria-hidden="true"><use href="#i-zoom"></use></svg><span class="linkText">Zoom</span></span>
               <span title="Pan to map" class="recordLinks dot panTo"><svg class="ico" aria-hidden="true"><use href="#i-hand"></use></svg><span class="linkText">Pan</span></span>
+              <span title="Copy citation" class="recordLinks dot citeLink"><span class="linkText">Cite</span></span>
             </span>
 
             <span class="center col4" style="text-indent: 4px;">
@@ -404,6 +465,12 @@ function render(){
     li.querySelector('.panTo').addEventListener('click', (ev) => {
       ev.preventDefault(); ev.stopPropagation();
       panToEntry(e);
+    });
+
+    li.querySelector(".citeLink").addEventListener("click", (ev) => {
+        ev.preventDefault();
+        ev.stopPropagation();
+        openCiteModal(buildCitation(e));
     });
 
     li.querySelector('.pinIt').addEventListener('click', (ev) => {
