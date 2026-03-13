@@ -129,7 +129,7 @@ const customEntries = [
 
     downloads: { },
     fixUrl: "",
-    meta: { publishers: 'EduceLab', datum: 'Unstated', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
+    meta: { publishers: 'EduceLab', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
   {
     id: 2,
@@ -140,14 +140,50 @@ const customEntries = [
     edition: "",
     scale: 0,
     thumb: "",
-    citation: "Greenlee, Marcia M. Battle of Rhode Island Historic District (Battle of Rhode Island Site). National Register of Historic Places Inventory–Nomination Form. Prepared for the Rhode Island Historical Preservation Commission under contract to the Afro-American Bicentennial Corporation, ca. 1973. National Park Service. p. 14. National Archives Identifier 41374753. https://catalog.archives.gov/id/41374753",
+    citation: "Marcia M. Greenlee, Battle of Rhode Island Historic District (Battle of Rhode Island Site), National Register of Historic Places Inventory–Nomination Form, prepared for the Rhode Island Historical Preservation Commission under contract to the Afro-American Bicentennial Corporation, 1973, p. 14; National Park Service, National Register of Historic Places records; National Archives Identifier 41374753; National Archives and Records Administration, National Archives Catalog, https://catalog.archives.gov/id/41374753 (accessed March 6, 2026).",
 
-    geotiffUrl: "maps/DOI_NPS_1969_geo.tif",
-    opacity: 0.99,
+    geotiffUrl: "/maps/DOI_NPS_1969_geo.tif",
+    opacity: 0.5,
 
     downloads: { },
     fixUrl: "",
-    meta: { publishers: 'EduceLab', datum: 'Unstated', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
+    meta: { publishers: 'US National Archives', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
+  },
+  {
+    id: 3,
+    title: "A Topographical Chart of the Bay of Narraganset in the Province of New England",
+    state: "RI",
+    year: 1777,
+    series: "BHF",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "Charles Blaskowitz and William Faden, A Topographical Chart of the Bay of Narraganset in the Province of New England: With All the Isles Contained Therein, Among Which Rhode Island and Connonicut Have Been Particularly Surveyed; Shewing the True Position & Bearings of the Banks, Shoals, Rocks &c., as Likewise the Soundings; to Which Have Been Added the Several Works & Batteries Raised by the Americans; Taken by Order of the Principal Farmers on Rhode Island, map, London: William Faden, 1777; Norman B. Leventhal Map & Education Center, Boston Public Library; digital image, Leventhal Map & Education Center Digital Collections, https://collections.leventhalmap.org/search/commonwealth:3f462w67b (accessed March 2, 2026).",
+    
+    geotiffUrl: "/maps/Blaskowitz_geo.tif",
+    opacity: 0.5,
+
+    downloads: { },
+    fixUrl: "",
+    meta: { publishers: 'Norman B. Leventhal Map & Education Center', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
+  },
+  {
+    id: 4,
+    title: "Plan of the Battle of Rhode Island",
+    state: "RI",
+    year: 1778,
+    series: "BHF",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "Johann Christian Schiffer, Plan von Rhode Island, und deren dem comando des Herrn General Majors Presgott inf dies-malig befundlichen campements, map, [1777]; Geography and Map Division; Library of Congress, Washington, D.C.; digital image, Library of Congress Digital Collections, https://www.loc.gov/item/75690704/ (accessed March 12, 2026).",
+    
+    geotiffUrl: "maps/Schiffer_1777_geo.tif",
+    opacity: 0.5,
+
+    downloads: { },
+    fixUrl: "",
+    meta: { publishers: 'US Library of Congress', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
 ];
 
@@ -425,7 +461,7 @@ function render(){
               <span title="Map metadata" class="recordLinks dot moreInfo ${st.infoOpen ? 'infoShown' : ''}"><svg class="ico" aria-hidden="true"><use href="#i-info"></use></svg><span class="linkText">Info</span></span>
               <span title="Zoom to map" class="recordLinks dot zoomTo"><svg class="ico" aria-hidden="true"><use href="#i-zoom"></use></svg><span class="linkText">Zoom</span></span>
               <span title="Pan to map" class="recordLinks dot panTo"><svg class="ico" aria-hidden="true"><use href="#i-hand"></use></svg><span class="linkText">Pan</span></span>
-              <span title="Copy citation" class="recordLinks dot citeLink"><span class="linkText">Cite</span></span>
+              <span title="Copy citation" class="recordLinks dot citeLink"><span class="linkText">Citation</span></span>
             </span>
 
             <span class="center col4" style="text-indent: 4px;">
