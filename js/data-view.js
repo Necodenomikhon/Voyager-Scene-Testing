@@ -173,7 +173,7 @@ const customEntries = [
     title: "Battle of Rhode Island Historic District boundaries",
     state: "RI",
     year: 1969,
-    series: "BHF",
+    series: "",
     edition: "",
     scale: 0,
     thumb: "",
@@ -190,7 +190,7 @@ const customEntries = [
     title: "A Topographical Chart of the Bay of Narraganset in the Province of New England",
     state: "RI",
     year: 1777,
-    series: "BHF",
+    series: "",
     edition: "",
     scale: 0,
     thumb: "",
@@ -204,10 +204,10 @@ const customEntries = [
   },
   {
     id: 4,
-    title: "Plan of the Battle of Rhode Island",
+    title: "Plan von Rhode Island",
     state: "RI",
     year: 1778,
-    series: "BHF",
+    series: "",
     edition: "",
     scale: 0,
     thumb: "",
@@ -218,6 +218,40 @@ const customEntries = [
     downloads: { },
     fixUrl: "",
     meta: { publishers: 'US Library of Congress', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
+  },
+  {
+    id: 5,
+    title: "Plan of the works at Windmill Hill",
+    state: "RI",
+    year: 1777,
+    series: "",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "Plan of the Works at Windmill Hill, December 31st 1777: Plan nr 19, map, December 31, 1777; William L. Clements Library, University of Michigan, Ann Arbor, Michigan; digital image, William L. Clements Library Image Bank, University of Michigan Library Digital Collections, https://quod.lib.umich.edu/w/wcl1ic/x-659/wcl000771 (accessed March 13, 2026).",
+    
+    geotiffUrl: "maps/Clinton_1777_geo.tif",
+
+    downloads: { },
+    fixUrl: "",
+    meta: { publishers: 'University of Michigan Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
+  },
+  {
+    id: 5,
+    title: "Plan of the northern part of Rhode Island in the township of Portsmouth",
+    state: "RI",
+    year: 1778,
+    series: "",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "Edward Fage (attributed), Plan of the Northern Part of Rhode Island in the Township of Portsmouth, Shewing the British Posts of Defence as Compleated During the Possession of Rhode Island from the 8th of Dec. 1776 to the 25th of Oct. 1778, manuscript map, ca. 1778; call no. mssHM 15473; The Huntington Library, San Marino, California; digital image, Huntington Digital Library, https://hdl.huntington.org/digital/collection/p15150coll4/id/16295 (accessed March 16, 2026).",    
+    
+    geotiffUrl: "maps/Fage_1778_geo.tif",
+
+    downloads: { },
+    fixUrl: "",
+    meta: { publishers: 'The Huntington Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
 ];
 
