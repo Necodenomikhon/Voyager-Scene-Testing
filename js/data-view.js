@@ -10,7 +10,8 @@ const basemaps = [
     layer: L.tileLayer(
       "https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}",
       {
-        attribution: "USGS The National Map",
+        attribution: '&copy; <a href="https://www.usgs.gov/" target="_blank" rel="noopener noreferrer">USGS</a> ' +
+          '| <a href="https://www.usgs.gov/faqs/what-are-base-map-services-or-urls-used-national-map" target="_blank" rel="noopener noreferrer">The National Map</a>',
         maxNativeZoom: 16,
         maxZoom: 22,
         crossOrigin: true
@@ -22,7 +23,8 @@ const basemaps = [
     layer: L.tileLayer(
       "https://basemap.nationalmap.gov/arcgis/rest/services/USGSShadedReliefOnly/MapServer/tile/{z}/{y}/{x}",
       {
-        attribution: "USGS The National Map",
+        attribution: '&copy; <a href="https://www.usgs.gov/" target="_blank" rel="noopener noreferrer">USGS</a> ' +
+          '| <a href="https://www.usgs.gov/faqs/what-are-base-map-services-or-urls-used-national-map" target="_blank" rel="noopener noreferrer">The National Map</a>',
         maxNativeZoom: 16,
         maxZoom: 22,
         crossOrigin: true
@@ -34,7 +36,7 @@ const basemaps = [
     layer: L.tileLayer(
       "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
       {
-        attribution: "© OpenStreetMap contributors",
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>',
         maxNativeZoom: 19,
         maxZoom: 22
       }
@@ -57,30 +59,66 @@ function cycleBasemap() {
   basemapButton.innerText = basemaps[currentBasemap].name;
 }
 
-const BasemapControl = L.Control.extend({
+const BasemapOpacityControl = L.Control.extend({
   options: { position: "bottomleft" },
 
   onAdd: function () {
-    const container = L.DomUtil.create("div", "leaflet-bar leaflet-control");
+    const container = L.DomUtil.create("div", "basemap-opacity-control");
 
-    const button = L.DomUtil.create("a", "", container);
+    const controls = L.DomUtil.create("div", "basemap-controls", container);
+
+    const button = L.DomUtil.create("a", "basemap-cycle", controls);
     button.href = "#";
     button.title = "Cycle basemap";
-    button.innerText = basemaps[currentBasemap].name;
-    button.className = "basemap-cycle";
+    button.textContent = basemaps[currentBasemap].name;
 
+    const sliderWrap = L.DomUtil.create("div", "entry-opacity-wrap", controls);
+
+    const slider = L.DomUtil.create("input", "entry-opacity", sliderWrap);
+    slider.type = "range";
+    slider.min = "0";
+    slider.max = "100";
+    slider.step = "1";
+    slider.value = "100";
+    slider.disabled = true;
+
+    const value = L.DomUtil.create("span", "entry-opacity-value", sliderWrap);
+    value.textContent = "100%";
+
+    // store refs
     window.basemapButton = button;
+    opacitySliderEl = slider;
+    opacityValueEl = value;
+
+    L.DomEvent.disableClickPropagation(container);
+    L.DomEvent.disableScrollPropagation(container);
 
     L.DomEvent.on(button, "click", function (e) {
       L.DomEvent.stop(e);
       cycleBasemap();
     });
 
+    L.DomEvent.on(slider, "input", function (e) {
+      const pct = Number(e.target.value);
+      const opacity = pct / 100;
+      value.textContent = `${pct}%`;
+
+      if (activeEntryId == null) return;
+
+      const st = stateById.get(activeEntryId);
+      if (!st) return;
+
+      st.opacity = opacity;
+
+      const layer = overlayById.get(activeEntryId) || layersById.get(activeEntryId);
+      applyOverlayOpacity(layer, opacity);
+    });
+
     return container;
   }
 });
 
-map.addControl(new BasemapControl());
+map.addControl(new BasemapOpacityControl());
 
 /* ---------------------------
    Sidebar collapse
@@ -122,7 +160,6 @@ const customEntries = [
     citation: "“USGS Lidar Point Cloud RI_Statewide_D22 395000_192500” U.S. Geological Survey, Jan. 2024. Accessed: 04/17/2025. [Online]. Available: https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/RI_Statewide_D22/RI_Statewide_1_D22/0_file_download_links.txt",
 
     geotiffUrl: "maps/lidar_geo.tif",
-    opacity: 0.7,
     
     // Optional: for Pan/Zoom before load; if unknown, omit and we use overlay bounds after load.
     // bounds: [[34.0, -86.0], [36.0, -84.0]],
@@ -142,8 +179,7 @@ const customEntries = [
     thumb: "",
     citation: "Marcia M. Greenlee, Battle of Rhode Island Historic District (Battle of Rhode Island Site), National Register of Historic Places Inventory–Nomination Form, prepared for the Rhode Island Historical Preservation Commission under contract to the Afro-American Bicentennial Corporation, 1973, p. 14; National Park Service, National Register of Historic Places records; National Archives Identifier 41374753; National Archives and Records Administration, National Archives Catalog, https://catalog.archives.gov/id/41374753 (accessed March 6, 2026).",
 
-    geotiffUrl: "/maps/DOI_NPS_1969_geo.tif",
-    opacity: 0.5,
+    geotiffUrl: "https://educelab.github.io/BHF/maps/DOI_NPS_1969_geo.tif",
 
     downloads: { },
     fixUrl: "",
@@ -160,8 +196,7 @@ const customEntries = [
     thumb: "",
     citation: "Charles Blaskowitz and William Faden, A Topographical Chart of the Bay of Narraganset in the Province of New England: With All the Isles Contained Therein, Among Which Rhode Island and Connonicut Have Been Particularly Surveyed; Shewing the True Position & Bearings of the Banks, Shoals, Rocks &c., as Likewise the Soundings; to Which Have Been Added the Several Works & Batteries Raised by the Americans; Taken by Order of the Principal Farmers on Rhode Island, map, London: William Faden, 1777; Norman B. Leventhal Map & Education Center, Boston Public Library; digital image, Leventhal Map & Education Center Digital Collections, https://collections.leventhalmap.org/search/commonwealth:3f462w67b (accessed March 2, 2026).",
     
-    geotiffUrl: "/maps/Blaskowitz_geo.tif",
-    opacity: 0.5,
+    geotiffUrl: "maps/Blaskowitz_geo.tif",
 
     downloads: { },
     fixUrl: "",
@@ -179,7 +214,6 @@ const customEntries = [
     citation: "Johann Christian Schiffer, Plan von Rhode Island, und deren dem comando des Herrn General Majors Presgott inf dies-malig befundlichen campements, map, [1777]; Geography and Map Division; Library of Congress, Washington, D.C.; digital image, Library of Congress Digital Collections, https://www.loc.gov/item/75690704/ (accessed March 12, 2026).",
     
     geotiffUrl: "maps/Schiffer_1777_geo.tif",
-    opacity: 0.5,
 
     downloads: { },
     fixUrl: "",
@@ -194,8 +228,8 @@ const overlayById = new Map(); // id -> GeoRasterLayer
 
 customEntries.forEach((e) => {
   stateById.set(e.id, {
-    on: false,
-    opacity: e.opacity ?? 0.9,
+    on: !!e.on,
+    opacity: 1,
     infoOpen: false,
     pinned: pins.has(e.id)
   });
@@ -370,24 +404,94 @@ async function addGeoTiffOverlay(url, { opacity = 0.7 } = {}) {
   return layer;
 }
 
-async function toggleEntryOverlay(entry){
+async function toggleEntryOverlay(entry) {
   const st = stateById.get(entry.id);
 
-  if (!st.on){
-    // ON
-    if (!overlayById.has(entry.id)){
-      const layer = await addGeoTiffOverlay(entry.geotiffUrl, { opacity: st.opacity });
+  if (!st.on) {
+    if (!overlayById.has(entry.id)) {
+      let layer;
+
+      if (entry.type === "kmz") {
+        layer = await addKmzOverlay(entry.kmzUrl, { opacity: st.opacity });
+      } else {
+        layer = await addGeoTiffOverlay(entry.geotiffUrl, { opacity: st.opacity });
+      }
+
       overlayById.set(entry.id, layer);
     } else {
       overlayById.get(entry.id).addTo(map);
+      applyOverlayOpacity(overlayById.get(entry.id), st.opacity);
     }
+
     st.on = true;
   } else {
-    // OFF
     const layer = overlayById.get(entry.id);
     if (layer) map.removeLayer(layer);
     st.on = false;
   }
+
+  syncOpacityControlToEntry(entry.id);
+  render();
+}
+
+function applyLayers(){
+  customEntries.forEach(e => {
+    if (!e.tileUrl) return;
+
+    const st = stateById.get(e.id);
+    const layer = layersById.get(e.id);
+    if (!layer) return;
+
+    applyOverlayOpacity(layer, st.opacity);
+
+    if (st.on && !map.hasLayer(layer)) layer.addTo(map);
+    if (!st.on && map.hasLayer(layer)) map.removeLayer(layer);
+  });
+}
+
+function applyOverlayOpacity(layer, opacity){
+  if (!layer) return;
+
+  // GeoTIFF layer / tile layer / image overlay
+  if (typeof layer.setOpacity === "function") {
+    layer.setOpacity(opacity);
+    return;
+  }
+
+  // LayerGroup / KMZ / grouped overlays
+  if (typeof layer.eachLayer === "function") {
+    layer.eachLayer((child) => {
+      if (typeof child.setOpacity === "function") {
+        child.setOpacity(opacity);
+      } else if (typeof child.setStyle === "function") {
+        child.setStyle({
+          opacity,
+          fillOpacity: Math.min(opacity, 0.5)
+        });
+      }
+    });
+    return;
+  }
+
+  // Vector fallback
+  if (typeof layer.setStyle === "function") {
+    layer.setStyle({
+      opacity,
+      fillOpacity: Math.min(opacity, 0.5)
+    });
+  }
+}
+
+function syncOpacityControlToEntry(id){
+  activeEntryId = id;
+
+  const st = stateById.get(id);
+  if (!st || !opacitySliderEl || !opacityValueEl) return;
+
+  const pct = Math.round((st.opacity ?? 1) * 100);
+  opacitySliderEl.disabled = false;
+  opacitySliderEl.value = String(pct);
+  opacityValueEl.textContent = `${pct}%`;
 }
 
 const table = document.getElementById('recordsTable');
@@ -477,36 +581,47 @@ function render(){
 
     // Wire events
     li.querySelector('.showOverlay').addEventListener('click', async (ev) => {
-      ev.preventDefault(); ev.stopPropagation();
-      try{
+      ev.preventDefault();
+      ev.stopPropagation();
+      syncOpacityControlToEntry(e.id);
+
+      if (e.geotiffUrl || e.kmzUrl || e.type === "kmz") {
         await toggleEntryOverlay(e);
-      }catch(err){
-        console.error(err);
-        alert(String(err.message || err));
+      } else {
+        const st2 = stateById.get(e.id);
+        st2.on = !st2.on;
+        applyLayers();
+        render();
       }
-      render();
     });
 
     li.querySelector('.moreInfo').addEventListener('click', (ev) => {
-      ev.preventDefault(); ev.stopPropagation();
+      ev.preventDefault();
+      ev.stopPropagation();
+      syncOpacityControlToEntry(e.id);
       st.infoOpen = !st.infoOpen;
       render();
     });
 
     li.querySelector('.zoomTo').addEventListener('click', (ev) => {
-      ev.preventDefault(); ev.stopPropagation();
+      ev.preventDefault();
+      ev.stopPropagation();
+      syncOpacityControlToEntry(e.id);
       zoomToEntry(e);
     });
 
     li.querySelector('.panTo').addEventListener('click', (ev) => {
-      ev.preventDefault(); ev.stopPropagation();
+      ev.preventDefault();
+      ev.stopPropagation();
+      syncOpacityControlToEntry(e.id);
       panToEntry(e);
     });
 
-    li.querySelector(".citeLink").addEventListener("click", (ev) => {
-        ev.preventDefault();
-        ev.stopPropagation();
-        openCiteModal(buildCitation(e));
+    li.querySelector('.citeLink')?.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      ev.stopPropagation();
+      syncOpacityControlToEntry(e.id);
+      openCiteModal(buildCitation(e));
     });
 
     li.querySelector('.pinIt').addEventListener('click', (ev) => {
@@ -531,9 +646,17 @@ document.getElementById('btnResetAll').addEventListener('click', () => {
     const st = stateById.get(e.id);
     st.on = false;
     st.infoOpen = false;
-    const layer = overlayById.get(e.id);
-    if (layer) map.removeLayer(layer);
+    st.opacity = 1;
   });
+
+  activeEntryId = null;
+  if (opacitySliderEl && opacityValueEl) {
+    opacitySliderEl.value = "100";
+    opacitySliderEl.disabled = true;
+    opacityValueEl.textContent = "100%";
+  }
+
+  applyLayers();
   render();
 });
 
