@@ -287,6 +287,301 @@ const customEntries = [
     fixUrl: "",
     meta: { publishers: 'University of Michigan Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
+  {
+    id: 9,
+    title: "1939 Rhode Island Aerial Photographs",
+    state: "RI",
+    year: 1939,
+    series: "ArcGIS MapServer",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "University of Rhode Island Environmental Data Center (URI EDC) and Rhode Island Geographic Information System (RIGIS), 1939 Rhode Island Aerial Photographs, aerial imagery dataset, University of Rhode Island Environmental Data Center, available at https://www.rigis.org/maps/edc::1939-rhode-island-aerial-photographs/about (accessed March 18, 2026).",
+    
+    tileUrl: "https://tiles.arcgis.com/tiles/S8zZg9pg23JUEexQ/arcgis/rest/services/atlas_img_1939/MapServer/tile/{z}/{y}/{x}",
+    bounds: [
+      [41.144, -72.676],
+      [42.028, -70.371]
+    ],
+    center: [41.586, -71.524],
+    zoom: 11,
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "URI EDC, RIGIS",
+      datum: "WGS 84 / Web Mercator",
+      projection: "EPSG:3857",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  }, 
+  {
+    id: 10,
+    title: "1951–1952 Rhode Island Aerial Photographs",
+    state: "RI",
+    year: 1951,
+    series: "ArcGIS MapServer",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "University of Rhode Island Environmental Data Center (URI EDC) and Rhode Island Geographic Information System (RIGIS), 1951–1952 Rhode Island Aerial Photographs, aerial imagery dataset, University of Rhode Island Environmental Data Center, https://www.rigis.org/maps/edc::1951-1952-rhode-island-aerial-photographs/about (accessed March 18, 2026).",
+    
+    tileUrl: "https://tiles.arcgis.com/tiles/S8zZg9pg23JUEexQ/arcgis/rest/services/atlas_img_1951_1952/MapServer/tile/{z}/{y}/{x}",
+    bounds: [
+      [41.144, -72.676],
+      [42.028, -70.371]
+    ],
+    center: [41.586, -71.524],
+    zoom: 11,
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "URI EDC, RIGIS",
+      datum: "WGS 84 / Web Mercator",
+      projection: "EPSG:3857",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 12,
+    title: "1962 Rhode Island Aerial Photographs",
+    state: "RI",
+    year: 1962,
+    series: "ArcGIS MapServer",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "University of Rhode Island Environmental Data Center (URI EDC) and Rhode Island Geographic Information System (RIGIS), 1962 Aerial Photography, aerial imagery dataset, University of Rhode Island Environmental Data Center, available at https://www.rigis.org/content/edc::1962-aerial-photography/about (accessed March 18, 2026).",
+    
+    tileUrl: "https://maps.edc.uri.edu/arcgis/rest/services/Atlas_imageryBaseMapsEarthCover/1962_RISPP/MapServer/tile/{z}/{y}/{x}",
+    bounds: [
+      [41.144, -72.676],
+      [42.028, -70.371]
+    ],
+    center: [41.586, -71.524],
+    zoom: 11,
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "URI EDC, RIGIS",
+      datum: "WGS 84 / Web Mercator",
+      projection: "EPSG:3857",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 13,
+    title: "1972 Rhode Island Aerial Photographs",
+    state: "RI",
+    year: 1972,
+    series: "ArcGIS MapServer",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "University of Rhode Island Environmental Data Center (URI EDC) and Rhode Island Geographic Information System (RIGIS), 1972 Aerial Photography, aerial imagery dataset, University of Rhode Island Environmental Data Center, available at https://www.rigis.org/content/edc::1972-aerial-photography/about (accessed March 18, 2026).",
+    
+    tileUrl: "https://tiles.arcgis.com/tiles/S8zZg9pg23JUEexQ/arcgis/rest/services/atlas_img_1972/MapServer/tile/{z}/{y}/{x}",
+    bounds: [
+      [41.144, -72.676],
+      [42.028, -70.371]
+    ],
+    center: [41.586, -71.524],
+    zoom: 11,
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "URI EDC, RIGIS",
+      datum: "WGS 84 / Web Mercator",
+      projection: "EPSG:3857",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 14,
+    title: "1981 Rhode Island Aerial Photographs",
+    state: "RI",
+    year: 1981,
+    series: "ArcGIS MapServer",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "University of Rhode Island Environmental Data Center (URI EDC) and Rhode Island Geographic Information System (RIGIS), 1982 Aerial Photography, aerial imagery dataset, University of Rhode Island Environmental Data Center, available at https://www.rigis.org/content/edc::1982-aerial-photography/about (accessed March 18, 2026).",
+    
+    tileUrl: "https://tiles.arcgis.com/tiles/S8zZg9pg23JUEexQ/arcgis/rest/services/atlas_img_1981/MapServer/tile/{z}/{y}/{x}",
+    bounds: [
+      [41.144, -72.676],
+      [42.028, -70.371]
+    ],
+    center: [41.586, -71.524],
+    zoom: 11,
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "University of Rhode Island Environmental Data Center (URI EDC); Rhode Island Geographic Information System (RIGIS)",
+      datum: "WGS 84 / Web Mercator",
+      projection: "EPSG:3857",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 15,
+    title: "1988 Rhode Island Aerial Photographs",
+    state: "RI",
+    year: 1988,
+    series: "ArcGIS MapServer",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "University of Rhode Island Environmental Data Center (URI EDC) and Rhode Island Geographic Information System (RIGIS), 1988 Aerial Photography, aerial imagery dataset, University of Rhode Island Environmental Data Center, available at https://www.rigis.org/content/edc::1988-aerial-photography/about (accessed March 18, 2026).",
+    
+    tileUrl: "https://tiles.arcgis.com/tiles/S8zZg9pg23JUEexQ/arcgis/rest/services/atlas_img_1988/MapServer/tile/{z}/{y}/{x}",
+    bounds: [
+      [41.144, -72.676],
+      [42.028, -70.371]
+    ],
+    center: [41.586, -71.524],
+    zoom: 11,
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "University of Rhode Island Environmental Data Center (URI EDC); Rhode Island Geographic Information System (RIGIS)",
+      datum: "WGS 84 / Web Mercator",
+      projection: "EPSG:3857",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 15,
+    title: "1938 USGS Aerial Photograph (Single Frame)",
+    state: "RI",
+    year: 1938,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19381213 Aerial Single Frame Photo ID: 1F00000060016, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
+    geotiffUrl: "aerial-photos/USGS_AR1F00000060016_geo.tiff",
+
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: "GeoTIFF (user-rectified)",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 16,
+    title: "1938 USGS Aerial Photograph (Single Frame 1F00000060125)",
+    state: "RI",
+    year: 1938,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19381213 Aerial Single Frame Photo ID: 1F00000060125, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
+    geotiffUrl: "aerial-photos/USGS_AR1F00000060125_geo.tif",
+
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: "GeoTIFF (user-rectified)",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 17,
+    title: "1938 USGS Aerial Photograph (Single Frame 1F00000060126)",
+    state: "RI",
+    year: 1938,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19381213 Aerial Single Frame Photo ID: 1F00000060126, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
+    geotiffUrl: "aerial-photos/USGS_AR1F00000060126_geo.tif",
+
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: "GeoTIFF (user-rectified)",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 18,
+    title: "1938 USGS Aerial Photograph (Single Frame 1F00000060127)",
+    state: "RI",
+    year: 1938,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19381213 Aerial Single Frame Photo ID: 1F00000060127, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
+    geotiffUrl: "aerial-photos/USGS_AR1F00000060127_geo.tif",
+
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: "GeoTIFF (user-rectified)",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 19,
+    title: "1960 USGS Aerial Photograph (Single Frame B593310410435)",
+    state: "RI",
+    year: 1960,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19600501 Aerial Single Frame Photo ID: B593310410435, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
+    geotiffUrl: "aerial-photos/USGS_ARB593310410435_geo.tif",
+
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: "GeoTIFF (user-rectified)",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  }
+    
 
 ];
 
@@ -294,6 +589,7 @@ const customEntries = [
 const stateById = new Map(); // id -> {on, opacity, infoOpen, pinned}
 const pins = new Set(loadPins());
 const overlayById = new Map(); // id -> GeoRasterLayer
+const layersById = new Map();   // id -> Leaflet tile/image layers
 
 customEntries.forEach((e) => {
   stateById.set(e.id, {
@@ -302,6 +598,27 @@ customEntries.forEach((e) => {
     infoOpen: false,
     pinned: pins.has(e.id)
   });
+
+  if (e.tileUrl) {
+    const layer = L.tileLayer(e.tileUrl, {
+      attribution: e.attribution || "&copy; URI EDC, RIGIS",
+      minNativeZoom: e.minNativeZoom ?? 8,
+      maxNativeZoom: e.maxNativeZoom ?? 19,
+      maxZoom: e.maxZoom ?? 22,
+      opacity: 1,
+      crossOrigin: true
+    });
+    layersById.set(e.id, layer);
+  } else if (e.wmsUrl) {
+    const layer = L.tileLayer.wms(e.wmsUrl, {
+      layers: e.wmsLayers || "0",
+      format: e.wmsFormat || "image/png",
+      transparent: e.wmsTransparent ?? true,
+      attribution: e.attribution || "&copy; URI EDC, RIGIS",
+      opacity: 1
+    });
+    layersById.set(e.id, layer);
+  }
 });
 
 function setCounts(){
@@ -475,6 +792,14 @@ async function addGeoTiffOverlay(url, { opacity = 0.7 } = {}) {
 
 async function toggleEntryOverlay(entry) {
   const st = stateById.get(entry.id);
+
+  if (layersById.has(entry.id)) {
+    st.on = !st.on;
+    applyLayers();
+    syncOpacityControlToEntry(entry.id);
+    render();
+    return;
+  }
 
   if (!st.on) {
     if (!overlayById.has(entry.id)) {
