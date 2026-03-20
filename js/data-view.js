@@ -462,8 +462,8 @@ const customEntries = [
     }
   },
   {
-    id: 15,
-    title: "1938 USGS Aerial Photograph (Single Frame)",
+    id: 16,
+    title: "1938 USGS Aerial Photograph (Single Frame 1F00000060016)",
     state: "RI",
     year: 1938,
     series: "USGS Single Frame Aerial Photography",
@@ -472,21 +472,21 @@ const customEntries = [
     thumb: "",
     citation: "U.S. Geological Survey 19381213 Aerial Single Frame Photo ID: 1F00000060016, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
     
-    geotiffUrl: "aerial-photos/USGS_AR1F00000060016_geo.tiff",
+    geotiffUrl: "aerial-photos/USGS_AR1F00000060016_defl_geo.tif",
 
     downloads: {},
     fixUrl: "",
     meta: {
       publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
-      projection: "GeoTIFF (user-rectified)",
+      projection: 'Unstated',
       gnisCellId: "",
       gnisCell: "",
       woodlandTint: "N/A"
     }
   },
   {
-    id: 16,
+    id: 17,
     title: "1938 USGS Aerial Photograph (Single Frame 1F00000060125)",
     state: "RI",
     year: 1938,
@@ -503,14 +503,14 @@ const customEntries = [
     meta: {
       publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
-      projection: "GeoTIFF (user-rectified)",
+      projection: 'Unstated',
       gnisCellId: "",
       gnisCell: "",
       woodlandTint: "N/A"
     }
   },
   {
-    id: 17,
+    id: 18,
     title: "1938 USGS Aerial Photograph (Single Frame 1F00000060126)",
     state: "RI",
     year: 1938,
@@ -527,14 +527,14 @@ const customEntries = [
     meta: {
       publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
-      projection: "GeoTIFF (user-rectified)",
+      projection: 'Unstated',
       gnisCellId: "",
       gnisCell: "",
       woodlandTint: "N/A"
     }
   },
   {
-    id: 18,
+    id: 19,
     title: "1938 USGS Aerial Photograph (Single Frame 1F00000060127)",
     state: "RI",
     year: 1938,
@@ -551,14 +551,14 @@ const customEntries = [
     meta: {
       publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
-      projection: "GeoTIFF (user-rectified)",
+      projection: 'Unstated',
       gnisCellId: "",
       gnisCell: "",
       woodlandTint: "N/A"
     }
   },
   {
-    id: 19,
+    id: 20,
     title: "1960 USGS Aerial Photograph (Single Frame B593310410435)",
     state: "RI",
     year: 1960,
@@ -575,7 +575,7 @@ const customEntries = [
     meta: {
       publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
-      projection: "GeoTIFF (user-rectified)",
+      projection: 'Unstated',
       gnisCellId: "",
       gnisCell: "",
       woodlandTint: "N/A"
@@ -762,14 +762,37 @@ function buildCitation(e){
 }
 
 async function addGeoTiffOverlay(url, { opacity = 0.7 } = {}) {
-  // IMPORTANT: Workers inside GeoTIFF libs sometimes need an absolute URL. Always resolve relative to page.
   const absUrl = new URL(url, window.location.href).href;
 
-  const res = await fetch(absUrl, { mode: 'cors' });
-  if (!res.ok) throw new Error(`GeoTIFF fetch failed: ${res.status} (${absUrl})`);
+  let res;
+  try {
+    res = await fetch(absUrl, { mode: "cors" });
+  } catch (err) {
+    throw new Error(`Failed to fetch raster: ${absUrl}\n${err.message}`);
+  }
+
+  if (!res.ok) {
+    throw new Error(`GeoTIFF fetch failed: ${res.status} (${absUrl})`);
+  }
+
+  const contentType = res.headers.get("content-type") || "";
+  console.log("Fetching raster:", absUrl, "content-type:", contentType);
+
   const buf = await res.arrayBuffer();
 
-  const georaster = await parseGeoraster(buf);
+  let georaster;
+  try {
+    georaster = await parseGeoraster(buf);
+    console.log("Parsed georaster:", georaster);
+  } catch (err) {
+    console.error("parseGeoraster failed for:", absUrl, err);
+    throw new Error(`Could not parse GeoTIFF: ${absUrl}`);
+  }
+
+  if (!georaster || !georaster.values) {
+    console.error("Invalid georaster object:", georaster);
+    throw new Error(`Parsed raster is invalid or missing values: ${absUrl}`);
+  }
 
   const layer = new GeoRasterLayer({
     georaster,
@@ -778,9 +801,9 @@ async function addGeoTiffOverlay(url, { opacity = 0.7 } = {}) {
   });
 
   layer.addTo(map);
-
+  
   // Fit to raster bounds but DO NOT exceed basemap native zoom (prevents black/404 tiles)
-  if (layer.getBounds){
+  if (layer.getBounds) {
     map.fitBounds(layer.getBounds(), {
       padding: [40, 40],
       maxZoom: activeBase.options.maxNativeZoom ?? 16
