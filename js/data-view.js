@@ -520,7 +520,7 @@ const customEntries = [
     thumb: "",
     citation: "U.S. Geological Survey 19381213 Aerial Single Frame Photo ID: 1F00000060126, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
     
-    geotiffUrl: "aerial-photos/USGS_AR1F00000060126_geo.tif",
+    geotiffUrl: "aerial-photos/USGS_AR1F00000060126_defl_geo.tif",
 
     downloads: {},
     fixUrl: "",
@@ -568,7 +568,7 @@ const customEntries = [
     thumb: "",
     citation: "U.S. Geological Survey 19600501 Aerial Single Frame Photo ID: B593310410435, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
     
-    geotiffUrl: "aerial-photos/USGS_ARB593310410435_geo.tif",
+    geotiffUrl: "aerial-photos/USGS_ARB593310410435_defl_geo.tif",
 
     downloads: {},
     fixUrl: "",
@@ -580,8 +580,117 @@ const customEntries = [
       gnisCell: "",
       woodlandTint: "N/A"
     }
+  },
+  {
+    id: 21,
+    title: "1960 USGS Aerial Photograph (Single Frame B593310410434)",
+    state: "RI",
+    year: 1960,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19600501 Aerial Single Frame Photo ID: B593310410434, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    geotiffUrl: "aerial-photos/USGS_ARB593310410434_defl_geo.tif",
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 22,
+    title: "1966 USGS Aerial Photograph (Single Frame 1VBKB00010042)",
+    state: "RI",
+    year: 1966,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19660222 Aerial Single Frame Photo ID: 1VBKB00010042, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    geotiffUrl: "aerial-photos/USGS_AR1VBKB00010042_jpeg_geo.tif",
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 23,
+    title: "1966 USGS Aerial Photograph (Single Frame 1VBKB00010041)",
+    state: "RI",
+    year: 1966,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19660222 Aerial Single Frame Photo ID: 1VBKB00010041, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    geotiffUrl: "aerial-photos/USGS_AR1VBKB00010041_geo.tif",
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 24,
+    title: "1969 USGS Aerial Photograph (Single Frame 6103000806335)",
+    state: "RI",
+    year: 1969,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19690913 Aerial Single Frame Photo ID: 6103000806335, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    geotiffUrl: "aerial-photos/USGS_AR6103000806335_jpeg_geo.tif",
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 25,
+    title: "1969 USGS Aerial Photograph (Single Frame 6103000806334)",
+    state: "RI",
+    year: 1969,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19690913 Aerial Single Frame Photo ID: 6103000806334, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    geotiffUrl: "aerial-photos/USGS_AR6103000806334_jpeg_geo.tif",
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
   }
-    
 
 ];
 
