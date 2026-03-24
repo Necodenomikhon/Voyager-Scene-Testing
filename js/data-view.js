@@ -237,7 +237,7 @@ const customEntries = [
     meta: { publishers: 'University of Michigan Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
   {
-    id: 5,
+    id: 6,
     title: "Plan of the northern part of Rhode Island in the township of Portsmouth",
     state: "RI",
     year: 1778,
@@ -254,7 +254,7 @@ const customEntries = [
     meta: { publishers: 'The Huntington Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
   {
-    id: 6,
+    id: 7,
     title: "Plan of the adjacent coast to the northern part of Rhode Island",
     state: "RI",
     year: 1778,
@@ -271,7 +271,7 @@ const customEntries = [
     meta: { publishers: 'University of Michigan Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
   {
-    id: 7,
+    id: 8,
     title: "Plan of a barrack for 300 men",
     state: "RI",
     year: 1778,
@@ -686,6 +686,35 @@ const customEntries = [
       publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
       projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 26,
+    title: "Rhode Island NAPP Historic Imagery",
+    state: "RI",
+    year: '1991-2001',
+    series: "ArcGIS MapServer",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "USDA FPAC-BC, Rhode Island NAPP Historic Imagery, black-and-white aerial imagery web map/service derived from imagery acquired for the MDOQ program, ArcGIS, updated February 20, 2025, available at https://www.arcgis.com/home/item.html?id=12f2ddd7f9d0407cb8032b1cde7edb21 (accessed March 24, 2026).",
+    
+    tileUrl: "https://tiles.arcgis.com/tiles/LLVEmB8Lsae3Um4s/arcgis/rest/services/ri_mdoq/MapServer/tile/{z}/{y}/{x}",
+    bounds: [
+      [41.144, -72.676],
+      [42.028, -70.371]
+    ],
+    center: [41.586, -71.524],
+    zoom: 11,
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "USDA FPAC-BC; FSA Aerial Photography Field Office (APFO)",
+      datum: "WGS 84 / Web Mercator",
+      projection: "EPSG:3857",
       gnisCellId: "",
       gnisCell: "",
       woodlandTint: "N/A"
