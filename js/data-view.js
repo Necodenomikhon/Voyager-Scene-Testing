@@ -591,7 +591,9 @@ const customEntries = [
     scale: 24000,
     thumb: "",
     citation: "U.S. Geological Survey 19600501 Aerial Single Frame Photo ID: B593310410434, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
     geotiffUrl: "aerial-photos/USGS_ARB593310410434_defl_geo.tif",
+    
     downloads: {},
     fixUrl: "",
     meta: {
@@ -613,7 +615,9 @@ const customEntries = [
     scale: 24000,
     thumb: "",
     citation: "U.S. Geological Survey 19660222 Aerial Single Frame Photo ID: 1VBKB00010042, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
     geotiffUrl: "aerial-photos/USGS_AR1VBKB00010042_jpeg_geo.tif",
+    
     downloads: {},
     fixUrl: "",
     meta: {
@@ -635,7 +639,9 @@ const customEntries = [
     scale: 24000,
     thumb: "",
     citation: "U.S. Geological Survey 19660222 Aerial Single Frame Photo ID: 1VBKB00010041, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
     geotiffUrl: "aerial-photos/USGS_AR1VBKB00010041_geo.tif",
+    
     downloads: {},
     fixUrl: "",
     meta: {
@@ -657,7 +663,9 @@ const customEntries = [
     scale: 24000,
     thumb: "",
     citation: "U.S. Geological Survey 19690913 Aerial Single Frame Photo ID: 6103000806335, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
     geotiffUrl: "aerial-photos/USGS_AR6103000806335_jpeg_geo.tif",
+    
     downloads: {},
     fixUrl: "",
     meta: {
@@ -679,7 +687,9 @@ const customEntries = [
     scale: 24000,
     thumb: "",
     citation: "U.S. Geological Survey 19690913 Aerial Single Frame Photo ID: 6103000806334, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
     geotiffUrl: "aerial-photos/USGS_AR6103000806334_jpeg_geo.tif",
+    
     downloads: {},
     fixUrl: "",
     meta: {
@@ -703,6 +713,7 @@ const customEntries = [
     citation: "USDA FPAC-BC, Rhode Island NAPP Historic Imagery, black-and-white aerial imagery web map/service derived from imagery acquired for the MDOQ program, ArcGIS, updated February 20, 2025, available at https://www.arcgis.com/home/item.html?id=12f2ddd7f9d0407cb8032b1cde7edb21 (accessed March 24, 2026).",
     
     tileUrl: "https://tiles.arcgis.com/tiles/LLVEmB8Lsae3Um4s/arcgis/rest/services/ri_mdoq/MapServer/tile/{z}/{y}/{x}",
+    
     bounds: [
       [41.144, -72.676],
       [42.028, -70.371]
@@ -730,7 +741,9 @@ const customEntries = [
     scale: 31680,
     thumb: "",
     citation: "U.S. Geological Survey (USGS), 1939, Prudence Island, Rhode Island, 1:31,680-scale historical topographic map (Historical Topographic Map Collection), map sheet 353446 (scan ID 31680), U.S. Geological Survey National Geospatial Technical Operations Center (NGTOC), Reston, Virginia, available at https://thor-f5.er.usgs.gov/ngtoc/metadata/waf/maps/historicaltopo/pdf/RI/31680/RI_Prudence_Island_353446_1939_31680_geo.xml (accessed March 25, 2026).",
+    
     geotiffUrl: "maps/RI_Prudence Island_353446_1939_31680_geo.tif",
+    
     downloads: {},
     fixUrl: "",
     meta: {

@@ -1,0 +1,687 @@
+export function getEntries() {
+  return overlayEntries;
+}
+
+const overlayEntries = [
+  {
+    id: 1,
+    title: "USGS Lidar Point Cloud for BHF",
+    state: "RI",
+    year: 2024,
+    series: "BHF",
+    edition: "",
+    scale: 0,
+    thumb: "maps/lidar.jpg",
+    citation: "“USGS Lidar Point Cloud RI_Statewide_D22 395000_192500” U.S. Geological Survey, Jan. 2024. Accessed: 04/17/2025. [Online]. Available: https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/RI_Statewide_D22/RI_Statewide_1_D22/0_file_download_links.txt",
+
+    geotiffUrl: "maps/lidar_geo.tif",
+    
+    // Optional: for Pan/Zoom before load; if unknown, omit and we use overlay bounds after load.
+    // bounds: [[34.0, -86.0], [36.0, -84.0]],
+
+    downloads: { },
+    fixUrl: "",
+    meta: { publishers: 'EduceLab', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
+  },
+  {
+    id: 2,
+    title: "Battle of Rhode Island Historic District boundaries",
+    state: "RI",
+    year: 1969,
+    series: "",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "Marcia M. Greenlee, Battle of Rhode Island Historic District (Battle of Rhode Island Site), National Register of Historic Places Inventory–Nomination Form, prepared for the Rhode Island Historical Preservation Commission under contract to the Afro-American Bicentennial Corporation, 1973, p. 14; National Park Service, National Register of Historic Places records; National Archives Identifier 41374753; National Archives and Records Administration, National Archives Catalog, https://catalog.archives.gov/id/41374753 (accessed March 6, 2026).",
+
+    geotiffUrl: "https://educelab.github.io/BHF/maps/DOI_NPS_1969_geo.tif",
+
+    downloads: { },
+    fixUrl: "",
+    meta: { publishers: 'US National Archives', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
+  },
+  {
+    id: 3,
+    title: "A Topographical Chart of the Bay of Narraganset in the Province of New England",
+    state: "RI",
+    year: 1777,
+    series: "",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "Charles Blaskowitz and William Faden, A Topographical Chart of the Bay of Narraganset in the Province of New England: With All the Isles Contained Therein, Among Which Rhode Island and Connonicut Have Been Particularly Surveyed; Shewing the True Position & Bearings of the Banks, Shoals, Rocks &c., as Likewise the Soundings; to Which Have Been Added the Several Works & Batteries Raised by the Americans; Taken by Order of the Principal Farmers on Rhode Island, map, London: William Faden, 1777; Norman B. Leventhal Map & Education Center, Boston Public Library; digital image, Leventhal Map & Education Center Digital Collections, https://collections.leventhalmap.org/search/commonwealth:3f462w67b (accessed March 2, 2026).",
+    
+    geotiffUrl: "maps/Blaskowitz_1777_jpg95_geo.tif",
+
+    downloads: { },
+    fixUrl: "",
+    meta: { publishers: 'Norman B. Leventhal Map & Education Center', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
+  },
+  {
+    id: 4,
+    title: "Plan von Rhode Island",
+    state: "RI",
+    year: 1778,
+    series: "",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "Johann Christian Schiffer, Plan von Rhode Island, und deren dem comando des Herrn General Majors Presgott inf dies-malig befundlichen campements, map, [1777]; Geography and Map Division; Library of Congress, Washington, D.C.; digital image, Library of Congress Digital Collections, https://www.loc.gov/item/75690704/ (accessed March 12, 2026).",
+    
+    geotiffUrl: "maps/Schiffer_1777_geo.tif",
+
+    downloads: { },
+    fixUrl: "",
+    meta: { publishers: 'US Library of Congress', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
+  },
+  {
+    id: 5,
+    title: "Plan of the works at Windmill Hill",
+    state: "RI",
+    year: 1777,
+    series: "",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "Plan of the Works at Windmill Hill, December 31st 1777: Plan nr 19, map, December 31, 1777; William L. Clements Library, University of Michigan, Ann Arbor, Michigan; digital image, William L. Clements Library Image Bank, University of Michigan Library Digital Collections, https://quod.lib.umich.edu/w/wcl1ic/x-659/wcl000771 (accessed March 13, 2026).",
+    
+    geotiffUrl: "maps/Clinton_1777_jpg60_geo.tif",
+
+    downloads: { },
+    fixUrl: "",
+    meta: { publishers: 'University of Michigan Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
+  },
+  {
+    id: 6,
+    title: "Plan of the northern part of Rhode Island in the township of Portsmouth",
+    state: "RI",
+    year: 1778,
+    series: "",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "Edward Fage (attributed), Plan of the Northern Part of Rhode Island in the Township of Portsmouth, Shewing the British Posts of Defence as Compleated During the Possession of Rhode Island from the 8th of Dec. 1776 to the 25th of Oct. 1778, manuscript map, ca. 1778; call no. mssHM 15473; The Huntington Library, San Marino, California; digital image, Huntington Digital Library, https://hdl.huntington.org/digital/collection/p15150coll4/id/16295 (accessed March 16, 2026).",    
+    
+    geotiffUrl: "maps/Fage_1778_defl_geo.tif",
+
+    downloads: { },
+    fixUrl: "",
+    meta: { publishers: 'The Huntington Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
+  },
+  {
+    id: 7,
+    title: "Plan of the adjacent coast to the northern part of Rhode Island",
+    state: "RI",
+    year: 1778,
+    series: "",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "Edward Fage, Plan of the Adjacent Coast to the Northern Part of Rhode Island, to Express the Route of a Body of Troops under the Command of Lieut. Colonel Campbell of the 22d Regiment to Destroy the Enemies Batteaux, Vessels, Galley &c. Which Was Accomplished May 25th 1778, manuscript map, 1778; William L. Clements Library, University of Michigan, Ann Arbor, Michigan; digital image, William L. Clements Library Image Bank, University of Michigan Library Digital Collections, https://quod.lib.umich.edu/w/wcl1ic/x-628/wcl000739 (accessed March 17, 2026).",
+
+    geotiffUrl: "maps/Fage_2_1778_defl_geo.tif",
+
+    downloads: { },
+    fixUrl: "",
+    meta: { publishers: 'University of Michigan Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
+  },
+  {
+    id: 8,
+    title: "Plan of a barrack for 300 men",
+    state: "RI",
+    year: 1778,
+    series: "",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "Plan of a Barrack for 300 Men, and Officers, Erected at Windmill Hill with an Abbatis, December 1777: Plan nr 18, manuscript map, December 1777; William L. Clements Library, University of Michigan, Ann Arbor, Michigan; digital image, William L. Clements Library Image Bank, University of Michigan Library Digital Collections, https://quod.lib.umich.edu/w/wcl1ic/x-6053/wcl006127 (accessed March 17, 2026).",
+
+    geotiffUrl: "maps/Clinton_2_1777_defl_geo.tif",
+
+    downloads: { },
+    fixUrl: "",
+    meta: { publishers: 'University of Michigan Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
+  },
+  {
+    id: 9,
+    title: "1939 Rhode Island Aerial Photographs",
+    state: "RI",
+    year: 1939,
+    series: "ArcGIS MapServer",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "University of Rhode Island Environmental Data Center (URI EDC) and Rhode Island Geographic Information System (RIGIS), 1939 Rhode Island Aerial Photographs, aerial imagery dataset, University of Rhode Island Environmental Data Center, available at https://www.rigis.org/maps/edc::1939-rhode-island-aerial-photographs/about (accessed March 18, 2026).",
+    
+    tileUrl: "https://tiles.arcgis.com/tiles/S8zZg9pg23JUEexQ/arcgis/rest/services/atlas_img_1939/MapServer/tile/{z}/{y}/{x}",
+    bounds: [
+      [41.144, -72.676],
+      [42.028, -70.371]
+    ],
+    center: [41.586, -71.524],
+    zoom: 11,
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "URI EDC, RIGIS",
+      datum: "WGS 84 / Web Mercator",
+      projection: "EPSG:3857",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  }, 
+  {
+    id: 10,
+    title: "1951–1952 Rhode Island Aerial Photographs",
+    state: "RI",
+    year: 1951,
+    series: "ArcGIS MapServer",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "University of Rhode Island Environmental Data Center (URI EDC) and Rhode Island Geographic Information System (RIGIS), 1951–1952 Rhode Island Aerial Photographs, aerial imagery dataset, University of Rhode Island Environmental Data Center, https://www.rigis.org/maps/edc::1951-1952-rhode-island-aerial-photographs/about (accessed March 18, 2026).",
+    
+    tileUrl: "https://tiles.arcgis.com/tiles/S8zZg9pg23JUEexQ/arcgis/rest/services/atlas_img_1951_1952/MapServer/tile/{z}/{y}/{x}",
+    bounds: [
+      [41.144, -72.676],
+      [42.028, -70.371]
+    ],
+    center: [41.586, -71.524],
+    zoom: 11,
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "URI EDC, RIGIS",
+      datum: "WGS 84 / Web Mercator",
+      projection: "EPSG:3857",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 12,
+    title: "1962 Rhode Island Aerial Photographs",
+    state: "RI",
+    year: 1962,
+    series: "ArcGIS MapServer",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "University of Rhode Island Environmental Data Center (URI EDC) and Rhode Island Geographic Information System (RIGIS), 1962 Aerial Photography, aerial imagery dataset, University of Rhode Island Environmental Data Center, available at https://www.rigis.org/content/edc::1962-aerial-photography/about (accessed March 18, 2026).",
+    
+    tileUrl: "https://maps.edc.uri.edu/arcgis/rest/services/Atlas_imageryBaseMapsEarthCover/1962_RISPP/MapServer/tile/{z}/{y}/{x}",
+    bounds: [
+      [41.144, -72.676],
+      [42.028, -70.371]
+    ],
+    center: [41.586, -71.524],
+    zoom: 11,
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "URI EDC, RIGIS",
+      datum: "WGS 84 / Web Mercator",
+      projection: "EPSG:3857",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 13,
+    title: "1972 Rhode Island Aerial Photographs",
+    state: "RI",
+    year: 1972,
+    series: "ArcGIS MapServer",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "University of Rhode Island Environmental Data Center (URI EDC) and Rhode Island Geographic Information System (RIGIS), 1972 Aerial Photography, aerial imagery dataset, University of Rhode Island Environmental Data Center, available at https://www.rigis.org/content/edc::1972-aerial-photography/about (accessed March 18, 2026).",
+    
+    tileUrl: "https://tiles.arcgis.com/tiles/S8zZg9pg23JUEexQ/arcgis/rest/services/atlas_img_1972/MapServer/tile/{z}/{y}/{x}",
+    bounds: [
+      [41.144, -72.676],
+      [42.028, -70.371]
+    ],
+    center: [41.586, -71.524],
+    zoom: 11,
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "URI EDC, RIGIS",
+      datum: "WGS 84 / Web Mercator",
+      projection: "EPSG:3857",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 14,
+    title: "1981 Rhode Island Aerial Photographs",
+    state: "RI",
+    year: 1981,
+    series: "ArcGIS MapServer",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "University of Rhode Island Environmental Data Center (URI EDC) and Rhode Island Geographic Information System (RIGIS), 1982 Aerial Photography, aerial imagery dataset, University of Rhode Island Environmental Data Center, available at https://www.rigis.org/content/edc::1982-aerial-photography/about (accessed March 18, 2026).",
+    
+    tileUrl: "https://tiles.arcgis.com/tiles/S8zZg9pg23JUEexQ/arcgis/rest/services/atlas_img_1981/MapServer/tile/{z}/{y}/{x}",
+    bounds: [
+      [41.144, -72.676],
+      [42.028, -70.371]
+    ],
+    center: [41.586, -71.524],
+    zoom: 11,
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "University of Rhode Island Environmental Data Center (URI EDC); Rhode Island Geographic Information System (RIGIS)",
+      datum: "WGS 84 / Web Mercator",
+      projection: "EPSG:3857",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 15,
+    title: "1988 Rhode Island Aerial Photographs",
+    state: "RI",
+    year: 1988,
+    series: "ArcGIS MapServer",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "University of Rhode Island Environmental Data Center (URI EDC) and Rhode Island Geographic Information System (RIGIS), 1988 Aerial Photography, aerial imagery dataset, University of Rhode Island Environmental Data Center, available at https://www.rigis.org/content/edc::1988-aerial-photography/about (accessed March 18, 2026).",
+    
+    tileUrl: "https://tiles.arcgis.com/tiles/S8zZg9pg23JUEexQ/arcgis/rest/services/atlas_img_1988/MapServer/tile/{z}/{y}/{x}",
+    
+    bounds: [
+      [41.144, -72.676],
+      [42.028, -70.371]
+    ],
+    center: [41.586, -71.524],
+    zoom: 11,
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "University of Rhode Island Environmental Data Center (URI EDC); Rhode Island Geographic Information System (RIGIS)",
+      datum: "WGS 84 / Web Mercator",
+      projection: "EPSG:3857",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 16,
+    title: "1938 USGS Aerial Photograph (Single Frame 1F00000060016)",
+    state: "RI",
+    year: 1938,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19381213 Aerial Single Frame Photo ID: 1F00000060016, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
+    geotiffUrl: "aerial-photos/USGS_AR1F00000060016_defl_geo.tif",
+
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 17,
+    title: "1938 USGS Aerial Photograph (Single Frame 1F00000060125)",
+    state: "RI",
+    year: 1938,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19381213 Aerial Single Frame Photo ID: 1F00000060125, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
+    geotiffUrl: "aerial-photos/USGS_AR1F00000060125_geo.tif",
+
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 18,
+    title: "1938 USGS Aerial Photograph (Single Frame 1F00000060126)",
+    state: "RI",
+    year: 1938,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19381213 Aerial Single Frame Photo ID: 1F00000060126, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
+    geotiffUrl: "aerial-photos/USGS_AR1F00000060126_defl_geo.tif",
+
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 19,
+    title: "1938 USGS Aerial Photograph (Single Frame 1F00000060127)",
+    state: "RI",
+    year: 1938,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19381213 Aerial Single Frame Photo ID: 1F00000060127, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
+    geotiffUrl: "aerial-photos/USGS_AR1F00000060127_geo.tif",
+
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 20,
+    title: "1960 USGS Aerial Photograph (Single Frame B593310410435)",
+    state: "RI",
+    year: 1960,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19600501 Aerial Single Frame Photo ID: B593310410435, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
+    geotiffUrl: "aerial-photos/USGS_ARB593310410435_defl_geo.tif",
+
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 21,
+    title: "1960 USGS Aerial Photograph (Single Frame B593310410434)",
+    state: "RI",
+    year: 1960,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19600501 Aerial Single Frame Photo ID: B593310410434, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
+    geotiffUrl: "aerial-photos/USGS_ARB593310410434_defl_geo.tif",
+    
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 22,
+    title: "1966 USGS Aerial Photograph (Single Frame 1VBKB00010042)",
+    state: "RI",
+    year: 1966,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19660222 Aerial Single Frame Photo ID: 1VBKB00010042, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
+    geotiffUrl: "aerial-photos/USGS_AR1VBKB00010042_jpeg_geo.tif",
+    
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 23,
+    title: "1966 USGS Aerial Photograph (Single Frame 1VBKB00010041)",
+    state: "RI",
+    year: 1966,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19660222 Aerial Single Frame Photo ID: 1VBKB00010041, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
+    geotiffUrl: "aerial-photos/USGS_AR1VBKB00010041_geo.tif",
+    
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 24,
+    title: "1969 USGS Aerial Photograph (Single Frame 6103000806335)",
+    state: "RI",
+    year: 1969,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19690913 Aerial Single Frame Photo ID: 6103000806335, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
+    geotiffUrl: "aerial-photos/USGS_AR6103000806335_jpeg_geo.tif",
+    
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 25,
+    title: "1969 USGS Aerial Photograph (Single Frame 6103000806334)",
+    state: "RI",
+    year: 1969,
+    series: "USGS Single Frame Aerial Photography",
+    edition: "",
+    scale: 24000,
+    thumb: "",
+    citation: "U.S. Geological Survey 19690913 Aerial Single Frame Photo ID: 6103000806334, aerial photograph, U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, Single Frame Aerial Photography series, available at https://doi.org/10.5066/F7610XKM (accessed March 20, 2026).",
+    
+    geotiffUrl: "aerial-photos/USGS_AR6103000806334_jpeg_geo.tif",
+    
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+      datum: "WGS 84",
+      projection: 'Unstated',
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 26,
+    title: "Rhode Island NAPP Historic Imagery",
+    state: "RI",
+    year: '1991-2001',
+    series: "ArcGIS MapServer",
+    edition: "",
+    scale: 0,
+    thumb: "",
+    citation: "USDA FPAC-BC, Rhode Island NAPP Historic Imagery, black-and-white aerial imagery web map/service derived from imagery acquired for the MDOQ program, ArcGIS, updated February 20, 2025, available at https://www.arcgis.com/home/item.html?id=12f2ddd7f9d0407cb8032b1cde7edb21 (accessed March 24, 2026).",
+    
+    tileUrl: "https://tiles.arcgis.com/tiles/LLVEmB8Lsae3Um4s/arcgis/rest/services/ri_mdoq/MapServer/tile/{z}/{y}/{x}",
+    
+    bounds: [
+      [41.144, -72.676],
+      [42.028, -70.371]
+    ],
+    center: [41.586, -71.524],
+    zoom: 11,
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "USDA FPAC-BC; FSA Aerial Photography Field Office (APFO)",
+      datum: "WGS 84 / Web Mercator",
+      projection: "EPSG:3857",
+      gnisCellId: "",
+      gnisCell: "",
+      woodlandTint: "N/A"
+    }
+  },
+  {
+    id: 27,
+    title: "1939 USGS Historical Topographic Map (Prudence Island 1:31,680)",
+    state: "RI",
+    year: 1939,
+    series: "USGS Historical Topographic Map Collection",
+    edition: "",
+    scale: 31680,
+    thumb: "",
+    citation: "U.S. Geological Survey (USGS), 1939, Prudence Island, Rhode Island, 1:31,680-scale historical topographic map (Historical Topographic Map Collection), map sheet 353446 (scan ID 31680), U.S. Geological Survey National Geospatial Technical Operations Center (NGTOC), Reston, Virginia, available at https://thor-f5.er.usgs.gov/ngtoc/metadata/waf/maps/historicaltopo/pdf/RI/31680/RI_Prudence_Island_353446_1939_31680_geo.xml (accessed March 25, 2026).",
+    
+    geotiffUrl: "maps/RI_Prudence_Island_353446_1939_31680_geo.tif",
+    
+    downloads: {},
+    fixUrl: "",
+    meta: {
+      publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
+      datum: "WGS 84",
+      projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
+      gnisCellId: "353446",
+      gnisCell: "Prudence Island",
+      woodlandTint: "Varies (historical topo symbology)"
+    }
+  },
+  {
+  id: 28,
+  title: "1939 USGS Historical Topographic Map (Prudence Island 1:31,680)",
+  state: "RI",
+  year: 1939,
+  series: "USGS Historical Topographic Map Collection",
+  edition: "",
+  scale: 31680,
+  thumb: "",
+  citation: "U.S. Geological Survey (USGS), 1939, Prudence Island, Rhode Island, 1:31,680-scale historical topographic map (Historical Topographic Map Collection), map sheet 463162 (scan ID 31680), U.S. Geological Survey National Geospatial Technical Operations Center (NGTOC), Reston, Virginia, available at https://thor-f5.er.usgs.gov/ngtoc/metadata/waf/maps/historicaltopo/pdf/RI/31680/RI_Prudence_Island_463162_1939_31680_geo.xml (accessed March 25, 2026).",
+
+  geotiffUrl: "maps/RI_Prudence_Island_463162_1939_31680_geo.tif",
+
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
+    datum: "WGS 84",
+    projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
+    gnisCellId: "463162",
+    gnisCell: "Prudence Island",
+    woodlandTint: "Varies (historical topo symbology)"
+  }
+},
+{
+  id: 29,
+  title: "1942 USGS Historical Topographic Map (Prudence Island 1:31,680)",
+  state: "RI",
+  year: 1942,
+  series: "USGS Historical Topographic Map Collection",
+  edition: "",
+  scale: 31680,
+  thumb: "",
+  citation: "U.S. Geological Survey (USGS), 1942, Prudence Island, Rhode Island, 1:31,680-scale historical topographic map (Historical Topographic Map Collection), map sheet 353447 (scan ID 31680), U.S. Geological Survey National Geospatial Technical Operations Center (NGTOC), Reston, Virginia, available at https://thor-f5.er.usgs.gov/ngtoc/metadata/waf/maps/historicaltopo/pdf/RI/31680/RI_Prudence_Island_353447_1942_31680_geo.xml (accessed March 25, 2026).",
+
+  geotiffUrl: "maps/RI_Prudence_Island_353447_1942_31680_geo.tif",
+
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
+    datum: "WGS 84",
+    projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
+    gnisCellId: "353447",
+    gnisCell: "Prudence Island",
+    woodlandTint: "Varies (historical topo symbology)"
+  }
+},
+{
+  id: 30,
+  title: "1942 USGS Historical Topographic Map (Prudence Island 1:31,680)",
+  state: "RI",
+  year: 1942,
+  series: "USGS Historical Topographic Map Collection",
+  edition: "",
+  scale: 31680,
+  thumb: "",
+  citation: "U.S. Geological Survey (USGS), 1942, Prudence Island, Rhode Island, 1:31,680-scale historical topographic map (Historical Topographic Map Collection), map sheet 353448 (scan ID 31680), U.S. Geological Survey National Geospatial Technical Operations Center (NGTOC), Reston, Virginia, available at https://thor-f5.er.usgs.gov/ngtoc/metadata/waf/maps/historicaltopo/pdf/RI/31680/RI_Prudence_Island_353448_1942_31680_geo.xml (accessed March 25, 2026).",
+
+  geotiffUrl: "maps/RI_Prudence_Island_353448_1942_31680_geo.tif",
+
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
+    datum: "WGS 84",
+    projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
+    gnisCellId: "353448",
+    gnisCell: "Prudence Island",
+    woodlandTint: "Varies (historical topo symbology)"
+  }
+}
+
+];
