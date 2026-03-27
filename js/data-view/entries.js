@@ -1,10 +1,13 @@
 export function getEntries() {
-  return overlayEntries;
+  return overlayEntries.map((e, i) => ({
+    ...e,
+    id: i
+  }));
 }
 
 const overlayEntries = [
   {
-    id: 1,
+    
     title: "USGS Lidar Point Cloud for BHF",
     state: "RI",
     year: 2024,
@@ -24,7 +27,7 @@ const overlayEntries = [
     meta: { publishers: 'EduceLab', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
   {
-    id: 2,
+    
     title: "Battle of Rhode Island Historic District boundaries",
     state: "RI",
     year: 1969,
@@ -41,7 +44,7 @@ const overlayEntries = [
     meta: { publishers: 'US National Archives', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
   {
-    id: 3,
+    
     title: "A Topographical Chart of the Bay of Narraganset in the Province of New England",
     state: "RI",
     year: 1777,
@@ -58,7 +61,7 @@ const overlayEntries = [
     meta: { publishers: 'Norman B. Leventhal Map & Education Center', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
   {
-    id: 4,
+    
     title: "Plan von Rhode Island",
     state: "RI",
     year: 1778,
@@ -75,7 +78,7 @@ const overlayEntries = [
     meta: { publishers: 'US Library of Congress', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
   {
-    id: 5,
+    
     title: "Plan of the works at Windmill Hill",
     state: "RI",
     year: 1777,
@@ -92,7 +95,7 @@ const overlayEntries = [
     meta: { publishers: 'University of Michigan Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
   {
-    id: 6,
+    
     title: "Plan of the northern part of Rhode Island in the township of Portsmouth",
     state: "RI",
     year: 1778,
@@ -109,7 +112,7 @@ const overlayEntries = [
     meta: { publishers: 'The Huntington Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
   {
-    id: 7,
+    
     title: "Plan of the adjacent coast to the northern part of Rhode Island",
     state: "RI",
     year: 1778,
@@ -126,7 +129,7 @@ const overlayEntries = [
     meta: { publishers: 'University of Michigan Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
   {
-    id: 8,
+    
     title: "Plan of a barrack for 300 men",
     state: "RI",
     year: 1778,
@@ -143,7 +146,7 @@ const overlayEntries = [
     meta: { publishers: 'University of Michigan Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
   {
-    id: 9,
+    
     title: "1939 Rhode Island Aerial Photographs",
     state: "RI",
     year: 1939,
@@ -172,7 +175,7 @@ const overlayEntries = [
     }
   }, 
   {
-    id: 10,
+    
     title: "1951–1952 Rhode Island Aerial Photographs",
     state: "RI",
     year: 1951,
@@ -201,7 +204,7 @@ const overlayEntries = [
     }
   },
   {
-    id: 12,
+    
     title: "1962 Rhode Island Aerial Photographs",
     state: "RI",
     year: 1962,
@@ -230,7 +233,7 @@ const overlayEntries = [
     }
   },
   {
-    id: 13,
+    
     title: "1972 Rhode Island Aerial Photographs",
     state: "RI",
     year: 1972,
@@ -259,7 +262,7 @@ const overlayEntries = [
     }
   },
   {
-    id: 14,
+    
     title: "1981 Rhode Island Aerial Photographs",
     state: "RI",
     year: 1981,
@@ -288,7 +291,7 @@ const overlayEntries = [
     }
   },
   {
-    id: 15,
+    
     title: "1988 Rhode Island Aerial Photographs",
     state: "RI",
     year: 1988,
@@ -318,7 +321,7 @@ const overlayEntries = [
     }
   },
   {
-    id: 16,
+    
     title: "1938 USGS Aerial Photograph (Single Frame 1F00000060016)",
     state: "RI",
     year: 1938,
@@ -342,7 +345,7 @@ const overlayEntries = [
     }
   },
   {
-    id: 17,
+    
     title: "1938 USGS Aerial Photograph (Single Frame 1F00000060125)",
     state: "RI",
     year: 1938,
@@ -366,7 +369,7 @@ const overlayEntries = [
     }
   },
   {
-    id: 18,
+    
     title: "1938 USGS Aerial Photograph (Single Frame 1F00000060126)",
     state: "RI",
     year: 1938,
@@ -390,7 +393,7 @@ const overlayEntries = [
     }
   },
   {
-    id: 19,
+    
     title: "1938 USGS Aerial Photograph (Single Frame 1F00000060127)",
     state: "RI",
     year: 1938,
@@ -414,7 +417,7 @@ const overlayEntries = [
     }
   },
   {
-    id: 20,
+    
     title: "1960 USGS Aerial Photograph (Single Frame B593310410435)",
     state: "RI",
     year: 1960,
@@ -438,7 +441,7 @@ const overlayEntries = [
     }
   },
   {
-    id: 21,
+    
     title: "1960 USGS Aerial Photograph (Single Frame B593310410434)",
     state: "RI",
     year: 1960,
@@ -462,7 +465,7 @@ const overlayEntries = [
     }
   },
   {
-    id: 22,
+    
     title: "1966 USGS Aerial Photograph (Single Frame 1VBKB00010042)",
     state: "RI",
     year: 1966,
@@ -486,7 +489,7 @@ const overlayEntries = [
     }
   },
   {
-    id: 23,
+    
     title: "1966 USGS Aerial Photograph (Single Frame 1VBKB00010041)",
     state: "RI",
     year: 1966,
@@ -510,7 +513,7 @@ const overlayEntries = [
     }
   },
   {
-    id: 24,
+    
     title: "1969 USGS Aerial Photograph (Single Frame 6103000806335)",
     state: "RI",
     year: 1969,
@@ -534,7 +537,7 @@ const overlayEntries = [
     }
   },
   {
-    id: 25,
+    
     title: "1969 USGS Aerial Photograph (Single Frame 6103000806334)",
     state: "RI",
     year: 1969,
@@ -558,7 +561,7 @@ const overlayEntries = [
     }
   },
   {
-    id: 26,
+    
     title: "Rhode Island NAPP Historic Imagery",
     state: "RI",
     year: '1991-2001',
@@ -588,8 +591,8 @@ const overlayEntries = [
     }
   },
   {
-    id: 27,
-    title: "1939 USGS Historical Topographic Map (Prudence Island 1:31,680)",
+    
+    title: "1939 USGS Historical Topographic Map (Prudence Island 353446)",
     state: "RI",
     year: 1939,
     series: "USGS Historical Topographic Map Collection",
@@ -612,8 +615,8 @@ const overlayEntries = [
     }
   },
   {
-  id: 28,
-  title: "1939 USGS Historical Topographic Map (Prudence Island 1:31,680)",
+  
+  title: "1939 USGS Historical Topographic Map (Prudence Island 463162)",
   state: "RI",
   year: 1939,
   series: "USGS Historical Topographic Map Collection",
@@ -636,8 +639,8 @@ const overlayEntries = [
   }
 },
 {
-  id: 29,
-  title: "1942 USGS Historical Topographic Map (Prudence Island 1:31,680)",
+  
+  title: "1942 USGS Historical Topographic Map (Prudence Island 353447)",
   state: "RI",
   year: 1942,
   series: "USGS Historical Topographic Map Collection",
@@ -660,8 +663,8 @@ const overlayEntries = [
   }
 },
 {
-  id: 30,
-  title: "1942 USGS Historical Topographic Map (Prudence Island 1:31,680)",
+  
+  title: "1942 USGS Historical Topographic Map (Prudence Island 353448)",
   state: "RI",
   year: 1942,
   series: "USGS Historical Topographic Map Collection",
