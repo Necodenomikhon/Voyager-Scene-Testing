@@ -469,3 +469,17 @@
   line-height: 1.35;
 }
 .attributionFooter a{ color: inherit; }
+
+.leaflet-educelab-logo {
+  background: rgba(0, 0, 0, 0);
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.leaflet-educelab-logo img {
+  display: block;
+  width: 160px;
+  height: auto;
+  opacity: 1;
+  pointer-events: none;
+}

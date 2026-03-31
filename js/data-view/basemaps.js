@@ -1,3 +1,5 @@
+let onOpacityChange = null;
+
 export function createMap() {
   return L.map('map', { zoomControl: true, maxZoom: 22 })
     .setView([41.615, -71.251], 11);
@@ -108,6 +110,17 @@ export function setupBasemapSystem(map) {
       opacitySliderEl = slider;
       opacityValueEl = value;
 
+      L.DomEvent.on(slider, "input", function () {
+        if (activeEntryId == null) return;
+
+        const opacity = Number(slider.value) / 100;
+        value.textContent = `${Math.round(opacity * 100)}%`;
+
+        if (typeof onOpacityChange === "function") {
+          onOpacityChange(activeEntryId, opacity);
+        }
+      });
+
       L.DomEvent.disableClickPropagation(container);
       L.DomEvent.disableScrollPropagation(container);
 
@@ -128,6 +141,11 @@ export function setupBasemapSystem(map) {
     getActiveEntryId: () => activeEntryId,
     getOpacitySliderEl: () => opacitySliderEl,
     getOpacityValueEl: () => opacityValueEl,
+    setOpacityChangeHandler,
     syncOpacityControlToEntry
   };
+}
+
+function setOpacityChangeHandler(fn) {
+  onOpacityChange = fn;
 }

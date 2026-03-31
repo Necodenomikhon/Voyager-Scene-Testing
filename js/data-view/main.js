@@ -16,6 +16,30 @@ setupSidebar();
 const basemapSystem = setupBasemapSystem(map);
 const { openCiteModal } = setupCitationModal();
 
+// Example: after const map = L.map('map', ...)
+
+const LogoControl = L.Control.extend({
+  options: {
+    position: 'bottomleft'
+  },
+
+  onAdd: function () {
+    const div = L.DomUtil.create('div', 'leaflet-educelab-logo');
+
+    div.innerHTML = `
+      <img src="EduceLab.png" alt="EduceLab logo" />
+    `;
+
+    // Prevent map drag/zoom when interacting with logo
+    L.DomEvent.disableClickPropagation(div);
+    L.DomEvent.disableScrollPropagation(div);
+
+    return div;
+  }
+});
+
+map.addControl(new LogoControl());
+
 const table = document.getElementById('recordsTable');
 
 const renderer = createRenderer({

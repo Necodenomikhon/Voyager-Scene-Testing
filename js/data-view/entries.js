@@ -6,8 +6,7 @@ export function getEntries() {
 }
 
 const overlayEntries = [
-  {
-    
+  {   
     title: "USGS Lidar Point Cloud for BHF",
     state: "RI",
     year: 2024,
@@ -18,16 +17,12 @@ const overlayEntries = [
     citation: "“USGS Lidar Point Cloud RI_Statewide_D22 395000_192500” U.S. Geological Survey, Jan. 2024. Accessed: 04/17/2025. [Online]. Available: https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/RI_Statewide_D22/RI_Statewide_1_D22/0_file_download_links.txt",
 
     geotiffUrl: "maps/lidar_geo.tif",
-    
-    // Optional: for Pan/Zoom before load; if unknown, omit and we use overlay bounds after load.
-    // bounds: [[34.0, -86.0], [36.0, -84.0]],
 
     downloads: { },
     fixUrl: "",
     meta: { publishers: 'EduceLab', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
-  {
-    
+  {   
     title: "Battle of Rhode Island Historic District boundaries",
     state: "RI",
     year: 1969,
@@ -37,14 +32,13 @@ const overlayEntries = [
     thumb: "",
     citation: "Marcia M. Greenlee, Battle of Rhode Island Historic District (Battle of Rhode Island Site), National Register of Historic Places Inventory–Nomination Form, prepared for the Rhode Island Historical Preservation Commission under contract to the Afro-American Bicentennial Corporation, 1973, p. 14; National Park Service, National Register of Historic Places records; National Archives Identifier 41374753; National Archives and Records Administration, National Archives Catalog, https://catalog.archives.gov/id/41374753 (accessed March 6, 2026).",
 
-    geotiffUrl: "https://educelab.github.io/BHF/maps/DOI_NPS_1969_geo.tif",
+    geotiffUrl: "maps/DOI_NPS_1969_defl_f_geo.tif",
 
     downloads: { },
     fixUrl: "",
     meta: { publishers: 'US National Archives', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
-  {
-    
+  {   
     title: "A Topographical Chart of the Bay of Narraganset in the Province of New England",
     state: "RI",
     year: 1777,
@@ -54,14 +48,13 @@ const overlayEntries = [
     thumb: "",
     citation: "Charles Blaskowitz and William Faden, A Topographical Chart of the Bay of Narraganset in the Province of New England: With All the Isles Contained Therein, Among Which Rhode Island and Connonicut Have Been Particularly Surveyed; Shewing the True Position & Bearings of the Banks, Shoals, Rocks &c., as Likewise the Soundings; to Which Have Been Added the Several Works & Batteries Raised by the Americans; Taken by Order of the Principal Farmers on Rhode Island, map, London: William Faden, 1777; Norman B. Leventhal Map & Education Center, Boston Public Library; digital image, Leventhal Map & Education Center Digital Collections, https://collections.leventhalmap.org/search/commonwealth:3f462w67b (accessed March 2, 2026).",
     
-    geotiffUrl: "maps/Blaskowitz_1777_jpg95_geo.tif",
+    geotiffUrl: "maps/Blaskowitz_1777_jpg90_f_geo.tif",
 
     downloads: { },
     fixUrl: "",
     meta: { publishers: 'Norman B. Leventhal Map & Education Center', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
-  {
-    
+  {   
     title: "Plan von Rhode Island",
     state: "RI",
     year: 1778,
@@ -71,14 +64,13 @@ const overlayEntries = [
     thumb: "",
     citation: "Johann Christian Schiffer, Plan von Rhode Island, und deren dem comando des Herrn General Majors Presgott inf dies-malig befundlichen campements, map, [1777]; Geography and Map Division; Library of Congress, Washington, D.C.; digital image, Library of Congress Digital Collections, https://www.loc.gov/item/75690704/ (accessed March 12, 2026).",
     
-    geotiffUrl: "maps/Schiffer_1777_geo.tif",
+    geotiffUrl: "maps/Schiffer_1777_f_geo.tif",
 
     downloads: { },
     fixUrl: "",
     meta: { publishers: 'US Library of Congress', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
-  {
-    
+  {   
     title: "Plan of the works at Windmill Hill",
     state: "RI",
     year: 1777,
@@ -88,14 +80,13 @@ const overlayEntries = [
     thumb: "",
     citation: "Plan of the Works at Windmill Hill, December 31st 1777: Plan nr 19, map, December 31, 1777; William L. Clements Library, University of Michigan, Ann Arbor, Michigan; digital image, William L. Clements Library Image Bank, University of Michigan Library Digital Collections, https://quod.lib.umich.edu/w/wcl1ic/x-659/wcl000771 (accessed March 13, 2026).",
     
-    geotiffUrl: "maps/Clinton_1777_jpg60_geo.tif",
+    geotiffUrl: "maps/Clinton_1777_jpg60_f_geo.tif",
 
     downloads: { },
     fixUrl: "",
     meta: { publishers: 'University of Michigan Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
-  {
-    
+  {   
     title: "Plan of the northern part of Rhode Island in the township of Portsmouth",
     state: "RI",
     year: 1778,
@@ -105,14 +96,13 @@ const overlayEntries = [
     thumb: "",
     citation: "Edward Fage (attributed), Plan of the Northern Part of Rhode Island in the Township of Portsmouth, Shewing the British Posts of Defence as Compleated During the Possession of Rhode Island from the 8th of Dec. 1776 to the 25th of Oct. 1778, manuscript map, ca. 1778; call no. mssHM 15473; The Huntington Library, San Marino, California; digital image, Huntington Digital Library, https://hdl.huntington.org/digital/collection/p15150coll4/id/16295 (accessed March 16, 2026).",    
     
-    geotiffUrl: "maps/Fage_1778_defl_geo.tif",
+    geotiffUrl: "maps/Fage_1778_defl_f_geo.tif",
 
     downloads: { },
     fixUrl: "",
     meta: { publishers: 'The Huntington Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
-  {
-    
+  {   
     title: "Plan of the adjacent coast to the northern part of Rhode Island",
     state: "RI",
     year: 1778,
@@ -122,14 +112,13 @@ const overlayEntries = [
     thumb: "",
     citation: "Edward Fage, Plan of the Adjacent Coast to the Northern Part of Rhode Island, to Express the Route of a Body of Troops under the Command of Lieut. Colonel Campbell of the 22d Regiment to Destroy the Enemies Batteaux, Vessels, Galley &c. Which Was Accomplished May 25th 1778, manuscript map, 1778; William L. Clements Library, University of Michigan, Ann Arbor, Michigan; digital image, William L. Clements Library Image Bank, University of Michigan Library Digital Collections, https://quod.lib.umich.edu/w/wcl1ic/x-628/wcl000739 (accessed March 17, 2026).",
 
-    geotiffUrl: "maps/Fage_2_1778_defl_geo.tif",
+    geotiffUrl: "maps/Fage_2_1778_defl_f_geo.tif",
 
     downloads: { },
     fixUrl: "",
     meta: { publishers: 'University of Michigan Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
-  {
-    
+  {   
     title: "Plan of a barrack for 300 men",
     state: "RI",
     year: 1778,
@@ -139,14 +128,13 @@ const overlayEntries = [
     thumb: "",
     citation: "Plan of a Barrack for 300 Men, and Officers, Erected at Windmill Hill with an Abbatis, December 1777: Plan nr 18, manuscript map, December 1777; William L. Clements Library, University of Michigan, Ann Arbor, Michigan; digital image, William L. Clements Library Image Bank, University of Michigan Library Digital Collections, https://quod.lib.umich.edu/w/wcl1ic/x-6053/wcl006127 (accessed March 17, 2026).",
 
-    geotiffUrl: "maps/Clinton_2_1777_defl_geo.tif",
+    geotiffUrl: "maps/Clinton_2_1777_defl_f_geo.tif",
 
     downloads: { },
     fixUrl: "",
     meta: { publishers: 'University of Michigan Library', datum: 'WGS 84', projection: 'Unstated', gnisCellId:'', gnisCell:'', woodlandTint:'Y' }
   },
-  {
-    
+  {   
     title: "1939 Rhode Island Aerial Photographs",
     state: "RI",
     year: 1939,
@@ -165,7 +153,7 @@ const overlayEntries = [
     zoom: 11,
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "URI EDC, RIGIS",
       datum: "WGS 84 / Web Mercator",
       projection: "EPSG:3857",
@@ -174,8 +162,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   }, 
-  {
-    
+  {   
     title: "1951–1952 Rhode Island Aerial Photographs",
     state: "RI",
     year: 1951,
@@ -194,7 +181,7 @@ const overlayEntries = [
     zoom: 11,
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "URI EDC, RIGIS",
       datum: "WGS 84 / Web Mercator",
       projection: "EPSG:3857",
@@ -203,8 +190,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "1962 Rhode Island Aerial Photographs",
     state: "RI",
     year: 1962,
@@ -223,7 +209,7 @@ const overlayEntries = [
     zoom: 11,
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "URI EDC, RIGIS",
       datum: "WGS 84 / Web Mercator",
       projection: "EPSG:3857",
@@ -232,8 +218,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "1972 Rhode Island Aerial Photographs",
     state: "RI",
     year: 1972,
@@ -252,7 +237,7 @@ const overlayEntries = [
     zoom: 11,
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "URI EDC, RIGIS",
       datum: "WGS 84 / Web Mercator",
       projection: "EPSG:3857",
@@ -261,8 +246,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "1981 Rhode Island Aerial Photographs",
     state: "RI",
     year: 1981,
@@ -281,7 +265,7 @@ const overlayEntries = [
     zoom: 11,
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "University of Rhode Island Environmental Data Center (URI EDC); Rhode Island Geographic Information System (RIGIS)",
       datum: "WGS 84 / Web Mercator",
       projection: "EPSG:3857",
@@ -290,8 +274,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "1988 Rhode Island Aerial Photographs",
     state: "RI",
     year: 1988,
@@ -311,7 +294,7 @@ const overlayEntries = [
     zoom: 11,
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "University of Rhode Island Environmental Data Center (URI EDC); Rhode Island Geographic Information System (RIGIS)",
       datum: "WGS 84 / Web Mercator",
       projection: "EPSG:3857",
@@ -320,8 +303,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "1938 USGS Aerial Photograph (Single Frame 1F00000060016)",
     state: "RI",
     year: 1938,
@@ -335,7 +317,7 @@ const overlayEntries = [
 
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
       projection: 'Unstated',
@@ -344,8 +326,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "1938 USGS Aerial Photograph (Single Frame 1F00000060125)",
     state: "RI",
     year: 1938,
@@ -359,7 +340,7 @@ const overlayEntries = [
 
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
       projection: 'Unstated',
@@ -368,8 +349,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "1938 USGS Aerial Photograph (Single Frame 1F00000060126)",
     state: "RI",
     year: 1938,
@@ -383,7 +363,7 @@ const overlayEntries = [
 
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
       projection: 'Unstated',
@@ -392,8 +372,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "1938 USGS Aerial Photograph (Single Frame 1F00000060127)",
     state: "RI",
     year: 1938,
@@ -407,8 +386,7 @@ const overlayEntries = [
 
     downloads: {},
     fixUrl: "",
-    meta: {
-      publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
+    meta: {     publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
       projection: 'Unstated',
       gnisCellId: "",
@@ -416,8 +394,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "1960 USGS Aerial Photograph (Single Frame B593310410435)",
     state: "RI",
     year: 1960,
@@ -431,7 +408,7 @@ const overlayEntries = [
 
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
       projection: 'Unstated',
@@ -440,8 +417,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "1960 USGS Aerial Photograph (Single Frame B593310410434)",
     state: "RI",
     year: 1960,
@@ -455,7 +431,7 @@ const overlayEntries = [
     
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
       projection: 'Unstated',
@@ -464,8 +440,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "1966 USGS Aerial Photograph (Single Frame 1VBKB00010042)",
     state: "RI",
     year: 1966,
@@ -479,7 +454,7 @@ const overlayEntries = [
     
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
       projection: 'Unstated',
@@ -488,8 +463,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "1966 USGS Aerial Photograph (Single Frame 1VBKB00010041)",
     state: "RI",
     year: 1966,
@@ -503,7 +477,7 @@ const overlayEntries = [
     
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
       projection: 'Unstated',
@@ -512,8 +486,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "1969 USGS Aerial Photograph (Single Frame 6103000806335)",
     state: "RI",
     year: 1969,
@@ -527,7 +500,7 @@ const overlayEntries = [
     
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
       projection: 'Unstated',
@@ -536,8 +509,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "1969 USGS Aerial Photograph (Single Frame 6103000806334)",
     state: "RI",
     year: 1969,
@@ -551,7 +523,7 @@ const overlayEntries = [
     
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center",
       datum: "WGS 84",
       projection: 'Unstated',
@@ -560,8 +532,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "Rhode Island NAPP Historic Imagery",
     state: "RI",
     year: '1991-2001',
@@ -581,7 +552,7 @@ const overlayEntries = [
     zoom: 11,
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "USDA FPAC-BC; FSA Aerial Photography Field Office (APFO)",
       datum: "WGS 84 / Web Mercator",
       projection: "EPSG:3857",
@@ -590,8 +561,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {
-    
+  {   
     title: "1939 USGS Historical Topographic Map (Prudence Island 353446)",
     state: "RI",
     year: 1939,
@@ -605,7 +575,7 @@ const overlayEntries = [
     
     downloads: {},
     fixUrl: "",
-    meta: {
+    meta: {     
       publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
       datum: "WGS 84",
       projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
@@ -614,8 +584,7 @@ const overlayEntries = [
       woodlandTint: "Varies (historical topo symbology)"
     }
   },
-  {
-  
+  { 
   title: "1939 USGS Historical Topographic Map (Prudence Island 463162)",
   state: "RI",
   year: 1939,
@@ -629,7 +598,7 @@ const overlayEntries = [
 
   downloads: {},
   fixUrl: "",
-  meta: {
+  meta: {   
     publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
     datum: "WGS 84",
     projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
@@ -638,8 +607,7 @@ const overlayEntries = [
     woodlandTint: "Varies (historical topo symbology)"
   }
 },
-{
-  
+{ 
   title: "1942 USGS Historical Topographic Map (Prudence Island 353447)",
   state: "RI",
   year: 1942,
@@ -653,7 +621,7 @@ const overlayEntries = [
 
   downloads: {},
   fixUrl: "",
-  meta: {
+  meta: {   
     publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
     datum: "WGS 84",
     projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
@@ -662,8 +630,7 @@ const overlayEntries = [
     woodlandTint: "Varies (historical topo symbology)"
   }
 },
-{
-  
+{ 
   title: "1942 USGS Historical Topographic Map (Prudence Island 353448)",
   state: "RI",
   year: 1942,
@@ -677,13 +644,30 @@ const overlayEntries = [
 
   downloads: {},
   fixUrl: "",
-  meta: {
+  meta: {   
     publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
     datum: "WGS 84",
     projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
     gnisCellId: "353448",
     gnisCell: "Prudence Island",
     woodlandTint: "Varies (historical topo symbology)"
+  }
+},
+{
+  title: "A chart of the harbour of Rhode Island and Narraganset Bay",
+  state: "RI",
+  year: 1776,
+  series: "Atlantic Neptune Charts",
+  edition: "",
+  scale: 51000,
+  thumb: "",
+  citation: "Des Barres, Joseph F. W. (Joseph Frederick Wallet), 1776, A chart of the harbour of Rhode Island and Narraganset Bay, map, scale ca. 1:51,000, hand-colored, 105 × 72 cm, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, Digital Commonwealth, ark:/50959/7h149w07s, available through Leventhal Map & Education Center Collections (accessed March 30, 2026).",
+  geotiffUrl: "maps/DesBarres_1776_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Norman B. Leventhal Map & Education Center, Boston Public Library",
+    datum: "WGS84",
   }
 }
 

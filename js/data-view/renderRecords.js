@@ -37,6 +37,20 @@ export function createRenderer({
 }) {
   const { stateById, pins, overlayById, layersById } = store;
 
+  basemapSystem.setOpacityChangeHandler((id, opacity) => {
+    const st = stateById.get(id);
+    if (!st) return;
+
+    st.opacity = opacity;
+
+    const layer = layersById.get(id) || overlayById.get(id);
+    if (layer) {
+      applyOverlayOpacity(layer, opacity);
+    }
+
+    render();
+  });
+
   function setCounts() {
     const active = overlayEntries.filter(e => stateById.get(e.id).on).length;
     document.getElementById('activeCountLabel').textContent = `${active} active`;
@@ -270,6 +284,8 @@ export function createRenderer({
 
     setCounts();
   }
+
+  
 
   return { render, applyLayers };
 }
