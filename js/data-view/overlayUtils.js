@@ -58,7 +58,27 @@ export async function addGeoTiffOverlay(map, url, activeBase, { opacity = 0.7 } 
   const layer = new GeoRasterLayer({
     georaster,
     opacity,
-    resolution: 256
+    resolution: 256,
+    pixelValuesToColorFn: (pixelValues) => {
+      if (!pixelValues || !pixelValues.length) return null;
+
+      const r = pixelValues[0] ?? 0;
+      const g = pixelValues[1] ?? 0;
+      const b = pixelValues[2] ?? 0;
+      const a = pixelValues[3];
+
+      if (a !== undefined && a === 0) return null;
+
+      if (r === 0 && g === 0 && b === 0 && (a === undefined || a === 0)) {
+        return null;
+      }
+
+      if (a !== undefined) {
+        return `rgba(${r}, ${g}, ${b}, ${a / 255})`;
+      }
+
+      return `rgb(${r}, ${g}, ${b})`;
+    }
   });
 
   layer.addTo(map);

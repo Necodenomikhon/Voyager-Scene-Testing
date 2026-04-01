@@ -64,7 +64,7 @@ const overlayEntries = [
     thumb: "",
     citation: "Johann Christian Schiffer, Plan von Rhode Island, und deren dem comando des Herrn General Majors Presgott inf dies-malig befundlichen campements, map, [1777]; Geography and Map Division; Library of Congress, Washington, D.C.; digital image, Library of Congress Digital Collections, https://www.loc.gov/item/75690704/ (accessed March 12, 2026).",
     
-    geotiffUrl: "maps/Schiffer_1777_f_geo.tif",
+    geotiffUrl: "maps/Schiffer_1777_defl_f_geo.tif",
 
     downloads: { },
     fixUrl: "",
@@ -661,13 +661,61 @@ const overlayEntries = [
   edition: "",
   scale: 51000,
   thumb: "",
-  citation: "Des Barres, Joseph F. W. (Joseph Frederick Wallet), 1776, A chart of the harbour of Rhode Island and Narraganset Bay, map, scale ca. 1:51,000, hand-colored, 105 × 72 cm, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, Digital Commonwealth, ark:/50959/7h149w07s, available through Leventhal Map & Education Center Collections (accessed March 30, 2026).",
+  citation: "Des Barres, Joseph F. W. (Joseph Frederick Wallet), 1776, A chart of the harbour of Rhode Island and Narraganset Bay, map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, Digital Commonwealth, ark:/50959/7h149w07s, available through Leventhal Map & Education Center Collections (accessed March 30, 2026).",
   geotiffUrl: "maps/DesBarres_1776_defl_f_geo.tif",
   downloads: {},
   fixUrl: "",
   meta: {
     publishers: "Norman B. Leventhal Map & Education Center, Boston Public Library",
     datum: "WGS84",
+  }
+},
+{
+  title: "A map of the bay of Narraganset with the islands therein and part of the country adjacent.",
+  state: "RI",
+  year: 1777,
+  series: "",
+  edition: "",
+  scale: 63360,
+  thumb: "",
+  citation: "Blaskowitz, Charles, 1777, A map of the bay of Narraganset with the islands therein and part of the country adjacent, map, Library of Congress, Geography and Map Division, Washington, DC, available at https://www.loc.gov/item/gm71000684/ (accessed March 30, 2026).",
+  geotiffUrl: "maps/Blaskowitz_1776_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Library of Congress, Geography and Map Division"
+  }
+},
+{
+  title: "[Narragansett Bay and Rhode Island].",
+  state: "RI",
+  year: 1770,
+  series: "",
+  edition: "",
+  scale: 52000,
+  thumb: "",
+  citation: "Anonymous {Fage?], [Narragansett Bay and Rhode Island]., ca. 1770s, map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan, available at https://quod.lib.umich.edu/w/wcl1ic/x-8265/wcl008334 (accessed March 30, 2026).",
+  geotiffUrl: "maps/Clinton_3_1777_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "William L. Clements Library, University of Michigan"
+  }
+},
+{
+  title: "Plan of a battery for six guns and a redout for one hundred men and two royals erected upon Windmill Hill eight miles and a half n.n.e. of Newport (Nr. 3).",
+  state: "RI",
+  year: 1777,
+  series: "",
+  edition: "Nr. 3",
+  scale: "",
+  thumb: "",
+  citation: "Plan of a battery for six guns and a redout for one hundred men and two royals erected upon Windmill Hill eight miles and a half n.n.e. of Newport (Nr. 3)., [1777], map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan, available at https://quod.lib.umich.edu/w/wcl1ic/x-660/wcl000772 (accessed April 30 2026).",
+  geotiffUrl: "maps/windmill_hill_battery_1777_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "William L. Clements Library, University of Michigan"
   }
 }
 
