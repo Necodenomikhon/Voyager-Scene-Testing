@@ -97,7 +97,7 @@ export function createTileLayers(overlayEntries, layersById) {
   overlayEntries.forEach((e) => {
     if (e.tileUrl) {
       const layer = L.tileLayer(e.tileUrl, {
-        attribution: e.attribution || "&copy; URI EDC, RIGIS",
+        attribution: e.attribution,
         minNativeZoom: e.minNativeZoom ?? 8,
         maxNativeZoom: e.maxNativeZoom ?? 19,
         maxZoom: e.maxZoom ?? 22,
