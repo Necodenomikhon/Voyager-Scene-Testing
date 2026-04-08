@@ -782,6 +782,86 @@ const overlayEntries = [
   meta: {
     publishers: "William L. Clements Library, University of Michigan"
   }
+},
+{
+  title: "1777 A Draught of Rhode Island",
+  state: "RI",
+  year: 1777,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "A draught of Rhode Island, 1777, map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan, available at https://quod.lib.umich.edu/w/wcl1ic/x-8364/wcl008434 (accessed April 3, 2026).",
+  geotiffUrl: "maps/Clinton_4_1777_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "William L. Clements Library, University of Michigan"
+  }
+},
+{
+  title: "Plan of Rhode-Island / Surveyed and drawn by Edw: Fage, captn. Royal Artillery, in the years 1777, 78 & 79.",
+  state: "RI",
+  year: 1777,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Fage, Edward, 1777–1779, Plan of Rhode-Island / Surveyed and drawn by Edw: Fage, captn. Royal Artillery, in the years 1777, 78 & 79., map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan, available at https://quod.lib.umich.edu/w/wcl1ic/x-828/wcl000922 (accessed April 3, 2026).",
+  geotiffUrl: "maps/Fage_1779_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "William L. Clements Library, University of Michigan"
+  }
+},
+{
+  title: "[Narragansett Bay and the surrounding shores].",
+  state: "RI",
+  year: "1770s",
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Wheeler, Thomas, [177-], [Narragansett Bay and the surrounding shores]., map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan, available at https://quod.lib.umich.edu/w/wcl1ic/x-826/wcl000920 (accessed April 3, 2026).",
+  geotiffUrl: "maps/Wheeler_177-_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "William L. Clements Library, University of Michigan"
+  }
+},
+{
+  title: "Narragansett Bay Containing Rhode Island &c. (Northern Half)",
+  state: "RI",
+  year: 1776,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Royal United Services Institute for Defence and Security Studies, [1776], Narragansett Bay containing Rhode Island &c., map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:hx11z2570 (accessed April 6, 2026).",
+  geotiffUrl: "maps/Fage_2_1_177-_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Norman B. Leventhal Map & Education Center, Boston Public Library"
+  }
+},
+{
+  title: "Narragansett Bay Containing Rhode Island &c. (Southern Half)",
+  state: "RI",
+  year: 1776,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Royal United Services Institute for Defence and Security Studies, [1776], Narragansett Bay containing Rhode Island &c., map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:hx11z2570 (accessed April 6, 2026).",
+  geotiffUrl: "maps/Fage_2_2_177-_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Norman B. Leventhal Map & Education Center, Boston Public Library"
+  }
 }
 
 ];
