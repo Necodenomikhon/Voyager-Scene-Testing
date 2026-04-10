@@ -791,8 +791,14 @@ const overlayEntries = [
   edition: "",
   scale: "",
   thumb: "",
+  
   citation: "A draught of Rhode Island, 1777, map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan, available at https://quod.lib.umich.edu/w/wcl1ic/x-8364/wcl008434 (accessed April 3, 2026).",
+  tileUrl: "maps/Clinton_4_1777_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
   geotiffUrl: "maps/Clinton_4_1777_geo.tif",
+  
   downloads: {},
   fixUrl: "",
   meta: {
@@ -807,8 +813,14 @@ const overlayEntries = [
   edition: "",
   scale: "",
   thumb: "",
+  
+  tileUrl: "maps/Fage_1779_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
   citation: "Fage, Edward, 1777–1779, Plan of Rhode-Island / Surveyed and drawn by Edw: Fage, captn. Royal Artillery, in the years 1777, 78 & 79., map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan, available at https://quod.lib.umich.edu/w/wcl1ic/x-828/wcl000922 (accessed April 3, 2026).",
   geotiffUrl: "maps/Fage_1779_geo.tif",
+  
   downloads: {},
   fixUrl: "",
   meta: {
@@ -824,6 +836,12 @@ const overlayEntries = [
   scale: "",
   thumb: "",
   citation: "Wheeler, Thomas, [177-], [Narragansett Bay and the surrounding shores]., map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan, available at https://quod.lib.umich.edu/w/wcl1ic/x-826/wcl000920 (accessed April 3, 2026).",
+  
+  tileUrl: "maps/Wheeler_177-_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
+  
   geotiffUrl: "maps/Wheeler_177-_geo.tif",
   downloads: {},
   fixUrl: "",
@@ -840,7 +858,13 @@ const overlayEntries = [
   scale: "",
   thumb: "",
   citation: "Royal United Services Institute for Defence and Security Studies, [1776], Narragansett Bay containing Rhode Island &c., map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:hx11z2570 (accessed April 6, 2026).",
+  
+  tileUrl: "maps/Fage_2_1_177-_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
   geotiffUrl: "maps/Fage_2_1_177-_defl_f_geo.tif",
+
   downloads: {},
   fixUrl: "",
   meta: {
@@ -856,7 +880,56 @@ const overlayEntries = [
   scale: "",
   thumb: "",
   citation: "Royal United Services Institute for Defence and Security Studies, [1776], Narragansett Bay containing Rhode Island &c., map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:hx11z2570 (accessed April 6, 2026).",
+  
+  tileUrl: "maps/Fage_2_2_177-_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
   geotiffUrl: "maps/Fage_2_2_177-_defl_f_geo.tif",
+
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Norman B. Leventhal Map & Education Center, Boston Public Library"
+  }
+},
+{
+  title: "[Map of Narragansett Bay]",
+  state: "RI",
+  year: 1777,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Des Barres, Joseph F. W. (Joseph Frederick Wallet), Richard Prescott, Sir Augustus Simon Frazer, and Royal United Services Institute for Defence and Security Studies, [ca. 1777], [Map of Narragansett Bay], map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:hx11z278r (accessed April 8, 2026).",
+  
+  tileUrl: "maps/Fage_1777_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
+  geotiffUrl: "maps/Fage_1777_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Norman B. Leventhal Map & Education Center, Boston Public Library"
+  }
+},
+{
+  title: "PLAN of RHODE ISLAND, the HARBOUR, the Adjacent ISLANDS, and COAST",
+  state: "RI",
+  year: 1778,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Fage, Edward; George III, King of Great Britain; and George IV, King of Great Britain, 1778, PLAN of RHODE ISLAND, the HARBOUR, the Adjacent ISLANDS, and COAST, map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:hx11z3134 (accessed April 8, 2026).",
+  
+  tileUrl: "maps/Fage_3_1778_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
+  geotiffUrl: "maps/Fage_3_1778_defl_f_geo.tif",
+
   downloads: {},
   fixUrl: "",
   meta: {
