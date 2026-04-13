@@ -908,6 +908,7 @@ const overlayEntries = [
   maxNativeZoom: 16,
   maxZoom: 22,
   geotiffUrl: "maps/Fage_1777_defl_f_geo.tif",
+  
   downloads: {},
   fixUrl: "",
   meta: {
@@ -935,6 +936,55 @@ const overlayEntries = [
   meta: {
     publishers: "Norman B. Leventhal Map & Education Center, Boston Public Library"
   }
+},
+{
+  title: "A chart of the harbour of Rhode Island and Narraganset Bay",
+  state: "RI",
+  year: 1781,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Des Barres, Joseph F. W. (Joseph Frederick Wallet), 1781, A chart of the harbour of Rhode Island and Narraganset Bay, map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:7h149z229 (accessed April 9, 2026).",
+  geotiffUrl: "maps/DesBarres_1781_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Norman B. Leventhal Map & Education Center, Boston Public Library"
+  }
+},
+{
+  title: "Attacks upon Rhode Island, Augt. 1778",
+  state: "RI",
+  year: 1778,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Attacks upon Rhode Island, Augt. 1778, [1778], map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:q524n7775 (accessed April 9, 2026).",
+  geotiffUrl: "maps/LOC_GMD_1778_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Norman B. Leventhal Map & Education Center, Boston Public Library"
+  }
+},
+{
+  title: "Port de Rhode Island et Narraganset Baye",
+  state: "RI",
+  year: 1778,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Le Rouge, Georges-Louis; Des Barres, Joseph F. W. (Joseph Frederick Wallet); and 5th Viscount Howe, William, 1778, Port de Rhode Island et Narraganset Baye : publié à la requête du Vicomte Howe par le Chevalier des Barres ; traduit de l'anglais et augmenté d'après celui de Blaskowitz publiée à Londres en 1777, map, Paris: Chez Le Rouge, Norman B. Leventhal Map & Education Center, available at https://collections.leventhalmap.org/search/commonwealth:z603vs481 (accessed April 9, 2026).",
+  geotiffUrl: "/maps/LeRouge_1778_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Chez Le Rouge; Norman B. Leventhal Map & Education Center, Boston Public Library"
+  }
 }
+
 
 ];
