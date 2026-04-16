@@ -946,7 +946,13 @@ const overlayEntries = [
   scale: "",
   thumb: "",
   citation: "Des Barres, Joseph F. W. (Joseph Frederick Wallet), 1781, A chart of the harbour of Rhode Island and Narraganset Bay, map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:7h149z229 (accessed April 9, 2026).",
+  
+  tileUrl: "maps/DesBarres_1781_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
   geotiffUrl: "maps/DesBarres_1781_defl_f_geo.tif",
+  
   downloads: {},
   fixUrl: "",
   meta: {
@@ -962,7 +968,13 @@ const overlayEntries = [
   scale: "",
   thumb: "",
   citation: "Attacks upon Rhode Island, Augt. 1778, [1778], map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:q524n7775 (accessed April 9, 2026).",
+  
+  tileUrl: "maps/LOC_GMD_1778_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
   geotiffUrl: "maps/LOC_GMD_1778_defl_f_geo.tif",
+  
   downloads: {},
   fixUrl: "",
   meta: {
@@ -978,13 +990,216 @@ const overlayEntries = [
   scale: "",
   thumb: "",
   citation: "Le Rouge, Georges-Louis; Des Barres, Joseph F. W. (Joseph Frederick Wallet); and 5th Viscount Howe, William, 1778, Port de Rhode Island et Narraganset Baye : publié à la requête du Vicomte Howe par le Chevalier des Barres ; traduit de l'anglais et augmenté d'après celui de Blaskowitz publiée à Londres en 1777, map, Paris: Chez Le Rouge, Norman B. Leventhal Map & Education Center, available at https://collections.leventhalmap.org/search/commonwealth:z603vs481 (accessed April 9, 2026).",
-  geotiffUrl: "/maps/LeRouge_1778_defl_f_geo.tif",
+  
+  tileUrl: "maps/LeRouge_1778_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
+  geotiffUrl: "maps/LeRouge_1778_defl_f_geo.tif",
+  
   downloads: {},
   fixUrl: "",
   meta: {
     publishers: "Chez Le Rouge; Norman B. Leventhal Map & Education Center, Boston Public Library"
   }
-}
+},
+{
+  title: "Plan de Rhode Island et les differentes operations de la flotte-françoises et des troupes americaines : commandées par le Major General Sullivan contre les forçes de terre et de mer des Anglois depuis le 9 aoust jusqu'à la nuit du 30 au 31 du meme mois 1778 que les Americains ont fait leur retraites",
+  state: "RI",
+  year: 1778,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Plan de Rhode Island et les differentes operations de la flotte-françoises et des troupes americaines : commandées par le Major General Sullivan contre les forces de terre et de mer des Anglois depuis le 9 aoust jusqu'à la nuit du 30 au 31 du même mois 1778 que les Americains ont fait leur retraites, [1778], map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:q524n779q (accessed April 10, 2026).",
+  
+  tileUrl: "maps/LOC_GMD_2_1778_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
+  geotiffUrl: "LOC_GMD_2_1778_defl_f_geo.tif",
 
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Norman B. Leventhal Map & Education Center, Boston Public Library"
+  }
+},
+{
+  title: "Partie de l'état de Rhode-Island et position des armées Américaine et Britannique au siége de Newport",
+  state: "RI",
+  year: 1807,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Partie de l'état de Rhode-Island et position des armées Américaine et Britannique au siége de Newport, et à l'affaire de 29 Août 1778, [1807], map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan, available at https://quod.lib.umich.edu/w/wcl1ic/x-800/wcl000894 (accessed April 10, 2026).",
+  geotiffUrl: "maps/Marshall_1807_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "William L. Clements Library, University of Michigan"
+  }
+},
+{
+  title: "Plan of the position of his majesty's troops at Rhode Island, after the defeat of the rebels the 29th of August 1778",
+  state: "RI",
+  year: 1778,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Plan of the position of his majesty's troops at Rhode Island, after the defeat of the rebels the 29th of August 1778, [1778], map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan, available at https://quod.lib.umich.edu/w/wcl1ic/x-8379/wcl008450 (accessed April 10, 2026).",
+  geotiffUrl: "maps/Clinton_1778_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "William L. Clements Library, University of Michigan"
+  }
+},
+{
+  title: "Plan of the town of Newport in Rhode Island",
+  state: "RI",
+  year: 1778,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "J. Denison, Plan of the town of Newport in Rhode Island, 1778, map, Rhode Island State Archives Digital Repository, Rhode Island Department of State, Providence, Rhode Island, available at https://sosri.access.preservica.com/uncategorized/IO_96fa6cdb-24b5-4e12-a92e-294ecffa7d6b/ (accessed April 13, 2026).",
+  geotiffUrl: "maps/Denison_1778_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Rhode Island Department of State, Rhode Island State Archives"
+  }
+},
+{
+  title: "Map of the military operations in 1777-78 on Rhode Island / Mielatz, del.",
+  state: "RI",
+  year: 1883,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Mielatz, Charles Frederick William, 1883, Map of the military operations in 1777-78 on Rhode Island / Mielatz, del., map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan (accessed April 13, 2026).",
+  geotiffUrl: "maps/Mielatz_1883_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "William L. Clements Library, University of Michigan"
+  }
+},
+{
+  title: "Carte des positions occupées par les troupes américaines après leur retraite de Rhode Island le 30 août 1778",
+  state: "RI",
+  year: 1778,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "du Chesnoy, Michel, Capitaine; and Marie Joseph Paul Yves Roch Gilbert du Motier, Marquis de Lafayette, [1778], Carte des positions occupées par les troupes américaines après leur retraite de Rhode Island le 30 août 1778, map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:q524nd580 (accessed April 13, 2026).",
+  geotiffUrl: "maps/Chesnoy_1778_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Norman B. Leventhal Map & Education Center, Boston Public Library"
+  }
+},
+{
+  title: "A map of part of Rhode Island shewing the positions of the American and British armies at the Siege of Newport, and the subsequent action on the 29th of August 1778",
+  state: "RI",
+  year: 1807,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Lewis, Samuel, [1807], A map of part of Rhode Island shewing the positions of the American and British armies at the Siege of Newport, and the subsequent action on the 29th of August 1778, map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:8336h3587 (accessed April 14, 2026).",
+  geotiffUrl: "maps/Lewis_1807_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Norman B. Leventhal Map & Education Center, Boston Public Library"
+  }
+},
+{
+  title: "[Newport County, ca. 1779].",
+  state: "RI",
+  year: 1779,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Fage, Edward, [ca. 1779], [Newport County, ca. 1779]., map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan, available at https://quod.lib.umich.edu/w/wcl1ic/x-8393/wcl008464 (accessed April 14, 2026).",
+  geotiffUrl: "maps/Fage_1779_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "William L. Clements Library, University of Michigan"
+  }
+},
+{
+  title: "Plan de la ville, du port, et de la rade de New-port et Rhode Island : Debarquement en 1780",
+  state: "RI",
+  year: 1780,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Plan de la ville, du port, et de la rade de New-port et Rhode Island : Débarquement en 1780, [1780], map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:q524nj32p (accessed April 14, 2026).",
+  geotiffUrl: "maps/LOC_GMD_1780_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Norman B. Leventhal Map & Education Center, Boston Public Library"
+  }
+},
+{
+  title: "Plan de Rhodes-Island, et position de l'armée françoise à Newport",
+  state: "RI",
+  year: 1780,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Plan de Rhodes-Island, et position de l'armée françoise à Newport, [1780], map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:q524nj304 (accessed April 14, 2026).",
+  geotiffUrl: "maps/LOC_GMD_2_1780_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Norman B. Leventhal Map & Education Center, Boston Public Library"
+  }
+},
+{
+  title: "Plan of the Island of Rhode Island under French occupation",
+  state: "RI",
+  year: 1780,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Closen?, [1780], [Plan of the Island of Rhode Island under French occupation], map, John Carter Brown Library, Brown University, Providence, Rhode Island, available at https://jcb.lunaimaging.com/luna/servlet/detail/JCNMAPS~1~1~2409~100977 (accessed April 14, 2026).",
+  geotiffUrl: "maps/Closen_1780_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "John Carter Brown Library, Brown University"
+  }
+},
+{
+  title: "Plan de la baie de Narragansett dans la Nouvelle Angleterre avec toutes les îles qu'elle renferme",
+  state: "RI",
+  year: 1780,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "Blaskowitz, Charles, 1780, Plan de la baie de Narragansett dans la Nouvelle Angleterre avec toutes les îles qu'elle renferme parmi lesquelles se trouvent Rhode-Island et île de Connonicut : levé par Charles Blaskowitz et publié à Londres en 1777. Dressé au Dépôt Général des Cartes, Plans et Journaux de la Marine pour le service des vaisseaux du roi, map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan, available at https://quod.lib.umich.edu/w/wcl1ic/x-846/wcl000940 (accessed April 14, 2026).",
+  geotiffUrl: "maps/Blaskowitz_1780_defl_f_geo.tif",
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "William L. Clements Library, University of Michigan"
+  }
+},
 
 ];
