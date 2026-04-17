@@ -1034,7 +1034,13 @@ const overlayEntries = [
   scale: "",
   thumb: "",
   citation: "Partie de l'état de Rhode-Island et position des armées Américaine et Britannique au siége de Newport, et à l'affaire de 29 Août 1778, [1807], map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan, available at https://quod.lib.umich.edu/w/wcl1ic/x-800/wcl000894 (accessed April 10, 2026).",
+  
+  tileUrl: "maps/Marshall_1807_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
   geotiffUrl: "maps/Marshall_1807_defl_f_geo.tif",
+  
   downloads: {},
   fixUrl: "",
   meta: {
@@ -1050,11 +1056,39 @@ const overlayEntries = [
   scale: "",
   thumb: "",
   citation: "Plan of the position of his majesty's troops at Rhode Island, after the defeat of the rebels the 29th of August 1778, [1778], map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan, available at https://quod.lib.umich.edu/w/wcl1ic/x-8379/wcl008450 (accessed April 10, 2026).",
+  
+  tileUrl: "maps/Clinton_1778_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
   geotiffUrl: "maps/Clinton_1778_defl_f_geo.tif",
+  
   downloads: {},
   fixUrl: "",
   meta: {
     publishers: "William L. Clements Library, University of Michigan"
+  }
+},
+{
+  title: "Plan of the town of Newport in Rhode Island (Recolored)",
+  state: "RI",
+  year: 1778,
+  series: "",
+  edition: "",
+  scale: "",
+  thumb: "",
+  citation: "J. Denison, Plan of the town of Newport in Rhode Island, 1778, map, Rhode Island State Archives Digital Repository, Rhode Island Department of State, Providence, Rhode Island, available at https://sosri.access.preservica.com/uncategorized/IO_96fa6cdb-24b5-4e12-a92e-294ecffa7d6b/ (accessed April 13, 2026).",
+  
+  tileUrl: "maps/Denison_1778_1_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
+  geotiffUrl: "maps/Denison_1778_1_defl_f_geo.tif",
+  
+  downloads: {},
+  fixUrl: "",
+  meta: {
+    publishers: "Rhode Island Department of State, Rhode Island State Archives"
   }
 },
 {
@@ -1065,8 +1099,14 @@ const overlayEntries = [
   edition: "",
   scale: "",
   thumb: "",
-  citation: "J. Denison, Plan of the town of Newport in Rhode Island, 1778, map, Rhode Island State Archives Digital Repository, Rhode Island Department of State, Providence, Rhode Island, available at https://sosri.access.preservica.com/uncategorized/IO_96fa6cdb-24b5-4e12-a92e-294ecffa7d6b/ (accessed April 13, 2026).",
+  citation: "J. Denison, Plan of the town of Newport in Rhode Island, 1778, map, Rhode Island State Archives Digital Repository, Rhode Island Department of State, Providence, Rhode Island, available at https://sosri.access.preservica.com/uncategorized/IO_8f702018-b27d-4133-87ec-efccf3bb7ede/ (accessed April 16, 2026).",
+  
+  tileUrl: "maps/Denison_1778_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
   geotiffUrl: "maps/Denison_1778_defl_f_geo.tif",
+
   downloads: {},
   fixUrl: "",
   meta: {
