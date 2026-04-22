@@ -1144,7 +1144,13 @@ const overlayEntries = [
   scale: "",
   thumb: "",
   citation: "du Chesnoy, Michel, Capitaine; and Marie Joseph Paul Yves Roch Gilbert du Motier, Marquis de Lafayette, [1778], Carte des positions occupées par les troupes américaines après leur retraite de Rhode Island le 30 août 1778, map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:q524nd580 (accessed April 13, 2026).",
+  
+  tileUrl: "maps/Chesnoy_1778_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
   geotiffUrl: "maps/Chesnoy_1778_defl_f_geo.tif",
+  
   downloads: {},
   fixUrl: "",
   meta: {
@@ -1160,7 +1166,13 @@ const overlayEntries = [
   scale: "",
   thumb: "",
   citation: "du Chesnoy, Michel, Capitaine; and Marie Joseph Paul Yves Roch Gilbert du Motier, Marquis de Lafayette, [1778], Plan de Rhode Islande, les differentes operations de la flotte françoise et des troupes américaines commandées par le major général Sullivan contre les forces de terre et de mer des Anglois depuis le 9 Aout jusqu'à la nuit du 30 au 31 du même mois que les Américains ont fait leur retraite 1778, map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:q524nd56f (accessed April 17, 2026).",
+  
+  tileUrl: "maps/Chesnoy_2_1778_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
   geotiffUrl: "maps/Chesnoy_2_1778_defl_f_geo.tif",
+  
   downloads: {},
   fixUrl: "",
   meta: {
