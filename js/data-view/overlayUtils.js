@@ -110,7 +110,7 @@ export function createTileLayers(overlayEntries, layersById) {
         layers: e.wmsLayers || "0",
         format: e.wmsFormat || "image/png",
         transparent: e.wmsTransparent ?? true,
-        attribution: e.attribution || "&copy; URI EDC, RIGIS",
+        attribution: e.attribution,
         opacity: 1
       });
       layersById.set(e.id, layer);

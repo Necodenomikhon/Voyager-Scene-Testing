@@ -1079,11 +1079,11 @@ const overlayEntries = [
   thumb: "",
   citation: "J. Denison, Plan of the town of Newport in Rhode Island, 1778, map, Rhode Island State Archives Digital Repository, Rhode Island Department of State, Providence, Rhode Island, available at https://sosri.access.preservica.com/uncategorized/IO_96fa6cdb-24b5-4e12-a92e-294ecffa7d6b/ (accessed April 13, 2026).",
   
-  tileUrl: "maps/Denison_1778_1_tiles/{z}/{x}/{y}.png",
+  tileUrl: "maps/Denison_1_1778_tiles/{z}/{x}/{y}.png",
   minNativeZoom: 8,
   maxNativeZoom: 16,
   maxZoom: 22,
-  geotiffUrl: "maps/Denison_1778_1_defl_f_geo.tif",
+  geotiffUrl: "maps/Denison_1_1778_defl_f_geo.tif",
   
   downloads: {},
   fixUrl: "",
