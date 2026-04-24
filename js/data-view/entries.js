@@ -1233,7 +1233,13 @@ const overlayEntries = [
   scale: "",
   thumb: "",
   citation: "Plan de la ville, du port, et de la rade de New-port et Rhode Island : Débarquement en 1780, [1780], map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:q524nj32p (accessed April 14, 2026).",
+  
+  tileUrl: "maps/LOC_GMD_1780_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
   geotiffUrl: "maps/LOC_GMD_1780_defl_f_geo.tif",
+  
   downloads: {},
   fixUrl: "",
   meta: {
@@ -1249,7 +1255,13 @@ const overlayEntries = [
   scale: "",
   thumb: "",
   citation: "Plan de Rhodes-Island, et position de l'armée françoise à Newport, [1780], map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:q524nj304 (accessed April 14, 2026).",
+  
+  tileUrl: "maps/LOC_GMD_2_1780_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
   geotiffUrl: "maps/LOC_GMD_2_1780_defl_f_geo.tif",
+  
   downloads: {},
   fixUrl: "",
   meta: {
@@ -1265,7 +1277,9 @@ const overlayEntries = [
   scale: "",
   thumb: "",
   citation: "Closen?, [1780], [Plan of the Island of Rhode Island under French occupation], map, John Carter Brown Library, Brown University, Providence, Rhode Island, available at https://jcb.lunaimaging.com/luna/servlet/detail/JCNMAPS~1~1~2409~100977 (accessed April 14, 2026).",
+  
   geotiffUrl: "maps/Closen_1780_defl_f_geo.tif",
+  
   downloads: {},
   fixUrl: "",
   meta: {
