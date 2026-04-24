@@ -1188,7 +1188,13 @@ const overlayEntries = [
   scale: "",
   thumb: "",
   citation: "Lewis, Samuel, [1807], A map of part of Rhode Island shewing the positions of the American and British armies at the Siege of Newport, and the subsequent action on the 29th of August 1778, map, Norman B. Leventhal Map & Education Center Collection, Boston Public Library, Boston, Massachusetts, available at https://collections.leventhalmap.org/search/commonwealth:8336h3587 (accessed April 14, 2026).",
+  
+  tileUrl: "maps/Lewis_1807_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
   geotiffUrl: "maps/Lewis_1807_defl_f_geo.tif",
+  
   downloads: {},
   fixUrl: "",
   meta: {
@@ -1204,7 +1210,14 @@ const overlayEntries = [
   scale: "",
   thumb: "",
   citation: "Fage, Edward, [ca. 1779], [Newport County, ca. 1779]., map, William L. Clements Library Image Bank, William L. Clements Library, University of Michigan, Ann Arbor, Michigan, available at https://quod.lib.umich.edu/w/wcl1ic/x-8393/wcl008464 (accessed April 14, 2026).",
-  geotiffUrl: "maps/Fage_1779_defl_f_geo.tif",
+  
+  
+  tileUrl: "maps/Fage_2_1779_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
+  geotiffUrl: "maps/Fage_2_1779_defl_f_geo.tif",
+  
   downloads: {},
   fixUrl: "",
   meta: {
