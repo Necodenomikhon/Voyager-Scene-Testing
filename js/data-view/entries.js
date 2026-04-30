@@ -602,98 +602,7 @@ const overlayEntries = [
       woodlandTint: "N/A"
     }
   },
-  {   
-    title: "1939 USGS Historical Topographic Map (Prudence Island 353446)",
-    state: "RI",
-    year: 1939,
-    series: "USGS Historical Topographic Map Collection",
-    edition: "",
-    scale: 31680,
-    thumb: "",
-    citation: "U.S. Geological Survey (USGS), 1939, Prudence Island, Rhode Island, 1:31,680-scale historical topographic map (Historical Topographic Map Collection), map sheet 353446 (scan ID 31680), U.S. Geological Survey National Geospatial Technical Operations Center (NGTOC), Reston, Virginia, available at https://thor-f5.er.usgs.gov/ngtoc/metadata/waf/maps/historicaltopo/pdf/RI/31680/RI_Prudence_Island_353446_1939_31680_geo.xml (accessed March 25, 2026).",
-    
-    geotiffUrl: "overlays/topographic/RI_Prudence_Island_353446_1939_31680_geo.tif",
-    
-    downloads: {},
-    fixUrl: "",
-    meta: {     
-      publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
-      datum: "WGS 84",
-      projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
-      gnisCellId: "353446",
-      gnisCell: "Prudence Island",
-      woodlandTint: "Varies (historical topo symbology)"
-    }
-  },
-  { 
-  title: "1939 USGS Historical Topographic Map (Prudence Island 463162)",
-  state: "RI",
-  year: 1939,
-  series: "USGS Historical Topographic Map Collection",
-  edition: "",
-  scale: 31680,
-  thumb: "",
-  citation: "U.S. Geological Survey (USGS), 1939, Prudence Island, Rhode Island, 1:31,680-scale historical topographic map (Historical Topographic Map Collection), map sheet 463162 (scan ID 31680), U.S. Geological Survey National Geospatial Technical Operations Center (NGTOC), Reston, Virginia, available at https://thor-f5.er.usgs.gov/ngtoc/metadata/waf/maps/historicaltopo/pdf/RI/31680/RI_Prudence_Island_463162_1939_31680_geo.xml (accessed March 25, 2026).",
 
-  geotiffUrl: "overlays/topographic/RI_Prudence_Island_463162_1939_31680_geo.tif",
-
-  downloads: {},
-  fixUrl: "",
-  meta: {   
-    publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
-    datum: "WGS 84",
-    projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
-    gnisCellId: "463162",
-    gnisCell: "Prudence Island",
-    woodlandTint: "Varies (historical topo symbology)"
-  }
-},
-{ 
-  title: "1942 USGS Historical Topographic Map (Prudence Island 353447)",
-  state: "RI",
-  year: 1942,
-  series: "USGS Historical Topographic Map Collection",
-  edition: "",
-  scale: 31680,
-  thumb: "",
-  citation: "U.S. Geological Survey (USGS), 1942, Prudence Island, Rhode Island, 1:31,680-scale historical topographic map (Historical Topographic Map Collection), map sheet 353447 (scan ID 31680), U.S. Geological Survey National Geospatial Technical Operations Center (NGTOC), Reston, Virginia, available at https://thor-f5.er.usgs.gov/ngtoc/metadata/waf/maps/historicaltopo/pdf/RI/31680/RI_Prudence_Island_353447_1942_31680_geo.xml (accessed March 25, 2026).",
-
-  geotiffUrl: "overlays/topographic/RI_Prudence_Island_353447_1942_31680_geo.tif",
-
-  downloads: {},
-  fixUrl: "",
-  meta: {   
-    publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
-    datum: "WGS 84",
-    projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
-    gnisCellId: "353447",
-    gnisCell: "Prudence Island",
-    woodlandTint: "Varies (historical topo symbology)"
-  }
-},
-{ 
-  title: "1942 USGS Historical Topographic Map (Prudence Island 353448)",
-  state: "RI",
-  year: 1942,
-  series: "USGS Historical Topographic Map Collection",
-  edition: "",
-  scale: 31680,
-  thumb: "",
-  citation: "U.S. Geological Survey (USGS), 1942, Prudence Island, Rhode Island, 1:31,680-scale historical topographic map (Historical Topographic Map Collection), map sheet 353448 (scan ID 31680), U.S. Geological Survey National Geospatial Technical Operations Center (NGTOC), Reston, Virginia, available at https://thor-f5.er.usgs.gov/ngtoc/metadata/waf/maps/historicaltopo/pdf/RI/31680/RI_Prudence_Island_353448_1942_31680_geo.xml (accessed March 25, 2026).",
-
-  geotiffUrl: "overlays/topographic/RI_Prudence_Island_353448_1942_31680_geo.tif",
-
-  downloads: {},
-  fixUrl: "",
-  meta: {   
-    publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
-    datum: "WGS 84",
-    projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
-    gnisCellId: "353448",
-    gnisCell: "Prudence Island",
-    woodlandTint: "Varies (historical topo symbology)"
-  }
-},
 {
   title: "A chart of the harbour of Rhode Island and Narraganset Bay",
   state: "RI",
@@ -1309,6 +1218,117 @@ const overlayEntries = [
   fixUrl: "",
   meta: {
     publishers: "William L. Clements Library, University of Michigan"
+  }
+},
+
+
+//Topographic Entries 
+{   
+  title: "1939 USGS Historical Topographic Map (Prudence Island 353446)",
+  state: "RI",
+  year: 1939,
+  series: "USGS Historical Topographic Map Collection",
+  edition: "",
+  scale: 31680,
+  thumb: "",
+  citation: "U.S. Geological Survey (USGS), 1939, Prudence Island, Rhode Island, 1:31,680-scale historical topographic map (Historical Topographic Map Collection), map sheet 353446 (scan ID 31680), U.S. Geological Survey National Geospatial Technical Operations Center (NGTOC), Reston, Virginia, available at https://thor-f5.er.usgs.gov/ngtoc/metadata/waf/maps/historicaltopo/pdf/RI/31680/RI_Prudence_Island_353446_1939_31680_geo.xml (accessed March 25, 2026).",
+  
+  tileUrl: "overlays/topographic/RI_Prudence_Island_353446_1939_31680_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
+  geotiffUrl: "overlays/topographic/RI_Prudence_Island_353446_1939_31680_geo.tif",
+  
+  downloads: {},
+  fixUrl: "",
+  meta: {     
+    publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
+    datum: "WGS 84",
+    projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
+    gnisCellId: "353446",
+    gnisCell: "Prudence Island",
+    woodlandTint: "Varies (historical topo symbology)"
+  }
+},
+{ 
+  title: "1939 USGS Historical Topographic Map (Prudence Island 463162)",
+  state: "RI",
+  year: 1939,
+  series: "USGS Historical Topographic Map Collection",
+  edition: "",
+  scale: 31680,
+  thumb: "",
+  citation: "U.S. Geological Survey (USGS), 1939, Prudence Island, Rhode Island, 1:31,680-scale historical topographic map (Historical Topographic Map Collection), map sheet 463162 (scan ID 31680), U.S. Geological Survey National Geospatial Technical Operations Center (NGTOC), Reston, Virginia, available at https://thor-f5.er.usgs.gov/ngtoc/metadata/waf/maps/historicaltopo/pdf/RI/31680/RI_Prudence_Island_463162_1939_31680_geo.xml (accessed March 25, 2026).",
+
+  tileUrl: "overlays/topographic/RI_Prudence_Island_463162_1939_31680_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
+  geotiffUrl: "overlays/topographic/RI_Prudence_Island_463162_1939_31680_geo.tif",
+
+  downloads: {},
+  fixUrl: "",
+  meta: {   
+    publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
+    datum: "WGS 84",
+    projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
+    gnisCellId: "463162",
+    gnisCell: "Prudence Island",
+    woodlandTint: "Varies (historical topo symbology)"
+  }
+},
+{ 
+  title: "1942 USGS Historical Topographic Map (Prudence Island 353447)",
+  state: "RI",
+  year: 1942,
+  series: "USGS Historical Topographic Map Collection",
+  edition: "",
+  scale: 31680,
+  thumb: "",
+  citation: "U.S. Geological Survey (USGS), 1942, Prudence Island, Rhode Island, 1:31,680-scale historical topographic map (Historical Topographic Map Collection), map sheet 353447 (scan ID 31680), U.S. Geological Survey National Geospatial Technical Operations Center (NGTOC), Reston, Virginia, available at https://thor-f5.er.usgs.gov/ngtoc/metadata/waf/maps/historicaltopo/pdf/RI/31680/RI_Prudence_Island_353447_1942_31680_geo.xml (accessed March 25, 2026).",
+
+  tileUrl: "overlays/topographic/RI_Prudence_Island_353447_1942_31680_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
+  geotiffUrl: "overlays/topographic/RI_Prudence_Island_353447_1942_31680_geo.tif",
+
+  downloads: {},
+  fixUrl: "",
+  meta: {   
+    publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
+    datum: "WGS 84",
+    projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
+    gnisCellId: "353447",
+    gnisCell: "Prudence Island",
+    woodlandTint: "Varies (historical topo symbology)"
+  }
+},
+{ 
+  title: "1942 USGS Historical Topographic Map (Prudence Island 353448)",
+  state: "RI",
+  year: 1942,
+  series: "USGS Historical Topographic Map Collection",
+  edition: "",
+  scale: 31680,
+  thumb: "",
+  citation: "U.S. Geological Survey (USGS), 1942, Prudence Island, Rhode Island, 1:31,680-scale historical topographic map (Historical Topographic Map Collection), map sheet 353448 (scan ID 31680), U.S. Geological Survey National Geospatial Technical Operations Center (NGTOC), Reston, Virginia, available at https://thor-f5.er.usgs.gov/ngtoc/metadata/waf/maps/historicaltopo/pdf/RI/31680/RI_Prudence_Island_353448_1942_31680_geo.xml (accessed March 25, 2026).",
+  
+  tileUrl: "overlays/topographic/RI_Prudence_Island_353448_1942_31680_tiles/{z}/{x}/{y}.png",
+  minNativeZoom: 8,
+  maxNativeZoom: 16,
+  maxZoom: 22,
+  geotiffUrl: "overlays/topographic/RI_Prudence_Island_353448_1942_31680_geo.tif",
+
+  downloads: {},
+  fixUrl: "",
+  meta: {   
+    publishers: "U.S. Geological Survey (USGS) National Geospatial Technical Operations Center (NGTOC)",
+    datum: "WGS 84",
+    projection: "EPSG:4326 reprojected from Polyconic (NAD27)",
+    gnisCellId: "353448",
+    gnisCell: "Prudence Island",
+    woodlandTint: "Varies (historical topo symbology)"
   }
 },
 
